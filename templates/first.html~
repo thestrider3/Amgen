@@ -1,0 +1,2646 @@
+
+<html>
+<head>
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<title>AMGEN Online Application</title>
+</head>
+
+<body text="#000000" bgcolor="#ffffff" link="#0088FF" vlink="#0088FF">
+
+	<form action="process-amgen.php" method="post" name="surfapp">
+		<div align="center">
+			<center>
+				<table width="75%" cellspacing="0" cellpadding="2" border="0">
+					<tbody>
+						<tr>
+							<td bgcolor="#004488" width="100%" align="center"><font
+								size="3" face="Arial" color="#ffffff"><b>Columbia
+										University<br> Department of Biological Sciences
+								</b></font><font size="4" face="Arial" color="#ffffff"> <br> <b>Amgen
+										Scholars Summer Research Program 2016 </b></font><b><font
+									face="Arial" size="4" color="#ffffff"></font></b></td>
+						</tr>
+					</tbody>
+				</table>
+			</center>
+		</div>
+		<div align="center">
+			<center>
+				<table height="330" width="65%" cellspacing="0" cellpadding="2"
+					border="1">
+					<tbody>
+						<tr>
+							<td height="19" bgcolor="#ffffff" colspan="2"></td>
+						</tr>
+						<tr>
+							<td align="center" height="19" bgcolor="#004488" colspan="2"><b><font
+									face="Arial" color="#ffffff">Online Application</font></b></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font size="3"
+								face="Arial Unicode MS">First Name:</font></td>
+							<td height="22" align="left" width="60%"><font size="3"
+								color="#000000"> <input name="FNAME" value=""
+									maxlength="50" size="14" type="text"> <font
+									face="Arial, Helvetica, sans-serif">Last Name:</font> <input
+									name="LNAME" size="15" type="text" value=""></font></td>
+						</tr>
+						<tr>
+							<td height="22"><p>
+									<font face="Arial Unicode MS">Date of Birth:<br> <font
+										size="2">(mm-dd-yyyy)</font></font>
+								</p></td>
+							<td height="22" align="left"><font face="Arial" size="3"
+								color="#000000"> <input name="DATEOFBIRTH" maxlength="40"
+									size="40" type="text" value="">
+							</font></td>
+						</tr>
+						<tr>
+							<td height="23" width="40%"><font size="3"
+								face="Arial Unicode MS">Email:</font></td>
+							<td height="23" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"><input name="EMAIL" size="40"
+									type="text" value=""> </font></td>
+						</tr>
+						<tr>
+							<td height="23" width="40%"><p>
+									<font size="3" face="Arial Unicode MS">Alternative Email
+										(non .edu):<br /> <font size="2">(Required)</font>
+									</font>
+								</p></td>
+							<td height="23" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"><input name="ALTERNATIVE_EMAIL"
+									size="40" type="text" value=""> </font></td>
+						</tr>
+
+						<tr>
+							<td height="22" width="40%"><font size="3"
+								face="Arial Unicode MS"> Phone # :</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"> <input name="PERMANENT_PHONE"
+									size="40" type="text" value="">
+							</font></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font size="3"
+								face="Arial Unicode MS"> Permanent Street Address 1:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"> <input
+									name="PERMANENT_ADDRESS1" size="40" type="text" value="">
+							</font></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font size="3"
+								face="Arial Unicode MS"> Permanent Street Address 2
+									(optional):</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"> <input
+									name="PERMANENT_ADDRESS2" size="40" type="text" value="">
+							</font></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font face="Arial Unicode MS">Permanent
+									City:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"><input name="PERMANENT_CITY"
+									size="40" type="text" value=""> </font></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font face="Arial Unicode MS">Permanent
+									State:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"><input name="PERMANENT_STATE"
+									size="40" type="text" value=""> </font></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font face="Arial Unicode MS">Permanent
+									Zip code:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"><input name="PERMANENT_ZIP"
+									size="40" type="text" value=""> </font></td>
+						</tr>
+
+
+
+
+
+
+
+						<tr>
+							<td height="22" width="40%"><font size="3"
+								face="Arial Unicode MS"> Campus Address 1:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"> <input name="SCHOOL_ADDRESS1"
+									size="40" type="text" value="">
+							</font></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font size="3"
+								face="Arial Unicode MS"> Campus Address 2:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"> <input name="SCHOOL_ADDRESS2"
+									size="40" type="text" value="">
+							</font></td>
+						</tr>
+
+
+						<tr>
+							<td height="22" width="40%"><font face="Arial Unicode MS">Campus
+									City:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"><input name="CAMPUS_CITY"
+									size="40" type="text" value=""> </font></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font face="Arial Unicode MS">Campus
+									State:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"><input name="CAMPUS_STATE"
+									size="40" type="text" value=""> </font></td>
+						</tr>
+
+
+
+						<tr>
+							<td height="22" width="40%"><font face="Arial Unicode MS">Campus
+									Zip code:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"><input name="CAMPUS_ZIP"
+									size="40" type="text" value=""> </font></td>
+						</tr>
+
+
+
+
+
+
+						<tr>
+							<td height="22" width="40%"><font face="Arial Unicode MS">Home
+									City:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"> <input name="HOMECITY" size="3"
+									type="text" value=""\>
+							</font>If you graduated high school in the US, which City did you
+								graduate in</td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font face="Arial Unicode MS">Home
+									State:</font></td>
+							<td height="22" align="left" width="60%"><font face="Arial"
+								size="3" color="#000000"> <input name="HOMESTATE"
+									size="3" type="text" value=""\>
+							</font>If you graduated high school in the US, which state did you
+								graduate in</td>
+						</tr>
+					</tbody>
+				</table>
+				<table width="65%" height="193" border="1" cellpadding="2"
+					cellspacing="0">
+					<tbody>
+						<tr>
+							<td><font size="3" face="Arial, Helvetica, sans-serif">
+									Gender:</font></td>
+							<td><font size="3" face="Arial, Helvetica, sans-serif">
+									<select size="1" name="GENDER">
+										<option value="Male">Male</option>
+										<option value="Female">Female</option>
+								</select>
+							</font></td>
+						</tr>
+						<tr>
+							<td><p>
+									<font size="3" face="Arial, Helvetica, sans-serif">
+										Ethnicity:</font>
+								</p>
+								<p align="left">
+									<font size="2" face="Arial, Helvetica, sans-serif">(Please
+										check all that apply) </font>
+								</p></td>
+							<td><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> <input
+										type=checkbox name="INDIAN"> American Indian / Alaskan
+										Native<BR> <input type=checkbox name="BLACK">
+										African-American / Black<BR> <input type=checkbox
+										name="PACIFIC"> Pacific Islander<BR> <input
+										type=checkbox name="MEXICAN"> Mexican American /
+										Chicano / Latino<BR> <input type=checkbox name="ASIAN">
+										Asian American<BR> <input type=checkbox name="MIDDLE">
+										Middle Eastern<BR> <input type=checkbox name="WHITE">
+										White / Caucasian<BR> Other: <input name="other"
+										maxlength="50" size="40" type="text" value=""> <BR>
+										<input type=checkbox name="decline"> Decline to State
+									</font>
+								</p></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><font size="3"
+								face="Arial, Helvetica, sans-serif">Citizenship Status: <br>
+									<font size="2">(Please note that non-U.S. citizens and
+										non-permanent residents are not eligible to apply.) </font></font></td>
+							<td height="22" align="left" width="60%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> <input
+										type="radio" name="CITIZENSHIP" value="citizen"> U.S.
+										Citizen<br> <input type="radio" name="CITIZENSHIP"
+										value="resident"> Permanent Resident, Place of Birth<input
+										name="PLACEOFBIRTH" maxlength="75" size="25" type="text"
+										value=""> <br> <input type="radio"
+										name="CITIZENSHIP" value="other"> Other<br> <br>
+									</font>
+								</p></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif">Parents
+										Educational Background:</font>
+								</p>
+								<p>
+									<font size="3" face="Arial, Helvetica, sans-serif">
+										Mother, Highest Degree Earned:</font>
+								</p>
+								<p>
+									<font size="3" face="Arial, Helvetica, sans-serif">Father,
+										Highest Degree Earned: </font>
+								</p></td>
+							<td height="22" align="left" width="60%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"><br>
+										<br> <select size="1" name="MOTHERDEGREE">
+											<option value="N/A">N/A</option>
+											<option value="No High School Degree">No High School
+												Degree</option>
+											<option value="High School">High School</option>
+											<option value="Associates/Certificate">Associates/Certificate</option>
+											<option value="Bachelors">Bachelors</option>
+											<option value="Masters">Masters</option>
+											<option value="Doctorate">Doctorate</option>
+									</select> <br> <br> <select size="1" name="FATHERDEGREE">
+											<option value="N/A">N/A</option>
+											<option value="No High School Degree">No High School
+												Degree</option>
+											<option value="High School">High School</option>
+											<option value="Associates/Certificate">Associates/Certificate</option>
+											<option value="Bachelors">Bachelors</option>
+											<option value="Masters">Masters</option>
+											<option value="Doctorate">Doctorate</option>
+									</select> <br> <br> </font>
+								</p></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif">
+										Class completed at the end of the coming spring
+										quarter/semester: <br>
+									</font> <br> <font size="2" face="Arial, Helvetica, sans-serif">(Please
+										note that only second year, third year, and non-graduating
+										fourth year undergraduates are eligible to apply) </font><font
+										size="3" face="Arial, Helvetica, sans-serif"><br>
+									</font>
+								</p></td>
+							<td height="22" align="left" width="60%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> <select
+										size="1" name="CLASSCOMPLETE">
+											<option value="Sophomore">Sophomore</option>
+											<option value="Junior">Junior</option>
+											<option value="Non-Graduating Senior">Non-Graduating
+												Senior</option>
+									</select> <br>
+									</font><br>
+								</p></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif">What
+										month and year do you anticipate to graduate with your
+										bachelors degree? </font>
+								</p></td>
+							<td height="22" align="left" width="60%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> </font><font
+										face="Arial"> <select size="1" name="GRADUATION_DATE">
+											<option value="January">January</option>
+											<option value="February">February</option>
+											<option value="March">March</option>
+											<option value="April">April</option>
+											<option value="May">May</option>
+											<option value="June">June</option>
+											<option value="July">July</option>
+											<option value="August">August</option>
+											<option value="September">September</option>
+											<option value="October">October</option>
+											<option value="November">November</option>
+											<option value="December">December</option>
+									</select>
+									</font><font size="3" face="Arial, Helvetica, sans-serif"> <select
+										size="1" name="BACHELORYEAR">
+											<option value="2016">2016</option>
+											<option value="2017">2017</option>
+											<option value="2018">2018</option>
+											<option value="2019">2019</option>
+									</select>
+									</font><font face="Arial"> </font>
+								</p></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif">Cumulative
+										GPA:<br>
+									</font><font size="2" face="Arial, Helvetica, sans-serif"> (on
+										a 4.0 scale; you must have a cumulative GPA &gt; 3.2 to apply.
+										Use #.## format) -- MIT students please enter on a 5.0 scale</font>
+								</p></td>
+							<td height="22" align="left" width="60%"><p>
+									<font face="Arial, Helvetica, sans-serif" size="3"
+										color="#000000"> <input name="CUMULATIVEGPA" size="40"
+										type="text" value="">
+									</font>
+								</p></td>
+						</tr>
+						<tr>
+							<td height="22"><font size="3"
+								face="Arial, Helvetica, sans-serif">Advanced Degree
+									Objective: </font></td>
+							<td height="22" align="left"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> <input
+										type="radio" name="ADVANCEDDEGREE" value="PHD"> Ph. D.<br>
+										<input type="radio" name="ADVANCEDDEGREE" value="MDPHD">
+										M. D./Ph. D.<br> <input type="radio"
+										name="ADVANCEDDEGREE" value="MAMS"> M. A./M. S.<br>
+										<input type="radio" name="ADVANCEDDEGREE" value="MD">
+										M.D.<br> <input type="radio" name="ADVANCEDDEGREE"
+										value="Other"> Other, Please Specify: <font
+										color="#000000"> <input name="ADVANCEDDEGREEOTHER"
+											size="40" type="text" value="">
+									</font></font>
+								</p></td>
+						</tr>
+						<td height="22"><font size="3"
+							face="Arial, Helvetica, sans-serif">Does your four-year
+								college or university offer an undergraduate research program? </font></td>
+						<td height="22" align="left"><p>
+								<font size="3" face="Arial, Helvetica, sans-serif"> <input
+									type="radio" name="RESEARCHOFFER" value="Yes"> Yes<br>
+									<input type="radio" name="RESEARCHOFFER" value="No"> No<br>
+								</font>
+							</p></td>
+						</tr>
+
+						<tr>
+							<td><font size="3" face="Arial, Helvetica, sans-serif">How
+									did you hear about the Amgen Scholars program? </font></td>
+							<td><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> <input
+										type=checkbox name="AMGENSITE"> Amgen National Website
+										<BR> <input type=checkbox name="UNIVERSITYSITE">
+										University website, University name:
+									</font><font face="Arial, Helvetica, sans-serif" size="3"
+										color="#000000"> <input name="UNIVERSITYSITENAME"
+										size="25" type="text" value="">
+									</font><font size="3" face="Arial, Helvetica, sans-serif"><BR>
+										<input type=checkbox name="EMAILANNOUNCEMENT"> E-mail
+										Announcement <BR> <input type=checkbox name="POSTER">
+										Poster<BR> <input type=checkbox name="CONFERENCE">
+										Conference, Conference name: </font><font
+										face="Arial, Helvetica, sans-serif" size="3" color="#000000">
+										<input name="CONFERENCENAME" size="30" type="text" value="">
+									</font><font size="3" face="Arial, Helvetica, sans-serif"><BR>
+										<input type=checkbox name="ACADEMICADVISOR"> Academic
+										Advisor <BR> <input type=checkbox name="INTERNETSEARCH">
+										Internet Search <BR> <input type=checkbox
+										name="HOMEUNIVERSITY"> Faculty/Staff from home
+										university <BR> <input type=checkbox
+										name="OTHERUNIVERSITY"> Faculty/Staff from other
+										university <br> University name: </font><font
+										face="Arial, Helvetica, sans-serif" size="3" color="#000000">
+										<input name="OTHERUNIVERSITYNAME" size="25" type="text"
+										value="">
+									</font><font size="3" face="Arial, Helvetica, sans-serif"><br>
+										<input type=checkbox name="AMGENOTHER"> Other, please
+										specify: </font><font face="Arial, Helvetica, sans-serif" size="3"
+										color="#000000"> <input name="AMGENOTHERNAME" size="25"
+										type="text" value="">
+									</font>
+								</p></td>
+						</tr>
+						<td height="22" width="40%"><font size="3"
+							face="Arial, Helvetica, sans-serif">Are you applying to
+								any other Amgen Scholars sites?</font></td>
+						<td height="22" align="left" width="60%"><p>
+								<font size="3" face="Arial, Helvetica, sans-serif"> <input
+									type="radio" name="APPLYINGOTHER" value="No"> No<br>
+									<input type="radio" name="APPLYINGOTHER" value="Yes">
+									Yes (if yes, where? <input name="APPLYINGOTHERSPECIFY"
+									maxlength="30" size="30" type="text" value=""> )<br>
+									<br>
+								</font>
+							</p></td>
+						<tr>
+							<td height="22" width="40%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif">Have
+										you participated as an Amgen Scholar in the past?</font><br>
+								</p></td>
+							<td height="22" align="left" width="60%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> <input
+										type="radio" name="PARTICIPATED" value="notparticipated">
+										No<br> <input type="radio" name="PARTICIPATED"
+										value="participated"> Yes
+									</font><font size="2" face="Arial, Helvetica, sans-serif"><br>
+										(note that if you have participated IN THE AMGEN SCHOLARS
+										PROGRAM AT ANY OF THE TEN UNIVERSITIES that you are NOT
+										ELIGIBLE to participate again)</font><font size="3"
+										face="Arial, Helvetica, sans-serif"><br> <br>
+									</font>
+								</p></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif">Did
+										you perform original research before this summer where you had
+										your own project?</font><br>
+								</p></td>
+							<td height="22" align="left" width="60%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> <input
+										type="radio" name="UG_RESEARCH" value="Yes"> Yes<br>
+										<input type="radio" name="UG_RESEARCH" value="No"> No
+									</font> </font>
+								</p></td>
+						</tr>
+						<tr>
+							<td height="22" width="40%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> Can
+										you arrive at CU for the first day of the program, which is
+										the day after Memorial Day each year? </font><br />
+								</p></td>
+							<td height="22" align="left" width="60%"><p>
+									<font size="3" face="Arial, Helvetica, sans-serif"> <input
+										type="radio" name="ARRIVEONFIRSTDAY" value="Yes"> Yes<br>
+										<input type="radio" name="ARRIVEONFIRSTDAY" value="No">
+										No <br /> Comments: <br /> <textarea
+											name="ARRIVEONFIRSTDAYX" rows="4" style="width: 99%"
+											maxlength="250"></textarea>
+									</font> </font>
+								</p></td>
+						</tr>
+				</table>
+			</center>
+		</div>
+		<p></p>
+		<div align="center">
+			<center>
+				<table cellpadding="0" width="79%" border="0">
+					<tbody>
+						<tr>
+							<td width="79%"><font size="3"
+								face="Arial, Helvetica, sans-serif"><font
+									face="Arial Unicode MS">Currently attending which
+										College/University: </font></td>
+							<td><select name="university" ONCHANGE="goto(this.form)">
+									<option value=""></option>
+									<option value='1723'></option>
+									<option value='1724'></option>
+									<option value='1'>Abilene Christian University</option>
+									<option value='2'>Abraham Baldwin Agricultural College</option>
+									<option value='3'>Academy of Art University</option>
+									<option value='4'>Adams State College</option>
+									<option value='5'>Adelphi University</option>
+									<option value='6'>Adrian College</option>
+									<option value='7'>Agnes Scott College</option>
+									<option value='8'>Air Force Institute of Technology</option>
+									<option value='9'>Air University</option>
+									<option value='10'>Alabama A&M University</option>
+									<option value='11'>Alabama State University</option>
+									<option value='12'>Alaska Bible College</option>
+									<option value='13'>Alaska Pacific University</option>
+									<option value='1725'>Albany College of Pharmacy and
+										Health Sciences</option>
+									<option value='14'>Albany State University</option>
+									<option value='15'>Albertson College of Idaho</option>
+									<option value='16'>Albertus Magnus College</option>
+									<option value='17'>Albion College</option>
+									<option value='18'>Albright College</option>
+									<option value='19'>Alcorn State University</option>
+									<option value='20'>Alderson-Broaddus College</option>
+									<option value='21'>Alexandria University</option>
+									<option value='22'>Alfred State College, State
+										University of New York College of Technology</option>
+									<option value='23'>Alfred University</option>
+									<option value='24'>Allegheny College</option>
+									<option value='25'>Allen College</option>
+									<option value='26'>Allen University</option>
+									<option value='27'>Allentown College</option>
+									<option value='28'>Alliant International University</option>
+									<option value='29'>Alma College</option>
+									<option value='30'>Alvernia College</option>
+									<option value='31'>Alverno College</option>
+									<option value='32'>Amberton University</option>
+									<option value='33'>American Bible College and Seminary</option>
+									<option value='34'>American Coastline University</option>
+									<option value='36'>American Global University</option>
+									<option value='37'>American Graduate School of
+										International Management</option>
+									<option value='38'>American Institute for Computer
+										Sciences</option>
+									<option value='39'>American InterContinental
+										University</option>
+									<option value='40'>American International College</option>
+									<option value='41'>American Military University</option>
+									<option value='42'>American Public University</option>
+									<option value='43'>American Schools of Professional
+										Psychology</option>
+									<option value='44'>American University</option>
+									<option value='45'>American University of Hawaii</option>
+									<option value='46'>Amherst College</option>
+									<option value='47'>Anderson College</option>
+									<option value='48'>Anderson University</option>
+									<option value='49'>Andrew Jackson University</option>
+									<option value='50'>Andrews University</option>
+									<option value='51'>Angelo State University</option>
+									<option value='52'>Anna Maria College</option>
+									<option value='53'>Antioch College</option>
+									<option value='54'>Antioch New England Graduate School</option>
+									<option value='55'>Antioch University Los Angeles</option>
+									<option value='56'>Antioch University Santa Barbara</option>
+									<option value='57'>Antioch University Seattle</option>
+									<option value='58'>Antioch University Yellow Springs
+										OH</option>
+									<option value='59'>Apache University</option>
+									<option value='60'>Appalachian School of Law</option>
+									<option value='61'>Appalachian State University</option>
+									<option value='62'>Aquinas College</option>
+									<option value='63'>Arcadia University</option>
+									<option value='64'>Arizona International College</option>
+									<option value='65'>Arizona State University</option>
+									<option value='66'>Arizona State University West</option>
+									<option value='67'>Arkansas State University</option>
+									<option value='68'>Arkansas Tech University</option>
+									<option value='69'>Arlington Baptist College</option>
+									<option value='70'>Armstrong State University</option>
+									<option value='71'>Art Center College of Design</option>
+									<option value='75'>Asbury College</option>
+									<option value='76'>Ashland University</option>
+									<option value='77'>Assumption College</option>
+									<option value='78'>Athena University</option>
+									<option value='79'>Athens State College</option>
+									<option value='80'>Atlantic Union College</option>
+									<option value='81'>Auburn University</option>
+									<option value='82'>Auburn University, Montgomery</option>
+									<option value='83'>Audrey Cohen College</option>
+									<option value='84'>Augsburg College</option>
+									<option value='85'>Augusta State University</option>
+									<option value='86'>Augustana College, Rock Island
+										Illinois</option>
+									<option value='87'>Augustana College, Sioux Falls
+										South Dakota</option>
+									<option value='88'>Aurora University</option>
+									<option value='89'>Austin College</option>
+									<option value='90'>Austin Peay State University</option>
+									<option value='1766'>Ave Maria University</option>
+									<option value='91'>Averett College</option>
+									<option value='92'>Avila College</option>
+									<option value='93'>Azusa Pacific University</option>
+									<option value='94'>Babson College</option>
+									<option value='95'>Baker College</option>
+									<option value='96'>Baker University</option>
+									<option value='97'>Baldwin-Wallace College</option>
+									<option value='98'>Ball State University</option>
+									<option value='99'>Baltimore Hebrew University</option>
+									<option value='100'>Bank Street College of Education</option>
+									<option value='101'>Baptist Bible College and Seminary</option>
+									<option value='104'>Barclay College</option>
+									<option value='103'>Bard College</option>
+									<option value='105'>Barnard College</option>
+									<option value='106'>Barrington University</option>
+									<option value='107'>Barry University</option>
+									<option value='108'>Barton College</option>
+									<option value='109'>Bastyr University</option>
+									<option value='110'>Bates College</option>
+									<option value='111'>Bay Path College</option>
+									<option value='112'>Baylor College of Dentistry</option>
+									<option value='113'>Baylor College of Medicine</option>
+									<option value='114'>Baylor University</option>
+									<option value='115'>Belhaven College</option>
+									<option value='116'>Bellarmine College</option>
+									<option value='1764'>Bellevue College, Washington</option>
+									<option value='117'>Bellevue University</option>
+									<option value='118'>Belmont Abbey College</option>
+									<option value='119'>Belmont University</option>
+									<option value='120'>Beloit College</option>
+									<option value='121'>Bemidji State Univeristy</option>
+									<option value='122'>Benedict College</option>
+									<option value='123'>Benedictine College</option>
+									<option value='124'>Benedictine University</option>
+									<option value='125'>Bennett College</option>
+									<option value='126'>Bennington College</option>
+									<option value='127'>Bentley College</option>
+									<option value='128'>Berea College</option>
+									<option value='129'>Berkeley College</option>
+									<option value='130'>Berklee College of Music</option>
+									<option value='131'>Berry College</option>
+									<option value='132'>Bethany Bible College</option>
+									<option value='134'>Bethany College, Lindsborg, KS</option>
+									<option value='135'>Bethany College, Scotts Valley, CA</option>
+									<option value='133'>Bethany College, West Virginia</option>
+									<option value='136'>Bethany Lutheran College</option>
+									<option value='137'>Bethel College and Seminary, Saint
+										Paul Minnesota</option>
+									<option value='138'>Bethel College, McKenzie,
+										Tennessee</option>
+									<option value='139'>Bethel College, Mishawaka, Indiana</option>
+									<option value='140'>Bethel College, Newton, Kansas</option>
+									<option value='141'>Bethune-Cookman College</option>
+									<option value='142'>Bienville University</option>
+									<option value='143'>Biola University</option>
+									<option value='144'>Birmingham-Southern College</option>
+									<option value='145'>Black Hills State University</option>
+									<option value='146'>Blackburn College</option>
+									<option value='147'>Bloomfield College</option>
+									<option value='148'>Bloomsburg University</option>
+									<option value='149'>Bluefield College</option>
+									<option value='150'>Bluefield State College</option>
+									<option value='151'>Bluffton College</option>
+									<option value='152'>Bob Jones University</option>
+									<option value='153'>Boise State University</option>
+									<option value='155'>Boston College</option>
+									<option value='156'>Boston Conservatory</option>
+									<option value='157'>Boston University</option>
+									<option value='158'>Bowdoin College</option>
+									<option value='159'>Bowie State University</option>
+									<option value='160'>Bowling Green State University</option>
+									<option value='161'>Bradford College</option>
+									<option value='162'>Bradley University</option>
+									<option value='163'>Brandeis University</option>
+									<option value='1780'>Brandman University</option>
+									<option value='164'>Brenau University</option>
+									<option value='165'>Brewton-Parker College</option>
+									<option value='166'>Briar Cliff University</option>
+									<option value='167'>Bridgewater College</option>
+									<option value='168'>Bridgewater State College</option>
+									<option value='169'>Brigham Young University</option>
+									<option value='170'>Brigham Young University Hawaii</option>
+									<option value='171'>Brigham Young University Idaho</option>
+									<option value='172'>Brooklyn College</option>
+									<option value='173'>Brooklyn Law School</option>
+									<option value='174'>Brown University</option>
+									<option value='175'>Bryant College</option>
+									<option value='176'>Bryn Mawr College</option>
+									<option value='177'>Bucknell University</option>
+									<option value='178'>Buena Vista University</option>
+									<option value='179'>Buffalo State</option>
+									<option value='180'>Butler University</option>
+									<option value='181'>C. R. Drew University of Medicine
+										and Science</option>
+									<option value='182'>Caldwell College</option>
+									<option value='183'>California Baptist University</option>
+									<option value='184'>California Coast University</option>
+									<option value='186'>California College for Health
+										Sciences</option>
+									<option value='185'>California College of Arts and
+										Crafts</option>
+									<option value='187'>California College of Podiatric
+										Medicine</option>
+									<option value='189'>California Institute for Human
+										Science</option>
+									<option value='190'>California Institute of Integral
+										Studies</option>
+									<option value='191'>California Institute of Technology</option>
+									<option value='188'>California Institute of the Arts</option>
+									<option value='192'>California Lutheran University</option>
+									<option value='194'>California National University for
+										Advanced Studies</option>
+									<option value='195'>California Pacific University</option>
+									<option value='196'>California Polytechnic State
+										University, San Luis Obispo</option>
+									<option value='197'>California State Polytechnic
+										University, Pomona</option>
+									<option value='198'>California State University,
+										Bakersfield</option>
+									<option value='199'>California State University,
+										Channel Islands</option>
+									<option value='200'>California State University, Chico</option>
+									<option value='201'>California State University,
+										Dominguez Hills</option>
+									<option value='202'>California State University,
+										Fresno</option>
+									<option value='203'>California State University,
+										Fullerton</option>
+									<option value='204'>California State University,
+										Hayward</option>
+									<option value='205'>California State University, Long
+										Beach</option>
+									<option value='206'>California State University, Los
+										Angeles</option>
+									<option value='207'>California State University,
+										Monterey</option>
+									<option value='208'>California State University,
+										Northridge</option>
+									<option value='209'>California State University,
+										Sacramento</option>
+									<option value='210'>California State University, San
+										Bernardino</option>
+									<option value='211'>California State University, San
+										Marcos</option>
+									<option value='212'>California State University,
+										Stanislaus</option>
+									<option value='213'>California University of
+										Pennsylvania</option>
+									<option value='214'>Calumet College of St. Joseph</option>
+									<option value='215'>Calvin College</option>
+									<option value='216'>Cambridge College</option>
+									<option value='217'>Cameron University</option>
+									<option value='218'>Campbell University</option>
+									<option value='219'>Campbellsville University</option>
+									<option value='220'>Canisius College</option>
+									<option value='221'>Canyon College</option>
+									<option value='222'>Capella University</option>
+									<option value='223'>Capital University</option>
+									<option value='224'>Capitol College</option>
+									<option value='225'>Cardinal Stritch University</option>
+									<option value='226'>Carleton College</option>
+									<option value='227'>Carlow College</option>
+									<option value='228'>Carnegie Institution of Washington</option>
+									<option value='229'>Carnegie Mellon University</option>
+									<option value='230'>Carroll College, Helena, MT</option>
+									<option value='231'>Carroll College, Waukesha, WI</option>
+									<option value='232'>Carson-Newman College</option>
+									<option value='233'>Carthage College</option>
+									<option value='234'>Case Western Reserve University</option>
+									<option value='235'>Castleton State College</option>
+									<option value='236'>Catawba College</option>
+									<option value='238'>Cazenovia College</option>
+									<option value='239'>Cedar Crest College</option>
+									<option value='240'>Cedarville University</option>
+									<option value='241'>Centenary College of Louisiana</option>
+									<option value='242'>Centenary College of New Jersey</option>
+									<option value='243'>Center for Creative Studies
+										College of Art and Design</option>
+									<option value='244'>Central College</option>
+									<option value='245'>Central Connecticut State
+										University</option>
+									<option value='246'>Central Methodist College</option>
+									<option value='247'>Central Michigan University</option>
+									<option value='248'>Central Missouri State University</option>
+									<option value='249'>Central State University</option>
+									<option value='250'>Central Washington University</option>
+									<option value='251'>Centre College</option>
+									<option value='252'>Century University</option>
+									<option value='253'>Chadron State College</option>
+									<option value='254'>Chadwick University</option>
+									<option value='255'>Chaminade University of Honolulu,
+										Hawaii</option>
+									<option value='256'>Champlain College</option>
+									<option value='257'>Chapman University</option>
+									<option value='258'>Charles R. Drew University of
+										Medicine and Science</option>
+									<option value='259'>Charleston Southern University</option>
+									<option value='260'>Charter Oak State College</option>
+									<option value='261'>Chatham College</option>
+									<option value='262'>Cheyney University of Pennsylvania</option>
+									<option value='264'>Chicago School of Professional
+										Psychology</option>
+									<option value='265'>Chicago State University</option>
+									<option value='263'>Chicago-Kent College of Law</option>
+									<option value='266'>Chowan College</option>
+									<option value='267'>Christendom College</option>
+									<option value='268'>Christian Bible College and
+										Seminary</option>
+									<option value='269'>Christian Brothers University</option>
+									<option value='270'>Christopher Newport University</option>
+									<option value='271'>Circleville Bible College</option>
+									<option value='273'>City Colleges of Chicago</option>
+									<option value='275'>City University of Los Angeles</option>
+									<option value='276'>City University of New York</option>
+									<option value='1757'>City University of New York ,
+										York College</option>
+									<option value='1734'>City University of New York, City
+										College</option>
+									<option value='1758'>City University of New York,
+										Lehman College</option>
+									<option value='274'>City University, Bellevue
+										Washington</option>
+									<option value='277'>Claflin College</option>
+									<option value='278'>Claremont Graduate University</option>
+									<option value='279'>Claremont McKenna College</option>
+									<option value='280'>Clarion University</option>
+									<option value='281'>Clark Atlanta University</option>
+									<option value='282'>Clark College</option>
+									<option value='283'>Clark University</option>
+									<option value='284'>Clarke College</option>
+									<option value='285'>Clarkson University</option>
+									<option value='286'>Clayton College and State
+										University</option>
+									<option value='287'>Clayton College of Natural Health</option>
+									<option value='289'>Clear Creek Baptist Bible College</option>
+									<option value='1728'>Clearwater Christian College</option>
+									<option value='290'>Cleary College</option>
+									<option value='288'>Clemson University</option>
+									<option value='291'>Cleveland Chiropractic College</option>
+									<option value='292'>Cleveland Institute of Art</option>
+									<option value='293'>Cleveland Institute of Music</option>
+									<option value='294'>Cleveland State University</option>
+									<option value='295'>Clinch Valley College</option>
+									<option value='296'>Coastal Carolina University</option>
+									<option value='297'>Coe College</option>
+									<option value='298'>Cogswell Polytechnical College</option>
+									<option value='299'>Coker College</option>
+									<option value='300'>Colby College</option>
+									<option value='301'>Colby-Sawyer College</option>
+									<option value='303'>Coleman College</option>
+									<option value='302'>Colgate University</option>
+									<option value='310'>College for Lifelong Learning</option>
+									<option value='312'>College Misericordia</option>
+									<option value='304'>College of Aeronautics</option>
+									<option value='306'>College of Charleston</option>
+									<option value='307'>College of Eastern Utah</option>
+									<option value='1763'>College of Idaho</option>
+									<option value='313'>College of Mount Saint Joseph</option>
+									<option value='1729'>College of Mount Saint Vincent</option>
+									<option value='315'>College of New Rochelle</option>
+									<option value='316'>College of Notre Dame of Maryland</option>
+									<option value='318'>College of Saint Benedict</option>
+									<option value='319'>College of Saint Catherine</option>
+									<option value='320'>College of Saint Elizabeth</option>
+									<option value='321'>College of Saint Mary</option>
+									<option value='322'>College of Saint Scholastica</option>
+									<option value='305'>College of the Atlantic</option>
+									<option value='308'>College of the Holy Cross</option>
+									<option value='317'>College of the Ozarks</option>
+									<option value='326'>College of the Southwest</option>
+									<option value='327'>College of William and Mary</option>
+									<option value='1746'>College of Wooster</option>
+									<option value='329'>Colorado Christian University</option>
+									<option value='330'>Colorado College</option>
+									<option value='331'>Colorado School of Mines</option>
+									<option value='332'>Colorado State University</option>
+									<option value='333'>Colorado Technical University</option>
+									<option value='335'>Columbia College of Missouri</option>
+									<option value='1751'>Columbia College, South Carolina</option>
+									<option value='336'>Columbia International University</option>
+									<option value='337'>Columbia Southern University</option>
+									<option value='338'>Columbia Union College</option>
+									<option value='339'>Columbia University</option>
+									<option value='340'>Columbus State University</option>
+									<option value='341'>Concord College</option>
+									<option value='342'>Concordia College, Ann Arbor
+										Michigan</option>
+									<option value='343'>Concordia College, Austin Texas</option>
+									<option value='344'>Concordia College, Bronxville, New
+										York</option>
+									<option value='345'>Concordia College, Moorhead
+										Minnesota</option>
+									<option value='346'>Concordia College, Saint Paul
+										Minnesota</option>
+									<option value='347'>Concordia College, Selma Alabama</option>
+									<option value='348'>Concordia College, Seward Nebraska</option>
+									<option value='349'>Concordia University, Irvine
+										California</option>
+									<option value='350'>Concordia University, Mequon
+										Wisconsin</option>
+									<option value='351'>Concordia University, Portland
+										Oregon</option>
+									<option value='352'>Concordia University, River Forest
+										Illinois</option>
+									<option value='353'>Connecticut College</option>
+									<option value='354'>Converse College</option>
+									<option value='355'>Cooper Union for the Advancement
+										of Science and Art</option>
+									<option value='356'>Coppin State College</option>
+									<option value='358'>Corcoran College of Art + Design</option>
+									<option value='357'>Cornell College, Iowa</option>
+									<option value='359'>Cornell University</option>
+									<option value='360'>Cornerstone University</option>
+									<option value='361'>Cornish College of the Arts</option>
+									<option value='362'>Cottey College</option>
+									<option value='363'>Covenant College</option>
+									<option value='364'>Creighton University</option>
+									<option value='365'>Crichton College</option>
+									<option value='366'>Crown College</option>
+									<option value='367'>Culver-Stockton College</option>
+									<option value='368'>Cumberland College</option>
+									<option value='369'>Cumberland University</option>
+									<option value='1743'>CUNY College of Staten Island</option>
+									<option value='1773'>CUNY-City College of Technology</option>
+									<option value='1772'>CUNY-Lehman College</option>
+									<option value='370'>Curry College</option>
+									<option value='371'>Cypress College</option>
+									<option value='415'>D'Youville College</option>
+									<option value='372'>Daemen College</option>
+									<option value='373'>Dakota State University</option>
+									<option value='374'>Dakota Wesleyan University</option>
+									<option value='375'>Dallas Baptist University</option>
+									<option value='376'>Dallas Theological Seminary</option>
+									<option value='377'>Dana College</option>
+									<option value='378'>Daniel Webster College</option>
+									<option value='379'>Dartmouth College</option>
+									<option value='380'>Davenport College</option>
+									<option value='381'>Davidson College</option>
+									<option value='382'>Davis and Elkins College</option>
+									<option value='383'>Dawson College</option>
+									<option value='1726'>Daytona State College</option>
+									<option value='384'>Dean College</option>
+									<option value='385'>Deep Springs College</option>
+									<option value='386'>Defiance College</option>
+									<option value='387'>Delaware State University</option>
+									<option value='388'>Delaware Valley College</option>
+									<option value='389'>Delta College</option>
+									<option value='390'>Delta State University</option>
+									<option value='391'>Denison University</option>
+									<option value='392'>Denver Seminary</option>
+									<option value='393'>DePaul University</option>
+									<option value='394'>DePauw University</option>
+									<option value='395'>DeSales University</option>
+									<option value='396'>DeVry University</option>
+									<option value='397'>DeVry University, Columbus</option>
+									<option value='398'>Diablo Valley College</option>
+									<option value='399'>Dickinson College</option>
+									<option value='400'>Dickinson State University</option>
+									<option value='401'>Dillard University</option>
+									<option value='402'>Dixie State College</option>
+									<option value='403'>Doane College</option>
+									<option value='404'>Dominican College</option>
+									<option value='405'>Dominican University</option>
+									<option value='406'>Dominican University of California</option>
+									<option value='1727'>Dominican University of
+										California</option>
+									<option value='407'>Dordt College</option>
+									<option value='408'>Dowling College</option>
+									<option value='409'>Drake University</option>
+									<option value='410'>Drew University</option>
+									<option value='411'>Drexel University</option>
+									<option value='412'>Drury University</option>
+									<option value='413'>Duke University</option>
+									<option value='414'>Duquesne University</option>
+									<option value='416'>Earlham College</option>
+									<option value='417'>East Carolina University</option>
+									<option value='418'>East Central University, Ada
+										Oklahoma</option>
+									<option value='419'>East Stroudsburg State University</option>
+									<option value='420'>East Tennessee State University</option>
+									<option value='421'>East Texas Baptist University</option>
+									<option value='422'>East-West University</option>
+									<option value='423'>Eastern College</option>
+									<option value='424'>Eastern Connecticut State
+										University</option>
+									<option value='425'>Eastern Illinois University</option>
+									<option value='426'>Eastern Kentucky University</option>
+									<option value='427'>Eastern Mennonite University</option>
+									<option value='428'>Eastern Michigan University</option>
+									<option value='429'>Eastern Nazarene College</option>
+									<option value='430'>Eastern New Mexico University</option>
+									<option value='431'>Eastern Oregon University</option>
+									<option value='432'>Eastern Washington University</option>
+									<option value='433'>Eckerd College</option>
+									<option value='434'>Edgewood College</option>
+									<option value='435'>Edinboro University of
+										Pennsylvania</option>
+									<option value='436'>Edward Waters College</option>
+									<option value='437'>Elizabeth City State University</option>
+									<option value='438'>Elizabethtown College</option>
+									<option value='439'>Elmhurst College</option>
+									<option value='440'>Elmira College</option>
+									<option value='441'>Elms College</option>
+									<option value='442'>Elon University</option>
+									<option value='443'>Embry-Riddle Aeronautical
+										University</option>
+									<option value='444'>Emerson College</option>
+									<option value='445'>Emmanuel College</option>
+									<option value='446'>Emmaus Bible College</option>
+									<option value='448'>Emory & Henry College</option>
+									<option value='447'>Emory University</option>
+									<option value='449'>Empire State College</option>
+									<option value='450'>Emporia State University</option>
+									<option value='451'>Endicott College</option>
+									<option value='452'>Erskine College</option>
+									<option value='453'>Eureka College</option>
+									<option value='454'>Evangel University</option>
+									<option value='455'>Everglades College</option>
+									<option value='456'>Evergreen State College</option>
+									<option value='457'>Excelsior College</option>
+									<option value='458'>Fairfield University</option>
+									<option value='459'>Fairleigh Dickinson University</option>
+									<option value='460'>Fairmont State University</option>
+									<option value='461'>Faith Baptist Bible College and
+										Theological Seminary</option>
+									<option value='462'>Faulkner University</option>
+									<option value='463'>Fayetteville State University</option>
+									<option value='464'>Felician College</option>
+									<option value='465'>Ferris State University</option>
+									<option value='466'>Ferrum College</option>
+									<option value='467'>Fielding Graduate Institute</option>
+									<option value='468'>Finch University of Health
+										Sciences/The Chicago Medical School</option>
+									<option value='469'>Fisk University</option>
+									<option value='470'>Fitchburg State College</option>
+									<option value='471'>Flagler College</option>
+									<option value='472'>Florida A & M University</option>
+									<option value='473'>Florida Atlantic University</option>
+									<option value='474'>Florida Christian College</option>
+									<option value='475'>Florida Gulf Coast University</option>
+									<option value='476'>Florida Institute of Technology</option>
+									<option value='477'>Florida International University</option>
+									<option value='478'>Florida Memorial College</option>
+									<option value='479'>Florida Metropolitan University</option>
+									<option value='480'>Florida Southern College</option>
+									<option value='481'>Florida State University</option>
+									<option value='482'>Fontbonne College</option>
+									<option value='483'>Fordham University</option>
+									<option value='484'>Forest Institute of Professional
+										Psychology</option>
+									<option value='485'>Fort Hays State University</option>
+									<option value='486'>Fort Lewis College</option>
+									<option value='487'>Fort Valley State University</option>
+									<option value='488'>Framingham State College</option>
+									<option value='489'>Francis Marion University</option>
+									<option value='490'>Franciscan University of
+										Steubenville</option>
+									<option value='491'>Franklin and Marshall College</option>
+									<option value='492'>Franklin College</option>
+									<option value='493'>Franklin Pierce College</option>
+									<option value='494'>Franklin Pierce Law Center</option>
+									<option value='495'>Franklin University</option>
+									<option value='496'>Freed-Hardeman University</option>
+									<option value='497'>Freewill Baptist Bible College</option>
+									<option value='498'>Fresno Pacific University</option>
+									<option value='499'>Friends University</option>
+									<option value='500'>Frostburg State University</option>
+									<option value='501'>Fuller Theological Seminary</option>
+									<option value='502'>Fullerton College</option>
+									<option value='503'>Furman University</option>
+									<option value='504'>Gallaudet University</option>
+									<option value='505'>Gannon University</option>
+									<option value='506'>Gardner-Webb University</option>
+									<option value='507'>Geneva College</option>
+									<option value='508'>George Fox University</option>
+									<option value='509'>George Mason University</option>
+									<option value='510'>George Washington University</option>
+									<option value='511'>Georgetown College</option>
+									<option value='512'>Georgetown University</option>
+									<option value='514'>Georgia College and State
+										University</option>
+									<option value='515'>Georgia Institute of Technology</option>
+									<option value='516'>Georgia Perimeter College</option>
+									<option value='517'>Georgia Southern University</option>
+									<option value='518'>Georgia Southwestern State
+										University</option>
+									<option value='519'>Georgia State University</option>
+									<option value='513'>Georgian Court College</option>
+									<option value='520'>Georgian Court College</option>
+									<option value='521'>Gettysburg College</option>
+									<option value='522'>Glenville State College</option>
+									<option value='523'>Globe Institute of Technology</option>
+									<option value='524'>Goddard College</option>
+									<option value='525'>Golden Gate University</option>
+									<option value='526'>Golden State Baptist College</option>
+									<option value='527'>Goldey-Beacom College</option>
+									<option value='528'>Gonzaga University</option>
+									<option value='529'>Gooding Institute of Nurse
+										Anesthesia</option>
+									<option value='530'>Gordon College</option>
+									<option value='531'>Gordon-Conwell Theological
+										Seminary</option>
+									<option value='532'>Goshen College</option>
+									<option value='533'>Goucher College</option>
+									<option value='534'>Governors State University</option>
+									<option value='535'>Grace College</option>
+									<option value='536'>Grace University</option>
+									<option value='537'>Graceland University</option>
+									<option value='539'>Grambling State University</option>
+									<option value='540'>Grand Canyon University</option>
+									<option value='541'>Grand Valley State University</option>
+									<option value='542'>Grand View College</option>
+									<option value='543'>Grantham University</option>
+									<option value='544'>Green Mountain College</option>
+									<option value='545'>Greenleaf University</option>
+									<option value='546'>Greensboro College</option>
+									<option value='547'>Greenville College</option>
+									<option value='548'>Greenwich University</option>
+									<option value='549'>Grinnell College</option>
+									<option value='550'>Grove City College</option>
+									<option value='551'>Guilford College</option>
+									<option value='552'>Gustavus Adolphus College, Saint
+										Peter, Minnesota</option>
+									<option value='553'>Gwynedd-Mercy College</option>
+									<option value='554'>Hamilton College</option>
+									<option value='555'>Hamilton University</option>
+									<option value='556'>Hamline University</option>
+									<option value='557'>Hampden-Sydney College</option>
+									<option value='558'>Hampshire College</option>
+									<option value='559'>Hampton University</option>
+									<option value='560'>Hannibal-LaGrange College</option>
+									<option value='561'>Hanover College</option>
+									<option value='562'>Hardin-Simmons University</option>
+									<option value='563'>Harding University</option>
+									<option value='564'>Harris-Stowe State College</option>
+									<option value='565'>Hartwick College</option>
+									<option value='566'>Harvard University</option>
+									<option value='567'>Harvey Mudd College</option>
+									<option value='568'>Hastings College</option>
+									<option value='569'>Haverford College</option>
+									<option value='570'>Hawaii Pacific University</option>
+									<option value='571'>Hebrew College</option>
+									<option value='572'>Heidelberg College</option>
+									<option value='573'>Henderson State Univerisity</option>
+									<option value='574'>Hendrix College</option>
+									<option value='575'>Henry Cogswell College</option>
+									<option value='576'>Heritage College</option>
+									<option value='577'>Hesser College</option>
+									<option value='578'>Hesston College</option>
+									<option value='579'>High Point University</option>
+									<option value='580'>Hilbert College</option>
+									<option value='581'>Hillsdale College</option>
+									<option value='582'>Hillsdale Freewill Baptist College</option>
+									<option value='583'>Hiram College</option>
+									<option value='584'>Hobart and William Smith Colleges</option>
+									<option value='585'>Hofstra University</option>
+									<option value='586'>Hollins University</option>
+									<option value='587'>Holy Cross College, Notre Dame
+										Indiana</option>
+									<option value='588'>Holy Family College</option>
+									<option value='589'>Hood College</option>
+									<option value='590'>Hope College</option>
+									<option value='591'>Houghton College</option>
+									<option value='592'>Houston Baptist University</option>
+									<option value='593'>Howard Payne University</option>
+									<option value='594'>Howard University</option>
+									<option value='595'>Humboldt State University</option>
+									<option value='596'>Hunter College</option>
+									<option value='597'>Huntingdon College</option>
+									<option value='598'>Huntington College</option>
+									<option value='599'>Huron University</option>
+									<option value='600'>Husson College</option>
+									<option value='601'>Huston-Tillotson College</option>
+									<option value='602'>Idaho State University</option>
+									<option value='603'>Illinois College</option>
+									<option value='604'>Illinois Institute of Technology</option>
+									<option value='605'>Illinois State University</option>
+									<option value='606'>Illinois Wesleyan University</option>
+									<option value='607'>Immaculata College</option>
+									<option value='608'>Indiana Institute Technologyy</option>
+									<option value='609'>Indiana State University</option>
+									<option value='611'>Indiana University - Bloomington</option>
+									<option value='616'>Indiana University - Purdue
+										University, Columbus</option>
+									<option value='617'>Indiana University - Purdue
+										University, Fort Wayne</option>
+									<option value='618'>Indiana University - Purdue
+										University, Indianapolis</option>
+									<option value='614'>Indiana University at South Bend</option>
+									<option value='612'>Indiana University Northwest</option>
+									<option value='613'>Indiana University of Pennsylvania</option>
+									<option value='615'>Indiana University Southeast</option>
+									<option value='610'>Indiana Wesleyan University</option>
+									<option value='619'>Institute for Christian Works</option>
+									<option value='622'>Institute for Transpersonal
+										Psychology</option>
+									<option value='620'>Institute of Computer Technology</option>
+									<option value='621'>Institute of Paper Science and
+										Technology</option>
+									<option value='623'>Inter American University of
+										Puerto Rico</option>
+									<option value='624'>International College</option>
+									<option value='625'>International Fine Arts College</option>
+									<option value='626'>International Institue of the
+										Americas</option>
+									<option value='627'>International Reform University</option>
+									<option value='628'>Iona College</option>
+									<option value='629'>Iowa State University</option>
+									<option value='630'>Iowa Wesleyan College</option>
+									<option value='631'>Ithaca College</option>
+									<option value='632'>Jackson State University</option>
+									<option value='633'>Jacksonville State University</option>
+									<option value='634'>Jacksonville University</option>
+									<option value='635'>James Madison University</option>
+									<option value='636'>Jamestown College</option>
+									<option value='637'>Jarvis Christian College</option>
+									<option value='638'>Jewish Theological Seminary</option>
+									<option value='639'>John Brown University</option>
+									<option value='640'>John Carroll University</option>
+									<option value='641'>John F. Kennedy University</option>
+									<option value='642'>John Jay College of Criminal
+										Justice</option>
+									<option value='643'>Johns Hopkins University</option>
+									<option value='645'>Johnson and Wales University</option>
+									<option value='644'>Johnson Bible College</option>
+									<option value='646'>Johnson C. Smith University</option>
+									<option value='1771'>Johnson State College</option>
+									<option value='647'>Joint Military Intelligence
+										College</option>
+									<option value='648'>Jones College</option>
+									<option value='649'>Jones International University</option>
+									<option value='651'>Judson College, Elgin IL</option>
+									<option value='650'>Judson College, Marion AL</option>
+									<option value='653'>Juniata College</option>
+									<option value='654'>Kalamazoo College</option>
+									<option value='655'>Kansas City Art Institute</option>
+									<option value='656'>Kansas Newman College</option>
+									<option value='657'>Kansas State University</option>
+									<option value='658'>Kansas Wesleyan University</option>
+									<option value='659'>Kean University</option>
+									<option value='660'>Keck Graduate Institute</option>
+									<option value='661'>Keene State College</option>
+									<option value='662'>Keiser College</option>
+									<option value='663'>Kennedy-Western University</option>
+									<option value='664'>Kennesaw State University</option>
+									<option value='665'>Kent State University</option>
+									<option value='666'>Kentucky Christian College</option>
+									<option value='667'>Kentucky State University</option>
+									<option value='668'>Kentucky Wesleyan College</option>
+									<option value='669'>Kenyon College</option>
+									<option value='670'>Kettering University</option>
+									<option value='671'>Keuka College</option>
+									<option value='672'>King College</option>
+									<option value='673'>King's College, Wilkes-Barre, PA</option>
+									<option value='675'>Knox College</option>
+									<option value='676'>Knox Theological Seminary</option>
+									<option value='677'>Kutztown University of
+										Pennsylvania</option>
+									<option value='678'>La Roche College</option>
+									<option value='679'>La Salle University</option>
+									<option value='680'>La Sierra University</option>
+									<option value='681'>Lafayette College</option>
+									<option value='682'>LaGrange College</option>
+									<option value='683'>Lake Erie College</option>
+									<option value='684'>Lake Forest College</option>
+									<option value='685'>Lake Superior State University</option>
+									<option value='686'>Lakeland College</option>
+									<option value='687'>Lamar University</option>
+									<option value='688'>Lambuth University</option>
+									<option value='689'>Lancaster Bible College</option>
+									<option value='690'>Lancaster Theological Seminary</option>
+									<option value='691'>Lander University</option>
+									<option value='692'>Landmark College</option>
+									<option value='694'>Lane College</option>
+									<option value='693'>Langston University</option>
+									<option value='695'>Lasell College</option>
+									<option value='696'>Lawrence Technological University</option>
+									<option value='697'>Lawrence University</option>
+									<option value='698'>Le Moyne College</option>
+									<option value='1769'>Le Moyne College</option>
+									<option value='699'>Lebanon Valley College</option>
+									<option value='700'>Lee College</option>
+									<option value='701'>Lee University</option>
+									<option value='702'>Lees-McRae College</option>
+									<option value='703'>Lehigh Univervsity</option>
+									<option value='704'>LeMoyne-Owen College</option>
+									<option value='705'>Lenoir-Rhyne College</option>
+									<option value='706'>Lenox Institute of Water
+										Technology</option>
+									<option value='707'>Lesley University</option>
+									<option value='708'>LeTourneau University</option>
+									<option value='709'>Lewis & Clark College</option>
+									<option value='711'>Lewis University</option>
+									<option value='710'>Lewis-Clark State College</option>
+									<option value='712'>Liberty University</option>
+									<option value='713'>Life University</option>
+									<option value='714'>Limestone College</option>
+									<option value='715'>Lincoln Christian College and
+										Seminary</option>
+									<option value='716'>Lincoln College</option>
+									<option value='717'>Lincoln Memorial University</option>
+									<option value='720'>Lincoln University of Pennsylvania</option>
+									<option value='718'>Lincoln University, Jefferson City
+										Missouri</option>
+									<option value='719'>Lincoln University, San Francisco
+										California</option>
+									<option value='721'>Lindenwood College</option>
+									<option value='722'>Lindsey Wilson College</option>
+									<option value='723'>Linfield College</option>
+									<option value='724'>Lipscomb University</option>
+									<option value='725'>Lock Haven University</option>
+									<option value='726'>Logan College of Chiropractic</option>
+									<option value='727'>Loma Linda University</option>
+									<option value='728'>Long Island University</option>
+									<option value='729'>Longwood College</option>
+									<option value='730'>Loras College</option>
+									<option value='1739'>Los Angeles Pierce College</option>
+									<option value='731'>Louisburg College</option>
+									<option value='732'>Louisiana Baptist Universty</option>
+									<option value='733'>Louisiana College</option>
+									<option value='734'>Louisiana State University at
+										Baton Rouge</option>
+									<option value='736'>Louisiana State University at
+										Shreveport</option>
+									<option value='735'>Louisiana State University Health
+										Sciences Center New Orleans</option>
+									<option value='737'>Louisiana Tech University</option>
+									<option value='738'>Loyola College, Baltimore</option>
+									<option value='739'>Loyola Marymount University</option>
+									<option value='740'>Loyola University, Chicago</option>
+									<option value='741'>Loyola University, New Orleans</option>
+									<option value='742'>Lubbock Christian University</option>
+									<option value='743'>Luther College</option>
+									<option value='744'>Luther Seminary</option>
+									<option value='745'>Lutheran Bible Institute</option>
+									<option value='746'>Lutheran Theological Seminary at
+										Gettysburg</option>
+									<option value='747'>Lycoming College</option>
+									<option value='748'>Lyme Academy of Fine Arts</option>
+									<option value='749'>Lynchburg College</option>
+									<option value='750'>Lyndon State College</option>
+									<option value='751'>Lynn University</option>
+									<option value='752'>Lyon College</option>
+									<option value='753'>Macalester College</option>
+									<option value='1747'>Macaulay Honors College</option>
+									<option value='754'>MacMurray College</option>
+									<option value='755'>Madonna University</option>
+									<option value='756'>Maharishi University of Management</option>
+									<option value='757'>Maine College of Art</option>
+									<option value='758'>Maine Maritime Academy</option>
+									<option value='759'>Malone College</option>
+									<option value='760'>Manchester College</option>
+									<option value='761'>Manhattan College</option>
+									<option value='762'>Manhattanville College</option>
+									<option value='763'>Mansfield University</option>
+									<option value='764'>Maranatha Baptist Bible College</option>
+									<option value='765'>Marian College</option>
+									<option value='766'>Marietta College</option>
+									<option value='768'>Marist College</option>
+									<option value='767'>Marlboro College</option>
+									<option value='769'>Marquette University</option>
+									<option value='770'>Mars Hill College</option>
+									<option value='771'>Marshall University</option>
+									<option value='772'>Mary Baldwin College</option>
+									<option value='773'>Mary Washington College</option>
+									<option value='774'>Maryland Institute, College of Art</option>
+									<option value='775'>Marylhurst University</option>
+									<option value='776'>Marymount College</option>
+									<option value='777'>Marymount Manhattan College</option>
+									<option value='778'>Marymount University</option>
+									<option value='779'>Maryville College</option>
+									<option value='780'>Maryville University of Saint
+										Louis</option>
+									<option value='781'>Marywood University</option>
+									<option value='782'>Massachusetts College of Art</option>
+									<option value='783'>Massachusetts College of Liberal
+										Arts</option>
+									<option value='784'>Massachusetts College of Pharmacy
+										and Allied Health Sciences</option>
+									<option value='785'>Massachusetts Institute of
+										Technology</option>
+									<option value='786'>Massachusetts Maritime Academy</option>
+									<option value='787'>Massachusetts School of
+										Professional Psychology</option>
+									<option value='790'>Mayville State University</option>
+									<option value='792'>McKendree College</option>
+									<option value='793'>McMurry University</option>
+									<option value='794'>McNeese State University</option>
+									<option value='795'>MCP Hahnemann University</option>
+									<option value='796'>McPherson College</option>
+									<option value='797'>Medaille College</option>
+									<option value='1738'>Medgar Evers College-CUNY</option>
+									<option value='798'>Medical College of Georgia</option>
+									<option value='799'>Medical College of Ohio</option>
+									<option value='800'>Medical College of Pennsylvania
+										and Hahnemann University</option>
+									<option value='801'>Medical College of Wisconsin</option>
+									<option value='802'>Medical University of South
+										Carolina</option>
+									<option value='803'>Meharry Medical College</option>
+									<option value='804'>Menlo College</option>
+									<option value='805'>Mercer University</option>
+									<option value='806'>Mercy College</option>
+									<option value='807'>Mercy College of Health Sciences</option>
+									<option value='808'>Mercyhurst College</option>
+									<option value='809'>Meredith College</option>
+									<option value='810'>Merrimack College</option>
+									<option value='811'>Mesa State College</option>
+									<option value='812'>Messiah College</option>
+									<option value='813'>Methodist College</option>
+									<option value='814'>Methodist Theological School in
+										Ohio</option>
+									<option value='815'>Metropolitan College</option>
+									<option value='816'>Metropolitan State College of
+										Denver</option>
+									<option value='817'>Metropolitan State University</option>
+									<option value='818'>Miami Christian University</option>
+									<option value='819'>Miami University of Ohio</option>
+									<option value='820'>Michigan State University</option>
+									<option value='821'>Michigan Technological University</option>
+									<option value='822'>Mid-America Nazarene University</option>
+									<option value='823'>Middle Georgia College</option>
+									<option value='824'>Middle Tennessee State University</option>
+									<option value='825'>Middlebury College</option>
+									<option value='826'>Midwestern Baptist College</option>
+									<option value='827'>Midwestern State University</option>
+									<option value='828'>Miles College</option>
+									<option value='829'>Millersville University</option>
+									<option value='830'>Milligan College</option>
+									<option value='831'>Millikin University</option>
+									<option value='832'>Mills College</option>
+									<option value='833'>Millsaps College</option>
+									<option value='834'>Milwaukee School of Engineering</option>
+									<option value='835'>Minneapolis College of Art and
+										Design</option>
+									<option value='836'>Minnesota State University Mankato</option>
+									<option value='837'>Minnesota State University
+										Moorhead</option>
+									<option value='838'>Minot State University</option>
+									<option value='839'>Minot State University--Bottineau</option>
+									<option value='840'>Mississippi College</option>
+									<option value='841'>Mississippi State University</option>
+									<option value='842'>Mississippi University for Women</option>
+									<option value='843'>Mississippi Valley State
+										University</option>
+									<option value='844'>Missouri Baptist College</option>
+									<option value='845'>Missouri Southern State College</option>
+									<option value='1741'>Missouri State University</option>
+									<option value='846'>Missouri Tech</option>
+									<option value='847'>Missouri Valley College</option>
+									<option value='848'>Missouri Western State College</option>
+									<option value='849'>Mitchell College</option>
+									<option value='850'>Molloy College</option>
+									<option value='851'>Monmouth College, Monmouth
+										Illinois</option>
+									<option value='852'>Monmouth University, West Long
+										Branch New Jersey</option>
+									<option value='853'>Monroe College</option>
+									<option value='856'>Montana State University College
+										of Technology, Great Falls</option>
+									<option value='854'>Montana State University-Billings</option>
+									<option value='855'>Montana State University-Bozeman</option>
+									<option value='857'>Montana State University-Northern
+										Havre</option>
+									<option value='858'>Montana Tech</option>
+									<option value='859'>Montclair State University</option>
+									<option value='860'>Monterey College of Law</option>
+									<option value='861'>Monterey Institute of
+										International Studies</option>
+									<option value='862'>Montreat College</option>
+									<option value='863'>Moravian College</option>
+									<option value='864'>Morehead State University</option>
+									<option value='865'>Morehouse College</option>
+									<option value='866'>Morehouse School of Medicine</option>
+									<option value='867'>Morgan State University</option>
+									<option value='868'>Morningside College</option>
+									<option value='869'>Morris Brown College</option>
+									<option value='870'>Morris College</option>
+									<option value='871'>Mount Aloysius College</option>
+									<option value='872'>Mount Holyoke College</option>
+									<option value='873'>Mount Ida College</option>
+									<option value='874'>Mount Marty College</option>
+									<option value='875'>Mount Mary College</option>
+									<option value='876'>Mount Mercy College</option>
+									<option value='877'>Mount Olive College</option>
+									<option value='1745'>Mount Saint Mary College,
+										Newburgh, NY</option>
+									<option value='881'>Mount Senario College</option>
+									<option value='878'>Mount St. Clare College</option>
+									<option value='879'>Mount St. Mary's College and
+										Seminary, Emmitsburg Maryland</option>
+									<option value='880'>Mount St. Mary's College, Los
+										Angeles California</option>
+									<option value='883'>Mount Union College</option>
+									<option value='884'>Mount Vernon Nazarene College</option>
+									<option value='885'>Mountain State University</option>
+									<option value='882'>Mt. Sierra College</option>
+									<option value='886'>Muhlenberg College</option>
+									<option value='887'>Murray State University</option>
+									<option value='888'>Muskingum College</option>
+									<option value='889'>Naropa University</option>
+									<option value='890'>National American University</option>
+									<option value='891'>National Defense University</option>
+									<option value='894'>National Technological University</option>
+									<option value='895'>National University</option>
+									<option value='893'>National-Louis University</option>
+									<option value='897'>Nazarene Bible College</option>
+									<option value='898'>Nazareth College</option>
+									<option value='899'>Nebraska Methodist College</option>
+									<option value='900'>Nebraska Wesleyan University</option>
+									<option value='901'>Neumann College</option>
+									<option value='902'>New Brunswick Theological Seminary</option>
+									<option value='903'>New College of Florida</option>
+									<option value='904'>New England College of Optometry</option>
+									<option value='905'>New England Conservatory of Music</option>
+									<option value='906'>New England Institute of
+										Technology</option>
+									<option value='907'>New England School of
+										Communications</option>
+									<option value='908'>New Jersey City University</option>
+									<option value='909'>New Jersey Institute of Technology</option>
+									<option value='910'>New Mexico Highlands University</option>
+									<option value='911'>New Mexico Institute of Mining and
+										Technology</option>
+									<option value='912'>New Mexico State University</option>
+									<option value='913'>New School University</option>
+									<option value='914'>New World School of the Arts</option>
+									<option value='915'>New York Academy of Art</option>
+									<option value='916'>New York Institute of Technology</option>
+									<option value='917'>New York Law School</option>
+									<option value='918'>New York University</option>
+									<option value='919'>Newberry College</option>
+									<option value='1765'>Newman University</option>
+									<option value='920'>Newport University</option>
+									<option value='921'>Niagara University</option>
+									<option value='922'>Nicholls State University</option>
+									<option value='923'>Nichols College</option>
+									<option value='924'>Norfolk State University</option>
+									<option value='1770'>North American University</option>
+									<option value='925'>North Carolina Agricultural and
+										Technical State University</option>
+									<option value='926'>North Carolina Central University</option>
+									<option value='927'>North Carolina School of the Arts</option>
+									<option value='928'>North Carolina State University</option>
+									<option value='929'>North Carolina Wesleyan College</option>
+									<option value='930'>North Central College</option>
+									<option value='931'>North Central University</option>
+									<option value='932'>North Dakota State
+										University--Fargo</option>
+									<option value='933'>North Georgia College and State
+										University, the Military College of Georgia</option>
+									<option value='934'>North Greenville College</option>
+									<option value='935'>North Park University</option>
+									<option value='936'>Northeastern Illinois University</option>
+									<option value='938'>Northeastern State University</option>
+									<option value='937'>Northeastern University</option>
+									<option value='939'>Northern Arizona University</option>
+									<option value='940'>Northern Illinois University</option>
+									<option value='941'>Northern Kentucky University</option>
+									<option value='942'>Northern Michigan University</option>
+									<option value='1753'>Northern New Mexico College</option>
+									<option value='943'>Northern State University</option>
+									<option value='944'>Northland College</option>
+									<option value='945'>Northwest Christian College</option>
+									<option value='946'>Northwest College</option>
+									<option value='947'>Northwest College of Art</option>
+									<option value='948'>Northwest Missouri State
+										University</option>
+									<option value='949'>Northwest Nazarene University</option>
+									<option value='1760'>Northwest University</option>
+									<option value='952'>Northwestern College, Iowa</option>
+									<option value='953'>Northwestern College, Saint Paul,
+										MN</option>
+									<option value='954'>Northwestern Michigan College</option>
+									<option value='950'>Northwestern Oklahoma State
+										University</option>
+									<option value='951'>Northwestern State University,
+										Louisiana</option>
+									<option value='955'>Northwestern University</option>
+									<option value='956'>Northwood University</option>
+									<option value='957'>Norwich University</option>
+									<option value='958'>Notre Dame College of Ohio</option>
+									<option value='959'>Notre Dame de Namur University</option>
+									<option value='960'>Nova Southeastern University</option>
+									<option value='961'>Nyack College</option>
+									<option value='1762'>Oakland City University</option>
+									<option value='962'>Oakland University</option>
+									<option value='963'>Oakwood College</option>
+									<option value='964'>Oberlin College</option>
+									<option value='965'>Occidental College</option>
+									<option value='966'>Oglethorpe University</option>
+									<option value='967'>Ohio Dominican College</option>
+									<option value='968'>Ohio Northern University</option>
+									<option value='969'>Ohio State University - Colombus</option>
+									<option value='970'>Ohio University</option>
+									<option value='971'>Ohio Valley College</option>
+									<option value='972'>Ohio Wesleyan University</option>
+									<option value='973'>Oklahoma Baptist University</option>
+									<option value='974'>Oklahoma Christian University</option>
+									<option value='975'>Oklahoma City University</option>
+									<option value='976'>Oklahoma Panhandle State
+										University</option>
+									<option value='977'>Oklahoma State University</option>
+									<option value='978'>Oklahoma State University Tulsa</option>
+									<option value='979'>Oklahoma Wesleyan University</option>
+									<option value='980'>Old Dominion University</option>
+									<option value='981'>Olin College of Engineering</option>
+									<option value='982'>Olivet College</option>
+									<option value='983'>Olivet Nazarene University</option>
+									<option value='985'>Oral Roberts University</option>
+									<option value='986'>Oregon Graduate Institute of
+										Science and Technology</option>
+									<option value='987'>Oregon Health Sciences University</option>
+									<option value='988'>Oregon Institute of Technology</option>
+									<option value='989'>Oregon State University</option>
+									<option value='991'>Ottawa University</option>
+									<option value='990'>Otterbein College</option>
+									<option value='992'>Ouachita Baptist University</option>
+									<option value='994'>Our Lady of Holy Cross College</option>
+									<option value='993'>Our Lady of the Lake University</option>
+									<option value='995'>Pace University</option>
+									<option value='996'>Pacific College of Oriental
+										Medicine</option>
+									<option value='997'>Pacific Lutheran University</option>
+									<option value='998'>Pacific Northwest College of Art</option>
+									<option value='999'>Pacific States University</option>
+									<option value='1000'>Pacific Union College</option>
+									<option value='1001'>Pacific University</option>
+									<option value='1002'>Paine College</option>
+									<option value='1003'>Palm Beach Atlantic College</option>
+									<option value='1004'>Palmer College of Chiropractic</option>
+									<option value='1736'>Palomar College</option>
+									<option value='1005'>Park University</option>
+									<option value='1006'>Parsons School of Design</option>
+									<option value='1008'>Patrick Henry College</option>
+									<option value='1007'>Patten College</option>
+									<option value='1009'>Paul Quinn College</option>
+									<option value='1010'>Paul Smith's College</option>
+									<option value='1011'>Peace College</option>
+									<option value='1012'>Pennsylvania College of
+										Technology</option>
+									<option value='1013'>Pennsylvania State University -
+										University Park</option>
+									<option value='1014'>Pennsylvania State University at
+										Altoona</option>
+									<option value='1752'>Pennsylvania State University at
+										Brandywine</option>
+									<option value='1016'>Pennsylvania State University at
+										Harrisburg</option>
+									<option value='1015'>Pennsylvania State University,
+										Great Valley</option>
+									<option value='1748'>Pennsylvania State University,
+										Hazleton</option>
+									<option value='1731'>Pennsylvania State University,
+										University Park</option>
+									<option value='1017'>Pennsylvania State University,
+										Worthington Scranton</option>
+									<option value='1018'>Pensacola Christian College</option>
+									<option value='1019'>Pepperdine University</option>
+									<option value='1020'>Peru State College</option>
+									<option value='1021'>Pfeiffer University</option>
+									<option value='1026'>Philadelphia Biblical University</option>
+									<option value='1027'>Philadelphia University</option>
+									<option value='1028'>Philander Smith College</option>
+									<option value='1029'>Phillips University</option>
+									<option value='1022'>Pickering University</option>
+									<option value='1023'>Piedmont College</option>
+									<option value='1024'>Pine Manor College</option>
+									<option value='1025'>Pittsburg State University</option>
+									<option value='1030'>Pitzer College</option>
+									<option value='1031'>Plymouth State University,
+										Plymouth New Hampshire</option>
+									<option value='1032'>Point Loma Nazarene College</option>
+									<option value='1033'>Point Park College</option>
+									<option value='1034'>Polytechnic University of New
+										York</option>
+									<option value='1035'>Polytechnic University of Puerto
+										Rico</option>
+									<option value='1036'>Pomona College</option>
+									<option value='1775'>Pontifical Catholic University of
+										Puerto Rico</option>
+									<option value='1037'>Portland State University</option>
+									<option value='1038'>Potomac College</option>
+									<option value='1039'>Prairie View A & M University</option>
+									<option value='1040'>Pratt Institute</option>
+									<option value='1041'>Presbyterian College</option>
+									<option value='1042'>Prescott College</option>
+									<option value='1043'>Preston University</option>
+									<option value='1044'>Princeton University</option>
+									<option value='1045'>Principia College</option>
+									<option value='1046'>Providence College</option>
+									<option value='1047'>Purdue University</option>
+									<option value='1048'>Queens College</option>
+									<option value='1761'>Queens University, Charlotte</option>
+									<option value='1049'>Quincy University</option>
+									<option value='1050'>Quinnipiac College</option>
+									<option value='1051'>Radford University</option>
+									<option value='1052'>Ramapo College of New Jersey</option>
+									<option value='1053'>Randolph-Macon College</option>
+									<option value='1054'>Randolph-Macon Woman's College</option>
+									<option value='1055'>Reed College</option>
+									<option value='1056'>Regent University</option>
+									<option value='1057'>Regis College</option>
+									<option value='1058'>Regis University</option>
+									<option value='1059'>Reinhardt College</option>
+									<option value='1060'>Rensselaer Polytechnic Institute</option>
+									<option value='1061'>Rhode Island College</option>
+									<option value='1062'>Rhode Island School of Design</option>
+									<option value='1063'>Rhodes College</option>
+									<option value='1064'>Rice University</option>
+									<option value='1066'>Rider University</option>
+									<option value='1067'>Ringling School of Art and Design</option>
+									<option value='1068'>Ripon College</option>
+									<option value='1069'>Rivier College</option>
+									<option value='1070'>Roanoke College</option>
+									<option value='1071'>Robert Morris College, Illinois</option>
+									<option value='1072'>Robert Morris College,
+										Pittsburgh, PA</option>
+									<option value='1073'>Roberts Wesleyan College</option>
+									<option value='1075'>Rochester College</option>
+									<option value='1074'>Rochester Institute of Technology</option>
+									<option value='1077'>Rockford College</option>
+									<option value='1078'>Rockhurst University</option>
+									<option value='1079'>Rocky Mountain College</option>
+									<option value='1080'>Roger Williams University</option>
+									<option value='1081'>Rogers State University</option>
+									<option value='1082'>Rollins College</option>
+									<option value='1083'>Roosevelt University</option>
+									<option value='1084'>Rose-Hulman Institute of
+										Technology</option>
+									<option value='1085'>Rosemont College</option>
+									<option value='1086'>Rowan University</option>
+									<option value='1087'>Rush University</option>
+									<option value='1088'>Russell Sage College</option>
+									<option value='1089'>Rust College</option>
+									<option value='1090'>Rutgers University</option>
+									<option value='1091'>Rutgers University-Camden</option>
+									<option value='1092'>Rutgers University-Newark</option>
+									<option value='1093'>Ryokan College</option>
+									<option value='1094'>Sacred Heart University</option>
+									<option value='1095'>Sacred Heart University, Puerto
+										Rico</option>
+									<option value='1097'>Saginaw Valley State University</option>
+									<option value='1098'>Saint Ambrose University</option>
+									<option value='1099'>Saint Andrews Presbyterian
+										College</option>
+									<option value='1100'>Saint Anselm College</option>
+									<option value='1101'>Saint Anthony College of Nursing</option>
+									<option value='1102'>Saint Augustine's College</option>
+									<option value='1103'>Saint Bonaventure University</option>
+									<option value='1104'>Saint Cloud State University</option>
+									<option value='1105'>Saint Edwards University</option>
+									<option value='1106'>Saint Francis College, Brooklyn
+										Heights, New York</option>
+									<option value='1107'>Saint Francis College, Fort
+										Wayne, Indiana</option>
+									<option value='1108'>Saint Francis College, Loretto,
+										Pennsylvania</option>
+									<option value='1110'>Saint John Fisher College</option>
+									<option value='1111'>Saint John's College</option>
+									<option value='1112'>Saint John's University,
+										Collegeville Minnesota</option>
+									<option value='1113'>Saint John's University, Jamaica
+										New York</option>
+									<option value='1114'>Saint Joseph College</option>
+									<option value='1115'>Saint Joseph's College</option>
+									<option value='1116'>Saint Joseph's College of Maine</option>
+									<option value='1117'>Saint Joseph's University</option>
+									<option value='1118'>Saint Lawrence University</option>
+									<option value='1119'>Saint Leo University</option>
+									<option value='1120'>Saint Louis University</option>
+									<option value='1121'>Saint Martin's College</option>
+									<option value='1122'>Saint Mary College</option>
+									<option value='1124'>Saint Mary's College</option>
+									<option value='1125'>Saint Mary's College of
+										California</option>
+									<option value='1126'>Saint Mary's College of Maryland</option>
+									<option value='1127'>Saint Mary's University of
+										Minnesota</option>
+									<option value='1128'>Saint Mary's University of San
+										Antonio</option>
+									<option value='1123'>Saint Mary-of-the-Woods College</option>
+									<option value='1129'>Saint Meinrad's School of
+										Theology</option>
+									<option value='1130'>Saint Michael's College</option>
+									<option value='1131'>Saint Norbert College</option>
+									<option value='1132'>Saint Olaf College</option>
+									<option value='1133'>Saint Paul's College</option>
+									<option value='1134'>Saint Peter's College</option>
+									<option value='1135'>Saint Rose College</option>
+									<option value='1136'>Saint Thomas Aquinas College</option>
+									<option value='1137'>Saint Thomas University</option>
+									<option value='1138'>Saint Vincent College</option>
+									<option value='1139'>Saint Xavier University</option>
+									<option value='1140'>Salem College</option>
+									<option value='1141'>Salem International University</option>
+									<option value='1142'>Salem State College</option>
+									<option value='1143'>Salisbury State University</option>
+									<option value='1145'>Salve Regina University</option>
+									<option value='1146'>Sam Houston State University</option>
+									<option value='1147'>Samford University</option>
+									<option value='1148'>Samuel Merritt College</option>
+									<option value='1149'>San Diego State University</option>
+									<option value='1150'>San Francisco Art Institute</option>
+									<option value='1151'>San Francisco Law School</option>
+									<option value='1152'>San Francisco State University</option>
+									<option value='1153'>San Joaquin College of Law</option>
+									<option value='1154'>San Jose Christian College</option>
+									<option value='1155'>San Jose State University</option>
+									<option value='1767'>Santa Barbara City College</option>
+									<option value='1156'>Santa Clara University</option>
+									<option value='1730'>Santa Fe College, Gainesville</option>
+									<option value='1157'>Sarah Lawrence College</option>
+									<option value='1159'>Sarah Lawrence College</option>
+									<option value='1158'>Saratoga University School of Law</option>
+									<option value='1160'>Savannah College of Art and
+										Design</option>
+									<option value='1161'>Savannah State University</option>
+									<option value='1162'>Saybrook Graduate School and
+										Research Center</option>
+									<option value='1163'>Schiller International University</option>
+									<option value='1164'>School for International Training</option>
+									<option value='1166'>School of Islamic and Social
+										Sciences</option>
+									<option value='1165'>School of the Art Institute of
+										Chicago</option>
+									<option value='1167'>School of the Museum of Fine
+										Arts, Boston</option>
+									<option value='1168'>School of the Visual Arts</option>
+									<option value='1169'>Schreiner College</option>
+									<option value='1170'>Scripps College</option>
+									<option value='1172'>Seattle Pacific University</option>
+									<option value='1173'>Seattle University</option>
+									<option value='1174'>Seton Hall University</option>
+									<option value='1175'>Seton Hill College</option>
+									<option value='1176'>Shasta Bible College</option>
+									<option value='1178'>Shaw University</option>
+									<option value='1177'>Shawnee State University</option>
+									<option value='1179'>Sheffield School of Interior
+										Design</option>
+									<option value='1180'>Sheldon Jackson College</option>
+									<option value='1181'>Shenandoah University</option>
+									<option value='1182'>Shepherd College</option>
+									<option value='1183'>Sherman College of Straight
+										Chiropractic</option>
+									<option value='1184'>Shimer College</option>
+									<option value='1185'>Shippensburg University of
+										Pennsylvania</option>
+									<option value='1186'>Shorter College</option>
+									<option value='1187'>Siena College</option>
+									<option value='1188'>Siena Heights University</option>
+									<option value='1189'>Silver Lake College</option>
+									<option value='1190'>Simmons College</option>
+									<option value='1191'>Simon's Rock College</option>
+									<option value='1193'>Simpson College, Indianola Iowa</option>
+									<option value='1192'>Simpson College, Redding
+										California</option>
+									<option value='1194'>Skidmore College</option>
+									<option value='1195'>Slippery Rock University</option>
+									<option value='1196'>Smith Chapel Bible College</option>
+									<option value='1197'>Smith College</option>
+									<option value='1198'>Soka University of America</option>
+									<option value='1199'>Sonoma State University</option>
+									<option value='1200'>South Carolina State University</option>
+									<option value='1201'>South Dakota School of Mines and
+										Technology</option>
+									<option value='1202'>South Dakota State University</option>
+									<option value='1203'>South Pacific University</option>
+									<option value='1777'>South Texas College</option>
+									<option value='1204'>South Texas College of Law</option>
+									<option value='1205'>Southampton College</option>
+									<option value='1206'>Southeast College of Technology</option>
+									<option value='1207'>Southeast Missouri State
+										University</option>
+									<option value='1208'>Southeastern College</option>
+									<option value='1209'>Southeastern Louisiana University</option>
+									<option value='1210'>Southeastern Oklahoma State
+										University</option>
+									<option value='1211'>Southeastern University</option>
+									<option value='1212'>Southern Adventist University</option>
+									<option value='1213'>Southern Arkansas University</option>
+									<option value='1214'>Southern California University of
+										Health Sciences</option>
+									<option value='1215'>Southern California University of
+										Professional Studies</option>
+									<option value='1216'>Southern Connecticut State
+										University</option>
+									<option value='1217'>Southern Illinois University at
+										Carbondale</option>
+									<option value='1218'>Southern Illinois University at
+										Edwardsville</option>
+									<option value='1219'>Southern Illinois University
+										Medical School at Springsfield</option>
+									<option value='1220'>Southern Methodist University</option>
+									<option value='1221'>Southern Nazarene University</option>
+									<option value='1222'>Southern New Hampshire University</option>
+									<option value='1223'>Southern Oregon State College</option>
+									<option value='1224'>Southern Polytechnic State
+										Univerisity</option>
+									<option value='1228'>Southern University, Baton Rouge</option>
+									<option value='1229'>Southern University, New Orleans</option>
+									<option value='1230'>Southern University,
+										Shreveport-Bossier City</option>
+									<option value='1231'>Southern Utah University</option>
+									<option value='1225'>Southern Vermont College</option>
+									<option value='1226'>Southern Virginia University</option>
+									<option value='1227'>Southern Wesleyan University</option>
+									<option value='1232'>Southwest Baptist University</option>
+									<option value='1233'>Southwest Bible College and
+										Seminary</option>
+									<option value='1234'>Southwest Missouri State
+										University</option>
+									<option value='1235'>Southwest State University</option>
+									<option value='1236'>Southwest Texas State University</option>
+									<option value='1237'>Southwestern Adventist University</option>
+									<option value='1238'>Southwestern Assemblies of God
+										University</option>
+									<option value='1239'>Southwestern College</option>
+									<option value='1240'>Southwestern Oklahoma State
+										University</option>
+									<option value='1241'>Southwestern University</option>
+									<option value='1242'>Southwestern University School of
+										Law</option>
+									<option value='1243'>Spalding University</option>
+									<option value='1244'>Spartanburg Methodist College</option>
+									<option value='1245'>Spelman College</option>
+									<option value='1246'>Spertus College</option>
+									<option value='1247'>Spring Arbor College</option>
+									<option value='1248'>Spring Hill College</option>
+									<option value='1249'>Springfield College</option>
+									<option value='1109'>St. Gregory's University</option>
+									<option value='1750'>St. Mary's University</option>
+									<option value='1250'>Stamford International College</option>
+									<option value='1251'>Stanford University</option>
+									<option value='1252'>State University of New York at
+										Albany</option>
+									<option value='1253'>State University of New York at
+										Binghamton</option>
+									<option value='1254'>State University of New York at
+										Buffalo</option>
+									<option value='1255'>State University of New York at
+										Oswego</option>
+									<option value='1256'>State University of New York at
+										Stony Brook</option>
+									<option value='1259'>State University of New York
+										College at Brockport</option>
+									<option value='1260'>State University of New York
+										College at Buffalo (Buffalo State College)</option>
+									<option value='1261'>State University of New York
+										College at Cortland</option>
+									<option value='1263'>State University of New York
+										College at Farmingdale</option>
+									<option value='1264'>State University of New York
+										College at Fredonia</option>
+									<option value='1265'>State University of New York
+										College at Geneseo</option>
+									<option value='1267'>State University of New York
+										College at New Paltz</option>
+									<option value='1268'>State University of New York
+										College at Old Westbury</option>
+									<option value='1269'>State University of New York
+										College at Oneonta</option>
+									<option value='1270'>State University of New York
+										College at Oswego</option>
+									<option value='1271'>State University of New York
+										College at Plattsburgh</option>
+									<option value='1272'>State University of New York
+										College at Potsdam</option>
+									<option value='1273'>State University of New York
+										College at Purchase</option>
+									<option value='1266'>State University of New York
+										College Maritime College at Fort Schuyler</option>
+									<option value='1257'>State University of New York
+										College of Agriculture and Technology, Cobleskill</option>
+									<option value='1258'>State University of New York
+										College of Agriculture and Technology, Morrisville</option>
+									<option value='1262'>State University of New York
+										College of Environmental Science and Forestry</option>
+									<option value='1733'>State University of New York
+										Empire College</option>
+									<option value='1274'>State University of New York
+										Institute of Technology at Canton</option>
+									<option value='1275'>State University of New York
+										Institute of Technology at Delhi</option>
+									<option value='1276'>State University of New York
+										Institute of Technology at Utica/Rome</option>
+									<option value='1277'>State University of West Georgia</option>
+									<option value='1279'>Stephen F. Austin State
+										University</option>
+									<option value='1280'>Stephens College</option>
+									<option value='1282'>Sterling College, Kansas</option>
+									<option value='1281'>Sterling College, Sterling Kansas</option>
+									<option value='1283'>Sterling College, Vermont</option>
+									<option value='1284'>Stetson University</option>
+									<option value='1286'>Stevens Institute of Technology</option>
+									<option value='1285'>Stevens-Henager College</option>
+									<option value='1287'>Stillman College</option>
+									<option value='1288'>Stonehill College</option>
+									<option value='1289'>Strayer University</option>
+									<option value='1290'>Suffolk University</option>
+									<option value='1291'>Sul Ross State University</option>
+									<option value='1292'>Summit University of Louisiana</option>
+									<option value='1293'>Susquehanna University</option>
+									<option value='1294'>Swarthmore College</option>
+									<option value='1295'>Sweet Briar College</option>
+									<option value='1296'>Syracuse University</option>
+									<option value='1297'>Tabor College</option>
+									<option value='1298'>Talladega College</option>
+									<option value='1299'>Tarleton State University</option>
+									<option value='1300'>Taylor University</option>
+									<option value='1301'>Teachers College</option>
+									<option value='1302'>Teikyo Marycrest University</option>
+									<option value='1303'>Teikyo Post University</option>
+									<option value='1304'>Temple University</option>
+									<option value='1305'>Tennessee State University</option>
+									<option value='1306'>Tennessee Technological
+										University</option>
+									<option value='1307'>Tennessee Temple University</option>
+									<option value='1308'>Tennessee Wesleyan College</option>
+									<option value='1309'>Texas A&M International
+										University</option>
+									<option value='1310'>Texas A&M University - College
+										Station</option>
+									<option value='1311'>Texas A&M University, Commerce</option>
+									<option value='1312'>Texas A&M University, Corpus
+										Christi</option>
+									<option value='1313'>Texas A&M University, Galveston</option>
+									<option value='1314'>Texas A&M University, Kingsville</option>
+									<option value='1315'>Texas A&M University, Texarkana</option>
+									<option value='1316'>Texas Christian University</option>
+									<option value='1317'>Texas Lutheran University</option>
+									<option value='1318'>Texas Southern University</option>
+									<option value='1319'>Texas Tech University</option>
+									<option value='1320'>Texas Wesleyan University</option>
+									<option value='1321'>Texas Woman's University</option>
+									<option value='35'>The American College</option>
+									<option value='72'>The Art Institute of Phoenix</option>
+									<option value='73'>The Art Institute of Southern
+										California</option>
+									<option value='74'>The Art Institute of Washington</option>
+									<option value='102'>The Baptist College of Florida</option>
+									<option value='154'>The Boston Architectural Center</option>
+									<option value='193'>The California Maritime Academy</option>
+									<option value='237'>The Catholic University of America</option>
+									<option value='272'>The Citadel</option>
+									<option value='309'>The College of Insurance</option>
+									<option value='311'>The College of Metaphysical
+										Studies</option>
+									<option value='314'>The College of New Jersey</option>
+									<option value='324'>The College of Saint Rose</option>
+									<option value='323'>The College of Saint Thomas More</option>
+									<option value='325'>The College of Santa Fe</option>
+									<option value='328'>The College of Wooster</option>
+									<option value='538'>The Graduate Center, City
+										University of New York</option>
+									<option value='652'>The Julliard School</option>
+									<option value='674'>The King's College, New York City,
+										NY</option>
+									<option value='788'>The Master's College</option>
+									<option value='789'>The Mayo Foundation</option>
+									<option value='791'>The McGregor School of Antioch
+										University</option>
+									<option value='892'>The National Graduate School</option>
+									<option value='896'>The Naval Postgraduate School</option>
+									<option value='984'>The Open University</option>
+									<option value='1065'>The Richard Stockton College of
+										New Jersey</option>
+									<option value='1076'>The Rockefeller University</option>
+									<option value='1096'>The Sage Colleges</option>
+									<option value='1144'>The Salk Institute for Biological
+										Studies</option>
+									<option value='1171'>The Scripps Research Institute</option>
+									<option value='1278'>The Stefan University</option>
+									<option value='1333'>The Transworld University</option>
+									<option value='1357'>The Union Institute</option>
+									<option value='1322'>Thiel College</option>
+									<option value='1323'>Thomas Aquinas College, Santa
+										Paula CA</option>
+									<option value='1325'>Thomas College</option>
+									<option value='1326'>Thomas Cooley Law School</option>
+									<option value='1324'>Thomas Edison State College</option>
+									<option value='1328'>Thomas Jefferson University</option>
+									<option value='1327'>Thomas More College</option>
+									<option value='1329'>Toccoa Falls College</option>
+									<option value='1330'>Tougaloo College</option>
+									<option value='1331'>Touro College</option>
+									<option value='1332'>Towson University</option>
+									<option value='1334'>Transylvania University</option>
+									<option value='1335'>Trevecca Nazarene University</option>
+									<option value='1344'>Tri-State University</option>
+									<option value='1336'>Trinity Baptist College</option>
+									<option value='1337'>Trinity Christian College</option>
+									<option value='1339'>Trinity College of Florida</option>
+									<option value='1341'>Trinity College of Vermont</option>
+									<option value='1338'>Trinity College, Hartford
+										Connecticut</option>
+									<option value='1340'>Trinity College, Washington DC</option>
+									<option value='1342'>Trinity International University</option>
+									<option value='1343'>Trinity University</option>
+									<option value='1345'>Troy State University</option>
+									<option value='1346'>Troy State University - Dothan</option>
+									<option value='1347'>Truman State University</option>
+									<option value='1348'>Tufts University</option>
+									<option value='1349'>Tulane University</option>
+									<option value='1350'>Tusculum College</option>
+									<option value='1351'>Tuskegee University</option>
+									<option value='1352'>Uniformed Services Universty of
+										the Health Sciences</option>
+									<option value='1354'>Union College</option>
+									<option value='1353'>Union College, Barbourville KY</option>
+									<option value='1740'>Union County College, Cranford,
+										NJ</option>
+									<option value='1355'>Union Theological Seminary</option>
+									<option value='1356'>Union University</option>
+									<option value='1358'>United States Air Force Academy</option>
+									<option value='1359'>United States Coast Guard Academy</option>
+									<option value='1360'>United States Merchant Marine
+										Academy</option>
+									<option value='1361'>United States Military Academy -
+										West Point</option>
+									<option value='1362'>United States Naval Academy -
+										Annapolis</option>
+									<option value='1363'>United States Open University</option>
+									<option value='1364'>United States Sports Academy</option>
+									<option value='1365'>Unity College</option>
+									<option value='1754'>universidad de este recinto de
+										barceoneta</option>
+									<option value='1722'>Universidad Metropolitana from
+										Puerto Rico</option>
+									<option value='1744'>Universidad Metropolitana, Puerto
+										Rico</option>
+									<option value='1366'>University of Action Learning at
+										Boulder</option>
+									<option value='1367'>University of Advancing
+										Technology</option>
+									<option value='1368'>University of Akron</option>
+									<option value='1369'>University of Alabama</option>
+									<option value='1370'>University of Alabama, Birmingham</option>
+									<option value='1371'>University of Alabama, Huntsville</option>
+									<option value='1372'>University of Alaska, Anchorage</option>
+									<option value='1373'>University of Alaska, Fairbanks</option>
+									<option value='1374'>University of Alaska, Southeast</option>
+									<option value='1375'>University of Arizona</option>
+									<option value='1377'>University of Arkansas at Little
+										Rock</option>
+									<option value='1378'>University of Arkansas at
+										Monticello</option>
+									<option value='1379'>University of Arkansas at Pine
+										Bluff</option>
+									<option value='1376'>University of Arkansas,
+										Fayetteville</option>
+									<option value='1381'>University of Baltimore</option>
+									<option value='1382'>University of Bridgeport</option>
+									<option value='1383'>University of California,
+										Berkeley</option>
+									<option value='1384'>University of California, Davis</option>
+									<option value='1385'>University of California,
+										Hastings College of Law</option>
+									<option value='1386'>University of California, Irvine</option>
+									<option value='1387'>University of California, Los
+										Angeles</option>
+									<option value='1388'>University of California, Merced</option>
+									<option value='1389'>University of California,
+										Riverside</option>
+									<option value='1390'>University of California, San
+										Diego</option>
+									<option value='1391'>University of California, San
+										Francisco</option>
+									<option value='1392'>University of California, Santa
+										Barbara</option>
+									<option value='1393'>University of California, Santa
+										Cruz</option>
+									<option value='1394'>University of Central Arkansas</option>
+									<option value='1395'>University of Central Florida</option>
+									<option value='1396'>University of Central Oklahoma</option>
+									<option value='1397'>University of Charleston</option>
+									<option value='1398'>University of Chicago</option>
+									<option value='1399'>University of Cincinnati</option>
+									<option value='1400'>University of Colorado - Boulder</option>
+									<option value='1401'>University of Colorado, Colorado
+										Springs</option>
+									<option value='1402'>University of Colorado, Denver</option>
+									<option value='1403'>University of Connecticut</option>
+									<option value='1404'>University of Dallas</option>
+									<option value='1405'>University of Dayton</option>
+									<option value='1406'>University of Delaware</option>
+									<option value='1407'>University of Denver</option>
+									<option value='1408'>University of Detroit Mercy</option>
+									<option value='1410'>University of Dubuque</option>
+									<option value='1411'>University of Evansville</option>
+									<option value='1412'>University of Findlay</option>
+									<option value='1413'>University of Florida</option>
+									<option value='1414'>University of Georgia</option>
+									<option value='1415'>University of Great Falls</option>
+									<option value='1416'>University of Guam</option>
+									<option value='1417'>University of Hartford</option>
+									<option value='1418'>University of Hawai`i</option>
+									<option value='1419'>University of Hawai`i, Hilo</option>
+									<option value='1420'>University of Hawai`i, West O`ahu</option>
+									<option value='1421'>University of Health Sciences
+										College of Osteopathic Medicine</option>
+									<option value='1422'>University of Houston</option>
+									<option value='1423'>University of Houston, Clear Lake</option>
+									<option value='1424'>University of Houston, Downtown</option>
+									<option value='1425'>University of Houston, Victoria</option>
+									<option value='1426'>University of Idaho</option>
+									<option value='1429'>University of Illinois at Chicago</option>
+									<option value='1430'>University of Illinois at
+										Springfield</option>
+									<option value='1431'>University of Illinois at
+										Urbana-Champaign</option>
+									<option value='1428'>University of Indianapolis</option>
+									<option value='1432'>University of Iowa</option>
+									<option value='1433'>University of Judaism</option>
+									<option value='1434'>University of Kansas</option>
+									<option value='1435'>University of Kansas Medical
+										Center</option>
+									<option value='1436'>University of Kentucky</option>
+									<option value='1437'>University of La Vernee</option>
+									<option value='1438'>University of Louisiana at
+										Lafayette</option>
+									<option value='1439'>University of Louisiana at Monroe</option>
+									<option value='1440'>University of Louisville</option>
+									<option value='1441'>University of Maine</option>
+									<option value='1759'>University of Maine at Farmington</option>
+									<option value='1442'>University of Maine at Fort Kent</option>
+									<option value='1443'>University of Maine at Presque
+										Isle</option>
+									<option value='1444'>University of Mary Hardin-Baylor</option>
+									<option value='1735'>University of Mary, Bismarck, ND</option>
+									<option value='1446'>University of Maryland at
+										Baltimore</option>
+									<option value='1447'>University of Maryland at College
+										Park</option>
+									<option value='1445'>University of Maryland Baltimore
+										County</option>
+									<option value='1448'>University of Maryland Eastern
+										Shore</option>
+									<option value='1449'>University of Maryland University
+										College</option>
+									<option value='1450'>University of Massachusetts at
+										Amherst</option>
+									<option value='1451'>University of Massachusetts at
+										Boston</option>
+									<option value='1452'>University of Massachusetts at
+										Dartmouth</option>
+									<option value='1453'>University of Massachusetts at
+										Lowell</option>
+									<option value='1454'>University of Massachusetts
+										Medical School</option>
+									<option value='1455'>University of Medicine and
+										Dentistry of New Jersey</option>
+									<option value='1456'>University of Memphis</option>
+									<option value='1457'>University of Miami</option>
+									<option value='1458'>University of Michigan-Ann Arbor</option>
+									<option value='1459'>University of Michigan-Dearborn</option>
+									<option value='1460'>University of Michigan-Flint</option>
+									<option value='1461'>University of Minnesota-Crookston</option>
+									<option value='1462'>University of Minnesota-Duluth</option>
+									<option value='1463'>University of Minnesota-Morris</option>
+									<option value='1464'>University of Minnesota-Twin
+										Cities</option>
+									<option value='1465'>University of Mississippi</option>
+									<option value='1466'>University of Missouri-Columbia</option>
+									<option value='1467'>University of Missouri-Kansas
+										City</option>
+									<option value='1468'>University of Missouri-Rolla</option>
+									<option value='1469'>University of Missouri-Saint
+										Louis</option>
+									<option value='1470'>University of Montana, Missoula</option>
+									<option value='1471'>University of Montevallo</option>
+									<option value='1472'>University of Natural Medicine</option>
+									<option value='1473'>University of Nebraska, Kearney</option>
+									<option value='1474'>University of Nebraska, Lincoln</option>
+									<option value='1475'>University of Nebraska, Omaha</option>
+									<option value='1476'>University of Nevada, Las Vegas</option>
+									<option value='1477'>University of Nevada, Reno</option>
+									<option value='1478'>University of New England</option>
+									<option value='1479'>University of New Hampshire,
+										Durham</option>
+									<option value='1480'>University of New Haven</option>
+									<option value='1481'>University of New Mexico</option>
+									<option value='1482'>University of New Orleans</option>
+									<option value='1483'>University of Newport</option>
+									<option value='1484'>University of North Alabama</option>
+									<option value='1485'>University of North Carolina at
+										Asheville</option>
+									<option value='1486'>University of North Carolina at
+										Chapel Hill</option>
+									<option value='1487'>University of North Carolina at
+										Charlotte</option>
+									<option value='1488'>University of North Carolina at
+										Greensboro</option>
+									<option value='1489'>University of North Carolina at
+										Pembroke</option>
+									<option value='1490'>University of North Carolina at
+										Wilmington</option>
+									<option value='1491'>University of North Dakota</option>
+									<option value='1492'>University of North Dakota--Lake
+										Region</option>
+									<option value='1493'>University of North Florida</option>
+									<option value='1494'>University of North Texas</option>
+									<option value='1495'>University of Northern Colorado</option>
+									<option value='1496'>University of Northern Iowa</option>
+									<option value='1497'>University of Northern Washington</option>
+									<option value='1498'>University of Notre Dame</option>
+									<option value='1499'>University of Oklahoma</option>
+									<option value='1500'>University of Oregon</option>
+									<option value='1501'>University of Orlando</option>
+									<option value='1502'>University of Osteopathic
+										Medicine and Health Science</option>
+									<option value='1505'>University of Pennsylvania</option>
+									<option value='1506'>University of Phoenix</option>
+									<option value='1507'>University of Pittsburgh</option>
+									<option value='1508'>University of Pittsburgh at
+										Bradford</option>
+									<option value='1509'>University of Pittsburgh at
+										Greenburg</option>
+									<option value='1510'>University of Pittsburgh at
+										Johnstown</option>
+									<option value='1511'>University of Portland</option>
+									<option value='1756'>University of Puerto Rico Arecibo</option>
+									<option value='1742'>University of Puerto Rico,
+										Aguadilla</option>
+									<option value='1737'>University of Puerto Rico,
+										BayamÃ³n</option>
+									<option value='1776'>University of Puerto Rico, Cayey</option>
+									<option value='1732'>University of Puerto Rico,
+										Humacao</option>
+									<option value='1778'>University of Puerto Rico,
+										Humacao</option>
+									<option value='1512'>University of Puerto Rico,
+										Mayaguez</option>
+									<option value='1768'>University of Puerto Rico, Ponce</option>
+									<option value='1513'>University of Puerto Rico, Rio
+										Piedras</option>
+									<option value='1514'>University of Puget Sound</option>
+									<option value='1515'>University of Redlands</option>
+									<option value='1516'>University of Rhode Island</option>
+									<option value='1517'>University of Richmond</option>
+									<option value='1518'>University of Rio Grande</option>
+									<option value='1519'>University of Rochester</option>
+									<option value='1749'>University of Saint Francis</option>
+									<option value='1774'>University of Saint Joseph</option>
+									<option value='1523'>University of San Diego</option>
+									<option value='1524'>University of San Francisco</option>
+									<option value='1525'>University of Sarasota</option>
+									<option value='1526'>University of Science and Arts of
+										Oklahoma</option>
+									<option value='1528'>University of Scranton</option>
+									<option value='1529'>University of Sioux Falls</option>
+									<option value='1531'>University of South Alabama</option>
+									<option value='1532'>University of South Carolina</option>
+									<option value='1533'>University of South Carolina,
+										Aiken</option>
+									<option value='1534'>University of South Carolina,
+										Beaufort</option>
+									<option value='1535'>University of South Carolina,
+										Spartanburg</option>
+									<option value='1536'>University of South Dakota</option>
+									<option value='1537'>University of South Florida</option>
+									<option value='1538'>University of Southern California</option>
+									<option value='1539'>University of Southern Colorado</option>
+									<option value='1540'>University of Southern Indiana</option>
+									<option value='1541'>University of Southern Maine</option>
+									<option value='1542'>University of Southern
+										Mississippi</option>
+									<option value='1520'>University of St. Francis</option>
+									<option value='1521'>University of St. Thomas, Houston</option>
+									<option value='1522'>University of St. Thomas, Saint
+										Paul</option>
+									<option value='1543'>University of Tampa</option>
+									<option value='1545'>University of Tennessee Health
+										Science Center</option>
+									<option value='1544'>University of Tennessee,
+										Chattanooga</option>
+									<option value='1546'>University of Tennessee,
+										Knoxville</option>
+									<option value='1547'>University of Tennessee, Martin</option>
+									<option value='1548'>University of Texas at Arlington</option>
+									<option value='1549'>University of Texas at Austin</option>
+									<option value='1550'>University of Texas at
+										Brownsville</option>
+									<option value='1551'>University of Texas at Dallas</option>
+									<option value='1552'>University of Texas at El Paso</option>
+									<option value='1559'>University of Texas at San
+										Antonio</option>
+									<option value='1560'>University of Texas at Tyler</option>
+									<option value='1555'>University of Texas Health Center
+										at Tyler</option>
+									<option value='1553'>University of Texas Health
+										Science Center at Houston</option>
+									<option value='1554'>University of Texas Health
+										Science Center at San Antonio</option>
+									<option value='1779'>University of Texas MD Anderson
+										Cancer Center</option>
+									<option value='1556'>University of Texas Medical
+										Branch</option>
+									<option value='1558'>University of Texas of the
+										Permian Basin</option>
+									<option value='1561'>University of Texas Southwestern
+										Medical Center</option>
+									<option value='1557'>University of Texas-Pan American</option>
+									<option value='1380'>University of the Arts</option>
+									<option value='1409'>University of the District of
+										Columbia</option>
+									<option value='1427'>University of the Incarnate Word</option>
+									<option value='1503'>University of the Ozarks</option>
+									<option value='1504'>University of the Pacific</option>
+									<option value='1527'>University of the Sciences in
+										Philadelphia</option>
+									<option value='1530'>University of the South - Sewanee</option>
+									<option value='1566'>University of the Virgin Islands</option>
+									<option value='1562'>University of Toledo</option>
+									<option value='1563'>University of Tulsa</option>
+									<option value='1564'>University of Utah</option>
+									<option value='1565'>University of Vermont</option>
+									<option value='1567'>University of Virginia</option>
+									<option value='1568'>University of Washington</option>
+									<option value='1569'>University of West Alabama</option>
+									<option value='1570'>University of West Florida</option>
+									<option value='1572'>University of Wisconsin-Eau
+										Claire</option>
+									<option value='1571'>University of Wisconsin-Green Bay</option>
+									<option value='1573'>University of Wisconsin-La Crosse</option>
+									<option value='1574'>University of Wisconsin-Madison</option>
+									<option value='1575'>University of Wisconsin-Milwaukee</option>
+									<option value='1576'>University of Wisconsin-Oshkosh</option>
+									<option value='1577'>University of Wisconsin-Parkside</option>
+									<option value='1578'>University of
+										Wisconsin-Platteville</option>
+									<option value='1582'>University of Wisconsin-River
+										Falls</option>
+									<option value='1579'>University of Wisconsin-Stevens
+										Point</option>
+									<option value='1580'>University of Wisconsin-Stout</option>
+									<option value='1581'>University of Wisconsin-Superior</option>
+									<option value='1583'>University of
+										Wisconsin-Whitewater</option>
+									<option value='1584'>University of Wyoming</option>
+									<option value='1585'>Upper Iowa University</option>
+									<option value='1586'>Urbana University</option>
+									<option value='1587'>Ursinus College</option>
+									<option value='1588'>Ursuline College</option>
+									<option value='1589'>Utah State University</option>
+									<option value='1590'>Utah Valley State College</option>
+									<option value='1591'>Utica College</option>
+									<option value='1592'>Valdosta State University</option>
+									<option value='1593'>Valley City State University</option>
+									<option value='1594'>Valparaiso University</option>
+									<option value='1595'>Vanderbilt University</option>
+									<option value='1596'>Vanguard University</option>
+									<option value='1597'>Vassar College</option>
+									<option value='1598'>Vennard College</option>
+									<option value='1599'>Vermont Technical College</option>
+									<option value='1600'>Villa Julie College</option>
+									<option value='1601'>Villanova University</option>
+									<option value='1602'>Virginia Commonwealth University</option>
+									<option value='1603'>Virginia Intermont College</option>
+									<option value='1604'>Virginia International University</option>
+									<option value='1605'>Virginia Military Institute</option>
+									<option value='1606'>Virginia Polytechnic Institute
+										and State University</option>
+									<option value='1607'>Virginia State University</option>
+									<option value='1608'>Virginia Union University</option>
+									<option value='1609'>Virginia University of Lynchburg</option>
+									<option value='1610'>Virginia Wesleyan College</option>
+									<option value='1611'>Viterbo College</option>
+									<option value='1612'>Voorhees College</option>
+									<option value='1613'>Wabash College</option>
+									<option value='1614'>Wagner College</option>
+									<option value='1615'>Wake Forest University</option>
+									<option value='1618'>Walden University</option>
+									<option value='1619'>Walla Walla College</option>
+									<option value='1620'>Walsh University</option>
+									<option value='1616'>Warner Pacific College</option>
+									<option value='1621'>Warren Wilson College</option>
+									<option value='1617'>Wartburg College</option>
+									<option value='1622'>Washburn University</option>
+									<option value='1623'>Washington & Jefferson College</option>
+									<option value='1624'>Washington & Lee University</option>
+									<option value='1625'>Washington Bible College /
+										Capital Bible Seminary</option>
+									<option value='1626'>Washington College</option>
+									<option value='1627'>Washington State University</option>
+									<option value='1628'>Washington University in Saint
+										Louis</option>
+									<option value='1629'>Wayland Baptist University</option>
+									<option value='1630'>Wayne State College</option>
+									<option value='1631'>Wayne State University</option>
+									<option value='1632'>Waynesburg College</option>
+									<option value='1633'>Webb Institute</option>
+									<option value='1634'>Weber State University</option>
+									<option value='1635'>Webster University</option>
+									<option value='1636'>Webster University North Florida</option>
+									<option value='1637'>Wellesley College</option>
+									<option value='1638'>Wells College</option>
+									<option value='1639'>Wentworth Institute of Technology</option>
+									<option value='1640'>Wesley College</option>
+									<option value='1641'>Wesleyan College</option>
+									<option value='1642'>Wesleyan University</option>
+									<option value='1644'>West Chester University of
+										Pennsylvania</option>
+									<option value='1643'>West Coast University</option>
+									<option value='1645'>West Liberty State College</option>
+									<option value='1646'>West Texas A&M University</option>
+									<option value='1647'>West Virginia State College</option>
+									<option value='1648'>West Virginia University</option>
+									<option value='1649'>West Virginia University
+										Parkersburg</option>
+									<option value='1650'>West Virginia Wesleyan College</option>
+									<option value='1651'>Western Baptist College</option>
+									<option value='1652'>Western Carolina University</option>
+									<option value='1653'>Western Connecticut State
+										University</option>
+									<option value='1654'>Western Governors University</option>
+									<option value='1655'>Western Illinois University</option>
+									<option value='1656'>Western International University</option>
+									<option value='1657'>Western Kentucky University</option>
+									<option value='1658'>Western Maryland College</option>
+									<option value='1659'>Western Michigan University</option>
+									<option value='1660'>Western Montana College</option>
+									<option value='1661'>Western New England College</option>
+									<option value='1662'>Western New Mexico University</option>
+									<option value='1663'>Western Oregon University</option>
+									<option value='1664'>Western State College</option>
+									<option value='1665'>Western State University College
+										of Law</option>
+									<option value='1666'>Western States Chiropractic
+										College</option>
+									<option value='1667'>Western University of Health
+										Sciences</option>
+									<option value='1668'>Western Washington University</option>
+									<option value='1669'>Westfield State College</option>
+									<option value='1670'>Westminster College, Fulton
+										Missouri</option>
+									<option value='1671'>Westminster College, New
+										Wilmington Pennsylvania</option>
+									<option value='1672'>Westminster College, Salt Lake
+										City</option>
+									<option value='1673'>Westminster Theological Seminary</option>
+									<option value='1674'>Westminster Theological Seminary
+										in California</option>
+									<option value='1675'>Westmont College</option>
+									<option value='1676'>Westwood College of Technology</option>
+									<option value='1678'>Wheaton College, Massachusetts</option>
+									<option value='1677'>Wheaton College, Wheaton Illinois</option>
+									<option value='1679'>Wheeling Jesuit University</option>
+									<option value='1680'>Wheelock College</option>
+									<option value='1681'>Whitman College</option>
+									<option value='1682'>Whittier College</option>
+									<option value='1683'>Whitworth College</option>
+									<option value='1684'>Wichita State University</option>
+									<option value='1685'>Widener University</option>
+									<option value='1686'>Wilberforce University</option>
+									<option value='1687'>Wilkes University</option>
+									<option value='1688'>Willamette University</option>
+									<option value='1690'>William Carey International
+										University</option>
+									<option value='1755'>William Carey University</option>
+									<option value='1689'>William Howard Taft University</option>
+									<option value='1691'>William Jewell College</option>
+									<option value='1692'>William Mitchell College of Law</option>
+									<option value='1693'>William Paterson University</option>
+									<option value='1694'>William Penn College</option>
+									<option value='1695'>William Woods University</option>
+									<option value='1696'>Williams Baptist College</option>
+									<option value='1697'>Williams College</option>
+									<option value='1698'>Wilmington College, New Castle
+										Delaware</option>
+									<option value='1699'>Wilmington College, Wilmington
+										Ohio</option>
+									<option value='1700'>Wilson College</option>
+									<option value='1701'>Wingate University</option>
+									<option value='1703'>Winona State University</option>
+									<option value='1702'>Winston-Salem State University</option>
+									<option value='1704'>Winthrop University</option>
+									<option value='1705'>Wisconsin Lutheran College</option>
+									<option value='1706'>Wittenberg University</option>
+									<option value='1707'>Wofford College</option>
+									<option value='1708'>Woodbury University</option>
+									<option value='1709'>Woods Hole Oceanographic
+										Institution</option>
+									<option value='1710'>Worcester Polytechnic Institute</option>
+									<option value='1711'>Worcester State College</option>
+									<option value='1712'>Wright Institute</option>
+									<option value='1713'>Wright State University</option>
+									<option value='1715'>Xavier University of Louisiana</option>
+									<option value='1714'>Xavier University, Cincinnati, OH</option>
+									<option value='1716'>Yale University</option>
+									<option value='1717'>Yeshiva University</option>
+									<option value='1719'>York College of Pennsylvania</option>
+									<option value='1718'>York College, York Nebraska</option>
+									<option value='1720'>Youngstown State University</option>
+									<option value='1721'>Zion Bible Institute</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td colspan=2>
+								<p align="justify">
+									<br> <font size="3" face="Arial, Helvetica, sans-serif">You
+										must be attending a four-year college or university in the
+										United States, Puerto Rico, or other US territory. If your
+										school is not listed, please email <a
+										href="mailto:surf@biology.columbia.edu">surf@biology.columbia.edu</a>
+										and we will add it immediately.
+									</font>
+								<p>
+							</td>
+						</tr>
+				</table>
+				<table cellpadding="0" width="79%" border="0">
+					<tbody>
+						<tr>
+							<td width="79%"><font size="3" face="Arial Unicode MS">
+									Your major (declared or expected)</font></td>
+							<td width="42%"><font face="Arial"><input size="26"
+									name="MAJOR" value=""></font></td>
+						</tr>
+						<tr>
+							<td width="79%"><font size="3" face="Arial Unicode MS">
+									Date Spring semester ends: <br>
+							</font></td>
+							<td width="42%"><font face="Arial"><input size="26"
+									name="SEMESTER_END" value=""> </font></td>
+						</tr>
+				</table>
+			</center>
+		</div>
+		<div align="center">
+			<center>
+				<p>
+					<font face="Arial Unicode MS"> Hit the Submit button, and
+						wait a minute for it to send.</font>
+				</p>
+
+			</center>
+		</div>
+		<div align="center">
+			<center>
+				<p>
+					<font face="Arial"> <br> <input value="Submit"
+						type="button" onClick="confirmsub()"> <input name="B1"
+						value="Erase it all" type="reset">
+
+					</font>
+
+				</p>
+			</center>
+	</form>
+</body>
+</html>
