@@ -1,29 +1,24 @@
 #!/usr/bin/env python2.7
 
 import os, uuid, json
-from sqlalchemy import *
-from sqlalchemy.pool import NullPool
+
 from flask import Flask, request, render_template, g, redirect, Response
+from mysql_dao import createDatabaseConnection, createNewUser
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__, template_folder=tmpl_dir)
-
-DATABASEURI = "mysql+mysqlconnector://aheicklen:mass67@mysql.columbiasurf.dreamhosters.com:3306/columbiasurf" 
-engine = create_engine(DATABASEURI)
+dbcon=''
 
 @app.before_request
 def before_request():
-  try:
-    g.conn = engine.connect()
-  except:
-    print "uh oh, problem connecting to database"
-    import traceback; traceback.print_exc()
-    g.conn = None
+  global dbcon
+  dbcon = createDatabaseConnection()
 
 @app.teardown_request
 def teardown_request(exception):
+  global dbcon
   try:
-    g.conn.close()
+    dbcon.close()
   except Exception as e:
     pass
 
@@ -34,10 +29,10 @@ def main():
 @app.route('/addUsername', methods=['POST'])
 def add():
   name = str(request.form['userid'])
-  passwrd = str(request.form['passwrd'])
+  passwrd = str(request.form['passwsrd'])
   print(name)
   print(passwrd)
-  g.conn.execute('INSERT INTO login_info VALUES (%s, %s)', [name,passwrd])
+  createNewUser(dbcon,name,passwrd)
   return render_template("first.html")
 
 
