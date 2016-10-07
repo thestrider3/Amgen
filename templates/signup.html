@@ -41,7 +41,7 @@
 		
 			
 				<p style="margin-left: 30%">
-					Username: <input size="28" name="username" value="">  
+					Username: <input size="28" name="username" value="" onblur="validateEmail(); return false;">  
 				</p>
 			
 		
@@ -74,26 +74,30 @@
 </body>
 <script>
 	function checkSamePassword(){
-		
-
-    var pass1 = document.getElementById('passwrd');
-    var pass2 = document.getElementById('repasswrd');
-   
-    var message = document.getElementById('confirmMessage');
-
-    var goodColor = "#66cc66";
-    var badColor = "#ff6666";
-
-    if(pass1.value == pass2.value){
-    
-        pass2.style.backgroundColor = goodColor;
-        message.style.color = goodColor;
-        message.innerHTML = "Passwords Match!"
-    }else{
-        pass2.style.backgroundColor = badColor;
-        message.style.color = badColor;
-        message.innerHTML = "Passwords Do Not Match!"
-    }
+	    var pass1 = document.getElementById('passwrd');
+	    var pass2 = document.getElementById('repasswrd');	   
+	    var message = document.getElementById('confirmMessage');
+	    var goodColor = "#66cc66";
+	    var badColor = "#ff6666";
+	    if(pass1.value == pass2.value){
+	    
+	        pass2.style.backgroundColor = goodColor;
+	        //message.style.color = goodColor;
+	        message.innerHTML = "Passwords Match!"
+	    }else{
+	        pass2.style.backgroundColor = badColor;
+	        //message.style.color = badColor;
+	        message.innerHTML = "Passwords Do Not Match!"
+	    }
 	}
+	function validateEmail() {
+		var email = document.getElementById('username');
+		var message = document.getElementById('confirmMessage');
+    	var re = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[eE][dD][uU]/;
+    	if(!re.test(email)){
+    		message.innerHTML = "Please enter a .edu email for username"
+    	}
+    }
+
 </script>
 </html>
