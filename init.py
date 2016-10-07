@@ -32,8 +32,8 @@ def teardown_request(exception):
 
 @app.route('/')
 def main():
-    login_manager.init_app(app)
-    return render_template('login.html')
+    #login_manager.init_app(app)
+    return render_template('first.html')
 
 @app.route('/addUsername', methods=['POST'])
 def add():
@@ -55,14 +55,15 @@ def add():
 @app.route('/submitFirstForm', methods=['POST'])
 def addFirstForm():
   #userid = os.urandom(24)
-
+  l=list()
   formDict = dict()
-  mysql_dao.createNewUser(dbcon,,d)
-  user = User(name,passwrd,True);
-  login_user(user)
-  next = flask.request.args.get('next')
+  
+  #user = User(name,passwrd,True);
+  #login_user(user)
+  #next = flask.request.args.get('next')
         # next_is_valid should check if the user has valid
         # permission to access the `next` url
+
   formDict['FirstName'] = str(request.form['FNAME'])
   formDict['LastName'] = str(request.form['LNAME'])
   formDict['DOB'] = str(request.form['DATEOFBIRTH'])
@@ -93,32 +94,38 @@ def addFirstForm():
   formDict['AdvancedDegreeObjective'] = str(request.form['ADVANCEDDEGREE'])
   formDict['IsUndergraduateResearchProgramOffered'] = str(request.form['RESEARCHOFFER'])
   if request.form.get('AMGENSITE'):
-    formDict['HowDidYouHear'] = 
+    l.append("Amgen National Website") 
   if request.form.get('UNIVERSITYSITE'):
-    formDict['HowDidYouHear'] = 
-    formDict['HeardUniversityName'] = 
+    l.append("University website, University name")
+    formDict['HowDidYouHearUniversityName'] = str(request.form[UNIVERSITYSITENAME])
+  else:
+    formDict['HowDidYouHearUniversityName'] = ""
   if request.form.get('EMAILANNOUNCEMENT'):
-    formDict['HowDidYouHear'] = 
+    l.append("E-mail Announcement")
   if request.form.get('POSTER'):
-    formDict['HowDidYouHear'] =
+    l.append("Poster")
   if request.form.get('CONFERENCE'):
-    CONFERENCENAME
-    formDict['HowDidYouHear'] =
+    l.append("Conference, Conference Name")
+    formDict['HowDidYouHearConferenceName'] = str(request.form[CONFERENCENAME])
+  else:
+    formDict['HowDidYouHearConferenceName'] = ""
   if request.form.get('ACADEMICADVISOR'):
-    formDict['HowDidYouHear'] =
+    l.append("Academic Advisor")
   if request.form.get('INTERNETSEARCH'):
-    formDict['HowDidYouHear'] = 
+    l.append("Internet Search")
   if request.form.get('HOMEUNIVERSITY'):
-    formDict['HowDidYouHear'] = 
+    l.append("Faculty/Staff from home university") 
   if request.form.get('OTHERUNIVERSITY'):
-    OTHERUNIVERSITYNAME
-    formDict['HowDidYouHear'] =  
+    l.append("Faculty/Staff from home university")
+    formDict['HowDidYouHearOtherUniversityName'] = str(request.form[OTHERUNIVERSITYNAME])
+  else:
+    formDict['HowDidYouHearOtherUniversityName'] = ""
   if request.form.get('AMGENOTHER'):
-    formDict['HowDidYouHear'] = 
-    AMGENOTHERNAME
-  
-
-
+    l.append("Other")
+    formDict['HowDidYouHearOther'] = str(request.form[AMGENOTHERNAME])
+  else:
+    formDict['HowDidYouHearOther'] = ""
+  formDict['HowDidYouHear'] = l
   formDict['AnyOtherAmgenScholarsSite'] = str(request.form['APPLYINGOTHER'])
   formDict['YesOtherAmgenScholarsSite'] = str(request.form['APPLYINGOTHERSPECIFY'])
   formDict['PastAmgenScholarParticipation'] = str(request.form['PARTICIPATED'])
@@ -128,9 +135,18 @@ def addFirstForm():
   formDict['CurrentlyAttendingUniversity'] = str(request.form['university'])
   formDict['Major'] = str(request.form['MAJOR'])
   formDict['DateSpringSemesterEnds'] = str(request.form['SEMESTER_END'])
+  mysql_dao.insertFirstForm(dbcon,os.urandom(24),formDict)
+  #mysql_dao.createNewUser(dbcon,,formDict) 
+  return flask.render_template('first.html')
 
+@app.route('/submitFirstForm', methods=['POST'])
+def addSecondForm():
+if request.form['submitBut'] == 'Next':
+  return flask.render_template('third.html')
     
-return flask.render_template('first.html')
+
+elif request.form['submitBut'] == 'Back':
+  return flask.render_template('first.html')
 
 
 @app.route('/upload', methods=['GET', 'POST'])
