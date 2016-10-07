@@ -7,6 +7,7 @@ Created on Wed Oct  5 17:28:00 2016
 
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
+from user import *
 DATABASEURI = "mysql+mysqlconnector://aheicklen:mass67@mysql.columbiasurf.dreamhosters.com:3306/columbiaamgen" 
 engine = create_engine(DATABASEURI)
 
@@ -17,27 +18,39 @@ def createDatabaseConnection():
         print "uh oh, problem connecting to database"
         import traceback; traceback.print_exc()
         conn = None
-    return conn
+    return conn,engine
     
-def createNewUser(conn,name,passwrd,userid):
+def checkUser(conn,name,passwrd):
     metadata = MetaData(conn)
-    user_info = Table('userInfo', metadata, autoload=True)
+    user_info = Table('studentData', metadata, autoload=True)
+    s= user_info.select(and_(user_info.c.Username==name , user_info.c.Password==passwrd))
+    rs = s.execute()
+    a=rs.fetchone()
+    if a:
+        u = User(a["Username"],a["Password"])
+        return u
+
+def createNewUser(conn,name,passwrd):
+    metadata = MetaData(conn)
+    user_info = Table('studentData', metadata, autoload=True)
     s= user_info.select(user_info.c.Username==name)
     rs = s.execute()
     if rs.fetchone():
-        return "Error"
-    conn.execute('INSERT INTO userInfo VALUES (%s, %s, %s)', [name,passwrd,userid])
+        return null
+    conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`) Values (%s,%s)', [name,passwrd])
+    u = User(name,passwrd)
+    return u
     
-def getUser(conn,userid):
+def getUser(conn,username):
     metadata = MetaData(conn)
-    user_info = Table('userInfo', metadata, autoload=True)
-    s= user_info.select(user_info.c.Id==userid)
+    user_info = Table('studentData', metadata, autoload=True)
+    s= user_info.select(user_info.c.Username==username)
     rs = s.execute()
     a=rs.fetchone()
-    u = User(rs["Username"],rs["Password"],rs["Id"],True)
+    u = User(a["Username"],a["Password"])
     return u
-
-def insertFirstForm(conn,userid,formDict)
+'''
+def insertFirstForm(conn,userid,formDict):
     metadata = MetaData(conn)
     studentFormData = Table('studentFormData',metadata, autoload=True)
     i = studentFormData.merge(studentFormData.c.UserId = formDict['UserId'],
@@ -80,4 +93,4 @@ def insertFirstForm(conn,userid,formDict)
     studentFormData.c.CurrentlyAttendingUniversity  = formDict['CurrentlyAttendingUniversity'],
     studentFormData.c.Major  = formDict['Major'],
     studentFormData.c.DateSpringSemesterEnds  = formDict['DateSpringSemesterEnds'])
-  
+  '''

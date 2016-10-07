@@ -2,25 +2,22 @@
 
 import os, uuid, json,flask,mysql_dao
 
-from flask import Flask, request, render_template, g, redirect, Response
-from flask_login import LoginManager,login_required,login_user
+from flask import Flask, request, flash, render_template, session, abort, g, redirect, Response
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
 from user import *
+import json
 
-tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
-app = Flask(__name__, template_folder=tmpl_dir)
-dbcon=''
-login_manager = LoginManager()
+#tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+app = Flask(__name__)
 
-@login_manager.user_loader
-def load_user(user_id):
-    return mysql_dao.getUser(dbcon,user_id)
-  
+
 @app.before_request
 def before_request():
-  global dbcon
-  dbcon = mysql_dao.createDatabaseConnection()
-  
-  
+    global dbcon,engine,userSession
+    dbcon,engine = mysql_dao.createDatabaseConnection()
+    Session = sessionmaker(bind=engine)
+    userSession = Session()
 
 @app.teardown_request
 def teardown_request(exception):
@@ -32,27 +29,51 @@ def teardown_request(exception):
 
 @app.route('/')
 def main():
-    login_manager.init_app(app)
-    return render_template('login.html')
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        return render_template('first.html')
 
-@app.route('/addUsername', methods=['POST'])
-def add():
-  name = str(request.form['userid'])
+@app.route('/checkUsername', methods=['POST'])
+def checkUsername():
+  global userSession
+  name = str(request.form['username'])
   passwrd = str(request.form['passwrd'])
-  userid = os.urandom(24)
-  print(userid)
+  
+  user=mysql_dao.checkUser(dbcon,name,passwrd)
+ 
+  if user:
+      session['logged_in'] = True
+      userSession.add(user)
+      render_template('first.html')
+  else:  
+      flash('Wrong username or wrong password!')
+
+  
+@app.route('/addUsername', methods=['POST'])
+def addUser():
+  global userSession
+  name = str(request.form['username'])
+  passwrd = str(request.form['passwrd'])
   print(name)
   print(passwrd)
-  mysql_dao.createNewUser(dbcon,name,userid,passwrd)
-  user = User(name,passwrd,True);
-  login_user(user)
-  next = flask.request.args.get('next')
-        # next_is_valid should check if the user has valid
-        # permission to access the `next` url
 
-  return flask.render_template('first.html')
-
-@app.route('/submitFirstForm', methods=['POST'])
+  user = mysql_dao.createNewUser(dbcon,name,passwrd)
+  
+  if user:
+      print("successfully created user")
+      session['logged_in'] = True
+      session['user'] = json.dumps(user.__dict__)
+      temp = json.loads(session['user']);
+      print(session['logged_in'])
+      print(session['user'])
+      print(temp["username"])
+      return render_template('first.html')
+  else:
+       flash("Username already exists. Please try again.")
+      
+      
+'''@app.route('/submitFirstForm', methods=['POST'])
 def addFirstForm():
   #userid = os.urandom(24)
 
@@ -131,10 +152,9 @@ def addFirstForm():
 
     
 return flask.render_template('first.html')
-
+'''
 
 @app.route('/upload', methods=['GET', 'POST'])
-@login_required
 def upload():
     # file upload handler code will be here
   if request.method == 'POST':
@@ -147,5 +167,5 @@ def upload():
 
 if __name__ == "__main__":
   app.secret_key = os.urandom(24)
-  app.run()
+  app.run(threaded=True)
 

@@ -1,6 +1,6 @@
 drop table columbiaamgen.Courses;
 drop table columbiaamgen.References;
-drop table columbiaamgen.studentFormData;
+drop table columbiaamgen.studentData;
 
 CREATE TABLE `columbiaamgen`.`studentData` (
   `UserId` VARCHAR(45) NOT NULL,
