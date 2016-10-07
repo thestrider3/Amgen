@@ -1,16 +1,11 @@
 drop table columbiaamgen.Courses;
 drop table columbiaamgen.References;
 drop table columbiaamgen.studentFormData;
-drop table columbiaamgen.studentLoginData;
 
-CREATE TABLE `columbiaamgen`.`studentLoginData` (
+CREATE TABLE `columbiaamgen`.`studentData` (
   `UserId` VARCHAR(45) NOT NULL,
   `Username` VARCHAR(45) NULL,
   `Password` VARCHAR(45) NULL,
-  PRIMARY KEY (`UserId`));
-
-CREATE TABLE `columbiaamgen`.`studentFormData` (
-  `UserId` VARCHAR(45) NOT NULL,
   `FirstName` VARCHAR(45) NULL,
   `LastName` VARCHAR(45) NULL,
   `DOB` DATE NULL,
@@ -40,7 +35,7 @@ CREATE TABLE `columbiaamgen`.`studentFormData` (
   `CumulativeGPA` FLOAT NULL,
   `AdvancedDegreeObjective` VARCHAR(45) NULL,
   `IsUndergraduateResearchProgramOffered` VARCHAR(5) NULL,
-  `HowDidYouHear` VARCHAR(100) NULL,
+  `HowDidYouHear` VARCHAR(250) NULL,
   `AnyOtherAmgenScholarsSite` VARCHAR(5) NULL,
   `YesOtherAmgenScholarsSite` VARCHAR(100) NULL,
   `PastAmgenScholarParticipation` VARCHAR(5) NULL,
@@ -61,6 +56,10 @@ CREATE TABLE `columbiaamgen`.`studentFormData` (
   `Transcript` BLOB NULL,
   `IsApplicationSubmitted` VARCHAR(5) NULL,
   `ReviewWaiver` VARCHAR(5) NULL,
+  `HowDidYouHearUniversityName` VARCHAR(50) NULL,
+  `HowDidYouHearConferenceName` VARCHAR(100) NULL,
+  `HowDidYouHearOtherUniversityName` VARCHAR(100) NULL,
+  `HowDidYouHearOther` VARCHAR(100) NULL,
   PRIMARY KEY (`UserId`));
 
 
