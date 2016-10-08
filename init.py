@@ -33,7 +33,7 @@ def teardown_request(exception):
 @app.route('/')
 def main():
     #login_manager.init_app(app)
-    return render_template('first.html')
+    return render_template('second.html')
 
 @app.route('/addUsername', methods=['POST'])
 def add():
@@ -135,31 +135,57 @@ def addFirstForm():
   formDict['CurrentlyAttendingUniversity'] = str(request.form['university'])
   formDict['Major'] = str(request.form['MAJOR'])
   formDict['DateSpringSemesterEnds'] = str(request.form['SEMESTER_END'])
-  mysql_dao.insertFirstForm(dbcon,os.urandom(24),formDict)
+  mysql_dao.insertFirstForm(dbcon,"tb",formDict)
   #mysql_dao.createNewUser(dbcon,,formDict) 
   return flask.render_template('first.html')
 
-@app.route('/submitFirstForm', methods=['POST'])
-def addSecondForm():
-if request.form['submitBut'] == 'Next':
-  return flask.render_template('third.html')
+#@app.route('/submitFirstForm', methods=['POST'])
+#def addSecondForm():
+
     
 
-elif request.form['submitBut'] == 'Back':
-  return flask.render_template('first.html')
+
 
 
 @app.route('/upload', methods=['GET', 'POST'])
-@login_required
+#@login_required
 def upload():
-    # file upload handler code will be here
   if request.method == 'POST':
-      file = request.files['file']
-      extension = os.path.splitext(file.filename)[1]
-      f_name = str(uuid.uuid4()) + extension
-      app.config['UPLOAD_FOLDER'] = 'static/Uploads'
-      file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
-  return json.dumps({'filename':f_name})
+    formDict = dict()
+    if request.form['submitBut'] == 'Next':
+      formDict['ScienceExperience'] = str(request.form['EXPERIENCE'])
+      formDict['CareerPlans'] = str(request.form['CAREER_PLANS'])
+      formDict['AspirationNext20Yrs'] = str(request.form['whysurf'])
+      formDict['Mentor1'] = str(request.form['mentor0'])
+      formDict['Mentor2'] = str(request.form['mentor1'])
+      formDict['Mentor3'] = str(request.form['mentor2'])
+      formDict['Mentor4'] = str(request.form['mentor3'])
+      formDict['Mentor5'] = str(request.form['mentor4'])
+
+      #file = request.files['fileupload']
+      #formDict['Transcript'] = open('file', 'rb').read()
+      #formDict['Transcript'] = str(request.form['fileupload'])
+      if request.form.get("agree") == "agree":
+        if request.form['submitBut'] == 'Next':
+          formDict['IsApplicationSubmitted'] = "Y" 
+          mysql_dao.insertSecondForm(dbcon,"tb",formDict)
+          for i in range(0,26):
+            if request.form['stitle'+''+str(i)] != '':
+              formDict['stitle'+''+str(i)] = request.form['stitle'+''+str(i)]
+              formDict['scredits'+''+str(i)] = request.form['scredits'+''+str(i)]
+              formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]
+              print('stitle'+''+str(i))
+              mysql_dao.insertStudentCourse(dbcon, "tb", formDict, 'stitle'+''+str(i), 'scredits'+''+str(i), 'sgrade'+''+str(i))
+          return flask.render_template('third.html')
+      else:
+        error="Please accept terms and condition"
+        return flask.render_template('second.html', error=error)
+      if request.form['submitBut'] == 'Back':
+        return flask.render_template('first.html')
+
+
+  
+
 
 if __name__ == "__main__":
   app.secret_key = os.urandom(24)

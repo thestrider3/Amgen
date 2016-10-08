@@ -37,13 +37,13 @@ def getUser(conn,userid):
     u = User(rs["Username"],rs["Password"],rs["Id"],True)
     return u
 
-def insertFirstForm(conn,userid,formDict):
+def insertFirstForm(conn,username,formDict):
     metadata = MetaData(conn)
     studentData = Table('studentData',metadata, autoload=True)
     HowDidYouHear=""
     for sen in formDict['HowDidYouHear']:
         HowDidYouHear = HowDidYouHear+" "+ str(sen)
-    i = studentData.update().where(studentData.c.Username == 'tb').values(
+    i = studentData.update().where(studentData.c.Username == username).values(
     FirstName = formDict['FirstName'],
     LastName  = formDict['LastName'],
     DOB = formDict['DOB'],
@@ -88,5 +88,37 @@ def insertFirstForm(conn,userid,formDict):
     Major  = formDict['Major'],
     DateSpringSemesterEnds  = formDict['DateSpringSemesterEnds'])
     conn.execute(i)
-  
-  
+
+def getFirstFormData(conn,Username):
+    metadata = MetaData(conn)
+    studentData = Table('studentData', metadata, autoload=True)
+    s= studentData.select(studentData.c.Username==Username)
+    rs = s.execute()
+    formDict = rs.fetchone()
+    return formDict
+
+def insertSecondForm(conn,username,formDict):
+    metadata = MetaData(conn)
+    studentData = Table('studentData',metadata, autoload=True)
+    i = studentData.update().where(studentData.c.Username == username).values(
+    ScienceExperience = formDict['ScienceExperience'],  
+    CareerPlans = formDict['CareerPlans'],  
+    AspirationNext20Yrs = formDict['AspirationNext20Yrs'],  
+    Mentor1 = formDict['Mentor1'],  
+    Mentor2 = formDict['Mentor2'],  
+    Mentor3 = formDict['Mentor3'],  
+    Mentor4 = formDict['Mentor4'], 
+    Mentor5 = formDict['Mentor5'],  
+    #Transcript = formDict['Transcript'],  
+    IsApplicationSubmitted = formDict['IsApplicationSubmitted'])
+    conn.execute(i)
+
+def insertStudentCourse(conn, username, formDict, title, grade, credit):
+    metadata = MetaData(conn)
+    Courses = Table('Courses',metadata, autoload=True)
+    i = Courses.insert().values(
+    Username = username,
+    Title = formDict[title],  
+    Credits = formDict[credit],  
+    Grade = formDict[grade])
+    conn.execute(i)
