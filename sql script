@@ -3,12 +3,11 @@ drop table columbiaamgen.References;
 drop table columbiaamgen.studentData;
 
 CREATE TABLE `columbiaamgen`.`studentData` (
-  `UserId` VARCHAR(45) NOT NULL,
   `Username` VARCHAR(45) NULL,
   `Password` VARCHAR(45) NULL,
   `FirstName` VARCHAR(45) NULL,
   `LastName` VARCHAR(45) NULL,
-  `DOB` DATE NULL,
+  `DOB` VARCHAR(20) NULL,
   `Email` VARCHAR(100) NULL,
   `AlternativeEmail` VARCHAR(100) NULL,
   `Phone` VARCHAR(20) NULL,
@@ -38,13 +37,13 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `HowDidYouHear` VARCHAR(250) NULL,
   `AnyOtherAmgenScholarsSite` VARCHAR(5) NULL,
   `YesOtherAmgenScholarsSite` VARCHAR(100) NULL,
-  `PastAmgenScholarParticipation` VARCHAR(5) NULL,
+  `PastAmgenScholarParticipation` VARCHAR(20) NULL,
   `OriginalResearchPerformed` VARCHAR(5) NULL,
   `CanArriveAtColumbiaMemorialDay` VARCHAR(5) NULL,
   `ArriveAtColumbiaComments` VARCHAR(200) CHARACTER SET 'dec8' NULL,
   `CurrentlyAttendingUniversity` VARCHAR(45) NULL,
   `Major` VARCHAR(45) NULL,
-  `DateSpringSemesterEnds` DATE NULL,
+  `DateSpringSemesterEnds` VARCHAR(20) NULL,
   `ScienceExperience` VARCHAR(750) NULL,
   `CareerPlans` VARCHAR(550) NULL,
   `AspirationNext20Yrs` VARCHAR(550) NULL,
@@ -60,7 +59,10 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `HowDidYouHearConferenceName` VARCHAR(100) NULL,
   `HowDidYouHearOtherUniversityName` VARCHAR(100) NULL,
   `HowDidYouHearOther` VARCHAR(100) NULL,
-  PRIMARY KEY (`UserId`));
+  `PlaceOfBirth` VARCHAR(100) NULL,
+  `EthnicityOther` VARCHAR(100) NULL,
+  `AdvancedDegreeObjectiveOther` VARCHAR(50) NULL, 
+  PRIMARY KEY (`Username`));
 
 
 CREATE TABLE `columbiaamgen`.`References` (

@@ -195,14 +195,14 @@ def upload():
   if request.method == 'POST':
     formDict = dict()
     if request.form['submitBut'] == 'Next':
-      formDict['ScienceExperience'] = str(request.form['EXPERIENCE'])
-      formDict['CareerPlans'] = str(request.form['CAREER_PLANS'])
-      formDict['AspirationNext20Yrs'] = str(request.form['whysurf'])
-      formDict['Mentor1'] = str(request.form['mentor0'])
-      formDict['Mentor2'] = str(request.form['mentor1'])
-      formDict['Mentor3'] = str(request.form['mentor2'])
-      formDict['Mentor4'] = str(request.form['mentor3'])
-      formDict['Mentor5'] = str(request.form['mentor4'])
+      formDict['ScienceExperience'] = str(request.form.get('EXPERIENCE'))
+      formDict['CareerPlans'] = str(request.form.get('CAREER_PLANS')
+      formDict['AspirationNext20Yrs'] = str(request.form.get('whysurf'))
+      formDict['Mentor1'] = str(request.form.get('mentor0'))
+      formDict['Mentor2'] = str(request.form.get('mentor1'))
+      formDict['Mentor3'] = str(request.form.get('mentor2'))
+      formDict['Mentor4'] = str(request.form.get('mentor3'))
+      formDict['Mentor5'] = str(request.form.get('mentor4'))
 
       #file = request.files['fileupload']
       #formDict['Transcript'] = open('file', 'rb').read()
