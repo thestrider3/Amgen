@@ -11,6 +11,13 @@ from user import *
 DATABASEURI = "mysql+mysqlconnector://aheicklen:mass67@mysql.columbiasurf.dreamhosters.com:3306/columbiaamgen" 
 engine = create_engine(DATABASEURI)
 
+def getUniversityList(conn):
+    metadata = MetaData(conn)
+    colleges = Table('colleges',metadata,autoload=True)
+    rs = select([colleges.c.name]).execute()
+    rs = [item[0] for item in rs.fetchall()]
+    return rs    
+    
 def createDatabaseConnection():
     try:
         conn = engine.connect()
@@ -25,10 +32,8 @@ def checkUser(conn,name,passwrd):
     user_info = Table('studentData', metadata, autoload=True)
     s= user_info.select(and_(user_info.c.Username==name , user_info.c.Password==passwrd))
     rs = s.execute()
-    a=rs.fetchone()
-    if a:
-        u = User(a["Username"],a["Password"])
-        return u
+    formDict=rs.fetchone()
+    return dict(formDict)
 
 def createNewUser(conn,name,passwrd):
     metadata = MetaData(conn)
@@ -36,19 +41,19 @@ def createNewUser(conn,name,passwrd):
     s= user_info.select(user_info.c.Username==name)
     rs = s.execute()
     if rs.fetchone():
-        return null
+        return None
     conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`) Values (%s,%s)', [name,passwrd])
-    u = User(name,passwrd)
-    return u
+    formDict = {"Username":name}
+    return formDict
     
 def getUser(conn,username):
     metadata = MetaData(conn)
     user_info = Table('studentData', metadata, autoload=True)
     s= user_info.select(user_info.c.Username==username)
     rs = s.execute()
-    a=rs.fetchone()
-    u = User(a["Username"],a["Password"])
-    return u
+    formDict=rs.fetchone()
+    return formDict
+
 '''
 def insertFirstForm(conn,userid,formDict):
     metadata = MetaData(conn)
@@ -94,3 +99,55 @@ def insertFirstForm(conn,userid,formDict):
     studentFormData.c.Major  = formDict['Major'],
     studentFormData.c.DateSpringSemesterEnds  = formDict['DateSpringSemesterEnds'])
   '''
+
+def insertFirstForm(conn,formDict):
+    metadata = MetaData(conn)
+    studentData = Table('studentData',metadata, autoload=True)
+    HowDidYouHear=""
+    for sen in formDict['HowDidYouHear']:
+        HowDidYouHear = HowDidYouHear+" "+ str(sen)
+    i = studentData.update().where(studentData.c.Username == formDict['Username']).values(
+    FirstName = formDict['FirstName'],
+    LastName  = formDict['LastName'],
+    DOB = formDict['DOB'],
+    Email = formDict['Email'], 
+    AlternativeEmail  = formDict['AlternativeEmail'],
+    Phone  = formDict['Phone'],
+    PermStreetAdr1  = formDict['PermStreetAdr1'],
+    PermStreetAdr2  = formDict['PermStreetAdr2'],
+    PermanentCity  = formDict['PermanentCity'],
+    PermanentState  = formDict['PermanentState'],
+    PermanentZipCode  = formDict['PermanentZipCode'],
+    CampusAdr1  = formDict['CampusAdr1'],
+    CampusAdr2  = formDict['CampusAdr2'],
+    CampusCity  = formDict['CampusCity'],
+    CampusState  = formDict['CampusState'],
+    CampusZipCode  = formDict['CampusZipCode'],
+    HomeCity  = formDict['HomeCity'],
+    HomeState  = formDict['UserId'],
+    Gender  = formDict['Gender'],
+    Ethnicity  = formDict['Ethnicity'],
+    CitizenshipStatus  = formDict['CitizenshipStatus'],
+    MotherDegree  = formDict['MotherDegree'],
+    FatherDegree  = formDict['FatherDegree'],
+    ClassCompletedSpring  = formDict['ClassCompletedSpring'],
+    GraduationMonth  = formDict['GraduationMonth'],
+    GraduationYear  = formDict['GraduationYear'],
+    CumulativeGPA  = formDict['CumulativeGPA'],
+    AdvancedDegreeObjective  = formDict['AdvancedDegreeObjective'],
+    IsUndergraduateResearchProgramOffered  = formDict['IsUndergraduateResearchProgramOffered'],
+    HowDidYouHear  = HowDidYouHear,
+    HowDidYouHearUniversityName = formDict['HowDidYouHearUniversityName'],
+    HowDidYouHearConferenceName = formDict['HowDidYouHearConferenceName'],
+    HowDidYouHearOtherUniversityName = formDict['HowDidYouHearOtherUniversityName'],
+    HowDidYouHearOther = formDict['HowDidYouHearOther'],
+    AnyOtherAmgenScholarsSite  = formDict['AnyOtherAmgenScholarsSite'],
+    YesOtherAmgenScholarsSite  = formDict['YesOtherAmgenScholarsSite'],
+    PastAmgenScholarParticipation  = formDict['PastAmgenScholarParticipation'],
+    OriginalResearchPerformed  = formDict['OriginalResearchPerformed'],
+    CanArriveAtColumbiaMemorialDay  = formDict['CanArriveAtColumbiaMemorialDay'],
+    ArriveAtColumbiaComments  = formDict['ArriveAtColumbiaComments'],
+    CurrentlyAttendingUniversity  = formDict['CurrentlyAttendingUniversity'],
+    Major  = formDict['Major'],
+    DateSpringSemesterEnds  = formDict['DateSpringSemesterEnds'])
+    conn.execute(i)

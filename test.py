@@ -80,7 +80,7 @@ def addFirstForm():
   print(str(request.form['WHITE']))
   print(str(request.form['other']))
   print(str(request.form['decline']))
-  '''
+  
   #print(str(request.form['ethinicity']))
   if request.form.get('AMGENSITE'):
     print(str(request.form.get('AMGENSITE')))
@@ -91,7 +91,12 @@ def addFirstForm():
     print(str(request.form.get('UNIVERSITYSITENAME')))
   if request.form.get('EMAILANNOUNCEMENT'):
     print(str(request.form.get('EMAILANNOUNCEMENT')))
-  
+  '''
+  print("Inside")
+  if request.form['submitBut'] == 'Next':
+    print("Next")
+  elif request.form['submitBut'] == 'Back':
+    print("Back")
   return flask.render_template('first.html')
 
 

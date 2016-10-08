@@ -29,10 +29,12 @@ def teardown_request(exception):
 
 @app.route('/')
 def main():
+    print(session.get('logged_in'))
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return render_template('first.html')
+        universityList = mysql_dao.getUniversityList(dbcon)
+        return render_template('first.html',formDict=session['user'],universityList=universityList)
 
 @app.route('/checkUsername', methods=['POST'])
 def checkUsername():
@@ -40,12 +42,13 @@ def checkUsername():
   name = str(request.form['username'])
   passwrd = str(request.form['passwrd'])
   
-  user=mysql_dao.checkUser(dbcon,name,passwrd)
+  formDict=mysql_dao.checkUser(dbcon,name,passwrd)
  
-  if user:
+  if formDict:
       session['logged_in'] = True
-      userSession.add(user)
-      render_template('first.html')
+      session['user'] = formDict
+      universityList = mysql_dao.getUniversityList(dbcon)
+      return render_template('first.html',formDict=formDict,universityList=universityList)
   else:  
       flash('Wrong username or wrong password!')
 
@@ -63,96 +66,110 @@ def addUser():
   if user:
       print("successfully created user")
       session['logged_in'] = True
-      session['user'] = json.dumps(user.__dict__)
-      temp = json.loads(session['user']);
+      session['user'] = user
       print(session['logged_in'])
       print(session['user'])
-      print(temp["username"])
-      return render_template('first.html')
+      universityList = mysql_dao.getUniversityList(dbcon)
+      return render_template('first.html',formDict=dict(),universityList=universityList)
   else:
        flash("Username already exists. Please try again.")
       
       
-'''@app.route('/submitFirstForm', methods=['POST'])
+@app.route('/submitFirstForm', methods=['POST'])
 def addFirstForm():
+  print("inside submit first form")
   #userid = os.urandom(24)
-
-  formDict = dict()
-  mysql_dao.createNewUser(dbcon,,d)
-  user = User(name,passwrd,True);
-  login_user(user)
-  next = flask.request.args.get('next')
+  l=list()
+  formDict=session['user']
+  #user = User(name,passwrd,True);
+  #login_user(user)
+  #next = flask.request.args.get('next')
         # next_is_valid should check if the user has valid
         # permission to access the `next` url
-  formDict['FirstName'] = str(request.form['FNAME'])
-  formDict['LastName'] = str(request.form['LNAME'])
-  formDict['DOB'] = str(request.form['DATEOFBIRTH'])
-  formDict['Email'] = str(request.form['EMAIL'])
-  formDict['AlternativeEmail'] = str(request.form['ALTERNATIVE_EMAIL'])
-  formDict['Phone'] = str(request.form['PERMANENT_PHONE'])
-  formDict['PermStreetAdr1'] = str(request.form['PERMANENT_ADDRESS1'])
-  formDict['PermStreetAdr2'] = str(request.form['PERMANENT_ADDRESS2'])
-  formDict['PermanentCity'] = str(request.form['PERMANENT_CITY'])
-  formDict['PermanentState'] = str(request.form['PERMANENT_STATE'])
-  formDict['PermanentZipCode'] = str(request.form['PERMANENT_ZIP'])
-  formDict['CampusAdr1'] = str(request.form['SCHOOL_ADDRESS1'])
-  formDict['CampusAdr2'] = str(request.form['SCHOOL_ADDRESS2'])
-  formDict['CampusCity'] = str(request.form['CAMPUS_CITY'])
-  formDict['CampusState'] = str(request.form['CAMPUS_STATE'])
-  formDict['CampusZipCode'] = str(request.form['CAMPUS_ZIP'])
-  formDict['HomeCity'] = str(request.form['HOMECITY'])
-  formDict['UserId'] = str(request.form['HOMESTATE'])
-  formDict['Gender'] = str(request.form['GENDER'])   
-  formDict['Ethnicity'] = str(request.form['ethinicity'])  
-  formDict['CitizenshipStatus'] = str(request.form['CITIZENSHIP'])
-  formDict['MotherDegree'] = str(request.form['MOTHERDEGREE'])
-  formDict['FatherDegree'] = str(request.form['FATHERDEGREE'])
-  formDict['ClassCompletedSpring'] = str(request.form['CLASSCOMPLETE'])
-  formDict['GraduationMonth'] = str(request.form['GRADUATION_DATE'])
-  formDict['GraduationYear'] = str(request.form['BACHELORYEAR'])
-  formDict['CumulativeGPA'] = str(request.form['CUMULATIVEGPA'])
-  formDict['AdvancedDegreeObjective'] = str(request.form['ADVANCEDDEGREE'])
-  formDict['IsUndergraduateResearchProgramOffered'] = str(request.form['RESEARCHOFFER'])
-  if request.form.get('AMGENSITE'):
-    formDict['HowDidYouHear'] = 
-  if request.form.get('UNIVERSITYSITE'):
-    formDict['HowDidYouHear'] = 
-    formDict['HeardUniversityName'] = 
-  if request.form.get('EMAILANNOUNCEMENT'):
-    formDict['HowDidYouHear'] = 
-  if request.form.get('POSTER'):
-    formDict['HowDidYouHear'] =
-  if request.form.get('CONFERENCE'):
-    CONFERENCENAME
-    formDict['HowDidYouHear'] =
-  if request.form.get('ACADEMICADVISOR'):
-    formDict['HowDidYouHear'] =
-  if request.form.get('INTERNETSEARCH'):
-    formDict['HowDidYouHear'] = 
-  if request.form.get('HOMEUNIVERSITY'):
-    formDict['HowDidYouHear'] = 
-  if request.form.get('OTHERUNIVERSITY'):
-    OTHERUNIVERSITYNAME
-    formDict['HowDidYouHear'] =  
-  if request.form.get('AMGENOTHER'):
-    formDict['HowDidYouHear'] = 
-    AMGENOTHERNAME
+
+  formDict['FirstName'] = str(request.form.get('FNAME'))
+  formDict['LastName'] = str(request.form.get('LNAME'))
+  formDict['DOB'] = str(request.form.get('DATEOFBIRTH'))
+  formDict['Email'] = str(request.form.get('EMAIL'))
+  formDict['AlternativeEmail'] = str(request.form.get('ALTERNATIVE_EMAIL'))
+  formDict['Phone'] = str(request.form.get('PERMANENT_PHONE'))
+  formDict['PermStreetAdr1'] = str(request.form.get('PERMANENT_ADDRESS1'))
+  formDict['PermStreetAdr2'] = str(request.form.get('PERMANENT_ADDRESS2'))
+  formDict['PermanentCity'] = str(request.form.get('PERMANENT_CITY'))
+  formDict['PermanentState'] = str(request.form.get('PERMANENT_STATE'))
+  formDict['PermanentZipCode'] = str(request.form.get('PERMANENT_ZIP'))
+  formDict['CampusAdr1'] = str(request.form.get('SCHOOL_ADDRESS1'))
+  formDict['CampusAdr2'] = str(request.form.get('SCHOOL_ADDRESS2'))
+  formDict['CampusCity'] = str(request.form.get('CAMPUS_CITY'))
+  formDict['CampusState'] = str(request.form.get('CAMPUS_STATE'))
+  formDict['CampusZipCode'] = str(request.form.get('CAMPUS_ZIP'))
+  formDict['HomeCity'] = str(request.form.get('HOMECITY'))
+  formDict['UserId'] = str(request.form.get('HOMESTATE'))
+  formDict['Gender'] = str(request.form.get('GENDER'))      
+  formDict['Ethnicity'] = str(request.form.get('ethinicity'))  
+  formDict['CitizenshipStatus'] = str(request.form.get('CITIZENSHIP'))
+  formDict['MotherDegree'] = str(request.form.get('MOTHERDEGREE'))
+  formDict['FatherDegree'] = str(request.form.get('FATHERDEGREE'))
+  formDict['ClassCompletedSpring'] = str(request.form.get('CLASSCOMPLETE'))
+  formDict['GraduationMonth'] = str(request.form.get('GRADUATION_DATE'))
+  formDict['GraduationYear'] = str(request.form.get('BACHELORYEAR'))
+  formDict['CumulativeGPA'] = str(request.form.get('CUMULATIVEGPA'))
+  formDict['AdvancedDegreeObjective'] = str(request.form.get('ADVANCEDDEGREE'))
+  formDict['IsUndergraduateResearchProgramOffered'] = str(request.form.get('RESEARCHOFFER'))
   
+  if request.form.get('AMGENSITE'):
+    l.append("Amgen National Website") 
+  if request.form.get('UNIVERSITYSITE'):
+    l.append("University website, University name")
+    formDict['HowDidYouHearUniversityName'] = str(request.form.get('UNIVERSITYSITENAME'))
+  else:
+    formDict['HowDidYouHearUniversityName'] = ""
+  if request.form.get('EMAILANNOUNCEMENT'):
+    l.append("E-mail Announcement")
+  if request.form.get('POSTER'):
+    l.append("Poster")
+  if request.form.get('CONFERENCE'):
+    l.append("Conference, Conference Name")
+    formDict['HowDidYouHearConferenceName'] = str(request.form.get('CONFERENCENAME'))
+  else:
+    formDict['HowDidYouHearConferenceName'] = ""
+  if request.form.get('ACADEMICADVISOR'):
+    l.append("Academic Advisor")
+  if request.form.get('INTERNETSEARCH'):
+    l.append("Internet Search")
+  if request.form.get('HOMEUNIVERSITY'):
+    l.append("Faculty/Staff from home university") 
+  if request.form.get('OTHERUNIVERSITY'):
+    l.append("Faculty/Staff from home university")
+    formDict['HowDidYouHearOtherUniversityName'] = str(request.form.get('OTHERUNIVERSITYNAME'))
+  else:
+    formDict['HowDidYouHearOtherUniversityName'] = ""
+  if request.form.get('AMGENOTHER'):
+    l.append("Other")
+    formDict['HowDidYouHearOther'] = str(request.form.get('AMGENOTHERNAME'))
+  else:
+    formDict['HowDidYouHearOther'] = ""
+  formDict['HowDidYouHear'] = l
+  formDict['AnyOtherAmgenScholarsSite'] = str(request.form.get('APPLYINGOTHER'))
+  formDict['YesOtherAmgenScholarsSite'] = str(request.form.get('APPLYINGOTHERSPECIFY'))
+  formDict['PastAmgenScholarParticipation'] = str(request.form.get('PARTICIPATED'))
+  formDict['OriginalResearchPerformed'] = str(request.form.get('UG_RESEARCH'))
+  formDict['CanArriveAtColumbiaMemorialDay'] = str(request.form.get('ARRIVEONFIRSTDAY'))
+  formDict['ArriveAtColumbiaComments'] = str(request.form.get('ARRIVEONFIRSTDAYX'))
+  formDict['CurrentlyAttendingUniversity'] = str(request.form.get('university'))
+  formDict['Major'] = str(request.form.get('MAJOR'))
+  formDict['DateSpringSemesterEnds'] = str(request.form.get('SEMESTER_END'))
+  mysql_dao.insertFirstForm(dbcon,formDict)
+  session['user'] = formDict
+  #mysql_dao.createNewUser(dbcon,,formDict) 
+  return flask.render_template('second.html')
 
-
-  formDict['AnyOtherAmgenScholarsSite'] = str(request.form['APPLYINGOTHER'])
-  formDict['YesOtherAmgenScholarsSite'] = str(request.form['APPLYINGOTHERSPECIFY'])
-  formDict['PastAmgenScholarParticipation'] = str(request.form['PARTICIPATED'])
-  formDict['OriginalResearchPerformed'] = str(request.form['UG_RESEARCH'])
-  formDict['CanArriveAtColumbiaMemorialDay'] = str(request.form['ARRIVEONFIRSTDAY'])
-  formDict['ArriveAtColumbiaComments'] = str(request.form['ARRIVEONFIRSTDAYX'])
-  formDict['CurrentlyAttendingUniversity'] = str(request.form['university'])
-  formDict['Major'] = str(request.form['MAJOR'])
-  formDict['DateSpringSemesterEnds'] = str(request.form['SEMESTER_END'])
-
-    
-return flask.render_template('first.html')
 '''
+@app.route('/submitFirstForm', methods=['POST'])
+def addSecondForm():
+if request.form['submitBut'] == 'Next':
+  return flask.render_template('third.html')
+'''    
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
@@ -168,4 +185,9 @@ def upload():
 if __name__ == "__main__":
   app.secret_key = os.urandom(24)
   app.run(threaded=True)
+  
+def xstr(s):
+    if s is None:
+        return ''
+    return str(s)
 
