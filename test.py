@@ -12,9 +12,9 @@ app = Flask(__name__, template_folder=tmpl_dir)
 
 @app.route('/')
 def main():
-    return render_template('first.html')
+    return render_template('second.html')
 
-@app.route('/submitFirstForm', methods=['POST'])
+@app.route('/upload', methods=['POST'])
 def addFirstForm():
   #userid = os.urandom(24)
   '''
@@ -91,14 +91,17 @@ def addFirstForm():
     print(str(request.form.get('UNIVERSITYSITENAME')))
   if request.form.get('EMAILANNOUNCEMENT'):
     print(str(request.form.get('EMAILANNOUNCEMENT')))
-  '''
+  
   print("Inside")
   if request.form['submitBut'] == 'Next':
     print("Next")
   elif request.form['submitBut'] == 'Back':
     print("Back")
   return flask.render_template('first.html')
-
+  '''
+  formDict = dict()
+  formDict['Transcript'] = request.files['fileupload'].read()
+  print(formDict['Transcript'])
 
 
 if __name__ == "__main__":

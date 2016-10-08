@@ -202,8 +202,8 @@
                                     Gender:</font></td>
                             <td><font size="3" face="Arial, Helvetica, sans-serif">
                                     <select size="1" name="GENDER">
-                                        <option value="Male" selected="{{formDict['Gender']=='M'}}">Male</option>
-                                        <option value="Female" selected="{{formDict['Gender']=='F'}}">Female</option>
+                                        <option value="Male" {%if formDict['Gender']=='M'%} selected {%endif%}>Male</option>
+                                        <option value="Female" {%if formDict['Gender']=='F'%} selected {%endif%}>Female</option>
                                 </select>
                             </font></td>
                         </tr>
@@ -219,25 +219,24 @@
                             <td><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"> 
                                         <input
-                                        type=radio name ="ethinicity" id="INDIAN" value="American Indian / Alaskan Native" checked="{{formDict['Ethnicity']=='American Indian / Alaskan Native'}}">American Indian / Alaskan Native<BR> 
+                                        type=radio name ="ethinicity" id="INDIAN" value="American Indian / Alaskan Native"  {% if formDict['Ethnicity']=='American Indian / Alaskan Native'%} checked {%endif%}> American Indian / Alaskan Native<BR> 
                                         
-                                        <input type=radio name ="ethinicity" id="BLACK" value="African-American / Black" selected="{{formDict['Ethnicity']=='African-American / Black'}}">African-American / Black<BR> 
+                                        <input type=radio name ="ethinicity" id="BLACK" value="African-American / Black" {% if formDict['Ethnicity']=='African-American / Black' %} checked {% endif%}>African-American / Black<BR> 
 
-                                        <input type=radio name="ethinicity" id="PACIFIC" value="Pacific Islander" selected="{{formDict['Ethnicity']=='Pacific Islander'}}">Pacific Islander<BR>
+                                        <input type=radio name="ethinicity" id="PACIFIC" value="Pacific Islander" {% if formDict['Ethnicity']=='Pacific Islander' %} checked {% endif%}>Pacific Islander<BR>
 
-                                         <input type=radio name="ethinicity" id="MEXICAN" value="Mexican American /Chicano / Latino" selected="{{formDict['Ethnicity']=='Mexican American / Chicano / Latino'}}"> Mexican American / Chicano / Latino<BR> 
+                                         <input type=radio name="ethinicity" id="MEXICAN" value="Mexican American /Chicano / Latino" {% if formDict['Ethnicity']=='Mexican American / Chicano / Latino' %} checked {% endif%}>Mexican American / Chicano / Latino<BR> 
 
-                                        <input type=radio name="ethinicity" id="ASIAN" value="Asian American" selected="{{formDict['Ethnicity']=='Asian American'}}">Asian American<BR>
+                                        <input type=radio name="ethinicity" id="ASIAN" value="Asian American" {% if formDict['Ethnicity']=='Asian American' %} checked {% endif%}>Asian American<BR>
                                         
-                                        <input type=radio name="ethinicity" id="MIDDLE" value="Middle Eastern" selected="{{formDict['Ethnicity']=='Middle Eastern'}}">
-                                        Middle Eastern<BR> 
+                                        <input type=radio name="ethinicity" id="MIDDLE" value="Middle Eastern" {% if formDict['Ethnicity']=='Middle Eastern' %} checked {% endif%}> Middle Eastern<BR> 
 
-                                        <input type=radio name="ethinicity" id="WHITE" value="White/Caucasian" selected="{{formDict['Ethnicity']=='White / Caucasian'}}">White / Caucasian<BR>
-                                        Other: <input name="other" maxlength="50" size="40"
-                                        type="text" value=""> <BR> 
+                                        <input type=radio name="ethinicity" id="WHITE" value="White/Caucasian" {% if formDict['Ethnicity']=='White / Caucasian' %} checked {% endif%}>White / Caucasian<BR>
+                                        <input type=radio name="ethinicity" id="OTHER" value="Other" {% if formDict['Ethnicity']=='Other' %} checked {% endif%}>Other: <input name="ethnicityother" maxlength="50" size="40"
+                                        type="text" value="{{formDict['EthnicityOther']}}"> <BR> 
 
                                         <input type=radio
-                                        name="ethinicity" id="decline" value="Decline" selected="{{formDict['Ethnicity']=='Decline to State'}}"> Decline to State
+                                        name="ethinicity" id="decline" value="Decline" {% if formDict['Ethnicity']=='Decline to State' %} checked {% endif%}> Decline to State
                                     </font>
                                 </p></td>
                         </tr>
@@ -247,13 +246,14 @@
                                     <font size="2">(Please note that non-U.S. citizens and
                                         non-permanent residents are not eligible to apply.) </font></font></td>
                             <td height="22" align="left" width="60%"><p>
-                                    <font size="3" face="Arial, Helvetica, sans-serif"> <input
-                                        type="radio" name="CITIZENSHIP" value="citizen"> U.S.
-                                        Citizen<br> <input type="radio" name="CITIZENSHIP"
-                                        value="resident"> Permanent Resident, Place of Birth<input
-                                        name="PLACEOFBIRTH" maxlength="75" size="25" type="text"
-                                        value=""> <br> <input type="radio"
-                                        name="CITIZENSHIP" value="other"> Other<br> <br>
+                                    <font size="3" face="Arial, Helvetica, sans-serif"> 
+                                        <input type="radio" name="CITIZENSHIP" value="citizen" {% if formDict['CitizenshipStatus']=='citizen' %} checked {% endif%}>U.S. Citizen<br> 
+                                        <input type="radio" name="CITIZENSHIP"
+                                        value="resident" {% if formDict['CitizenshipStatus']=='resident' %} checked {% endif%}>Permanent Resident, Place of Birth
+                                        <input name="PLACEOFBIRTH" maxlength="75" size="25" type="text"
+                                        value="{{formDict['PlaceOfBirth']}}"> <br> 
+                                        <input type="radio"
+                                        name="CITIZENSHIP" value="other" {% if formDict['CitizenshipStatus']=='other' %} checked {% endif%}>Other<br> <br>
                                     </font>
                                 </p></td>
                         </tr>
@@ -273,21 +273,21 @@
                             <td height="22" align="left" width="60%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"><br>
                                         <br> <select size="1" name="MOTHERDEGREE">
-                                            <option value="N/A" selected="{{formDict['MotherDegree']=='N/A'}}">N/A</option>
-                                            <option value="No High School Degree" selected="{{formDict['MotherDegree']=='No High School Degree'}}">No High School Degree</option>
-                                            <option value="High School" selected="{{formDict['MotherDegree']=='High School'}}">High School</option>
-                                            <option value="Associates/Certificate" selected="{{formDict['MotherDegree']=='Associates/Certificate'}}">Associates/Certificate</option>
-                                            <option value="Bachelors" selected="{{formDict['MotherDegree']=='Bachelors'}}">Bachelors</option>
-                                            <option value="Masters" selected="{{formDict['MotherDegree']=='Masters'}}">Masters</option>
-                                            <option value="Doctorate" selected="{{formDict['MotherDegree']=='Doctorate'}}">Doctorate</option>
+                                            <option value="N/A" {%if formDict['MotherDegree']=='N/A' %} selected {%endif%}>N/A</option>
+                                            <option value="No High School Degree" {%if formDict['MotherDegree']=='No High School Degree' %} selected {%endif%}>No High School Degree</option>
+                                            <option value="High School" {%if formDict['MotherDegree']=='High School' %} selected {%endif%}>High School</option>
+                                            <option value="Associates/Certificate" {%if formDict['MotherDegree']=='Associates/Certificate' %} selected {%endif%}>Associates/Certificate</option>
+                                            <option value="Bachelors" {%if formDict['MotherDegree']=='Bachelors' %} selected {%endif%}>Bachelors</option>
+                                            <option value="Masters" {%if formDict['MotherDegree']=='Masters' %} selected {%endif%}>Masters</option>
+                                            <option value="Doctorate" {%if formDict['MotherDegree']=='Doctorate' %} selected {%endif%}>Doctorate</option>
                                     </select> <br> <br> <select size="1" name="FATHERDEGREE">
-                                            <option value="N/A" selected="{{formDict['FatherDegree']=='N/A'}}">N/A</option>
-                                            <option value="No High School Degree" selected="{{formDict['FatherDegree']=='No High School Degree'}}">No High School Degree</option>
-                                            <option value="High School" selected="{{formDict['FatherDegree']=='High School'}}">High School</option>
-                                            <option value="Associates/Certificate" selected="{{formDict['FatherDegree']=='Associates/Certificate'}}">Associates/Certificate</option>
-                                            <option value="Bachelors" selected="{{formDict['FatherDegree']=='Bachelors'}}">Bachelors</option>
-                                            <option value="Masters" selected="{{formDict['FatherDegree']=='Masters'}}">Masters</option>
-                                            <option value="Doctorate" selected="{{formDict['FatherDegree']=='Doctorate'}}">Doctorate</option>
+                                            <option value="N/A" {%if formDict['FatherDegree']=='N/A' %} selected {%endif%}>N/A</option>
+                                            <option value="No High School Degree" {%if formDict['FatherDegree']=='No High School Degree' %} selected {%endif%}>No High School Degree</option>
+                                            <option value="High School" {%if formDict['FatherDegree']=='High School' %} selected {%endif%}>High School</option>
+                                            <option value="Associates/Certificate" {%if formDict['FatherDegree']=='Associates/Certificate' %} selected {%endif%}>Associates/Certificate</option>
+                                            <option value="Bachelors" {%if formDict['FatherDegree']=='Bachelors' %} selected {%endif%}>Bachelors<</option>
+                                            <option value="Masters" {%if formDict['FatherDegree']=='Masters' %} selected {%endif%}>Masters</option>
+                                            <option value="Doctorate" {%if formDict['FatherDegree']=='Doctorate' %} selected {%endif%}>Doctorate</option>
                                     </select> <br> <br> </font>
                                 </p></td>
                         </tr>
@@ -305,9 +305,9 @@
                             <td height="22" align="left" width="60%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"> <select
                                         size="1" name="CLASSCOMPLETE">
-                                            <option value="Sophomore" selected="{{formDict['ClassCompletedSpring']=='Sophomore'}}">Sophomore</option>
-                                            <option value="Junior" selected="{{formDict['ClassCompletedSpring']=='Junior'}}">Junior</option>
-                                            <option value="Non-Graduating Senior" selected="{{formDict['ClassCompletedSpring']=='Non-Graduating Senior'}}">Non-Graduating Senior</option>
+                                            <option value="Sophomore" {%if formDict['ClassCompletedSpring']=='Sophomore'%} selected {%endif%}>Sophomore</option>
+                                            <option value="Junior" {%if formDict['ClassCompletedSpring']=='Junior'%} selected {%endif%}>Junior</option>
+                                            <option value="Non-Graduating Senior" {%if formDict['ClassCompletedSpring']=='Non-Graduating Senior'%} selected {%endif%}>Non-Graduating Senior</option>
                                     </select> <br>
                                     </font><br>
                                 </p></td>
@@ -321,25 +321,25 @@
                             <td height="22" align="left" width="60%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"> </font><font
                                         face="Arial"> <select size="1" name="GRADUATION_DATE">
-                                            <option value="January" selected="{{formDict['GraduationMonth']=='January'}}">January</option>
-                                            <option value="February" selected="{{formDict['GraduationMonth']=='February'}}">February</option>
-                                            <option value="March" selected="{{formDict['GraduationMonth']=='March'}}">March</option>
-                                            <option value="April" selected="{{formDict['GraduationMonth']=='April'}}">April</option>
-                                            <option value="May" selected="{{formDict['GraduationMonth']=='May'}}">May</option>
-                                            <option value="June" selected="{{formDict['GraduationMonth']=='June'}}">June</option>
-                                            <option value="July" selected="{{formDict['GraduationMonth']=='July'}}">July</option>
-                                            <option value="August" selected="{{formDict['GraduationMonth']=='August'}}">August</option>
-                                            <option value="September" selected="{{formDict['GraduationMonth']=='September'}}">September</option>
-                                            <option value="October" selected="{{formDict['GraduationMonth']=='October'}}">October</option>
-                                            <option value="November" selected="{{formDict['GraduationMonth']=='November'}}">November</option>
-                                            <option value="December" selected="{{formDict['GraduationMonth']=='December'}}">December</option>
+                                            <option value="January" {%if formDict['GraduationMonth']=='January' %} selected {%endif%}>January</option>
+                                            <option value="February" {%if formDict['GraduationMonth']=='February'%} selected {%endif%}>February</option>
+                                            <option value="March" {%if formDict['GraduationMonth']=='March'%} selected {%endif%}>March</option>
+                                            <option value="April" {%if formDict['GraduationMonth']=='April'%} selected {%endif%}>April</option>
+                                            <option value="May" {%if formDict['GraduationMonth']=='May'%} selected {%endif%}>May</option>
+                                            <option value="June" {%if formDict['GraduationMonth']=='June'%} selected {%endif%}>June</option>
+                                            <option value="July" {%if formDict['GraduationMonth']=='July'%} selected {%endif%}>July</option>
+                                            <option value="August" {%if formDict['GraduationMonth']=='August'%} selected {%endif%}>August</option>
+                                            <option value="September" {%if formDict['GraduationMonth']=='September'%} selected {%endif%}>September</option>
+                                            <option value="October" {%if formDict['GraduationMonth']=='October'%} selected {%endif%}>October</option>
+                                            <option value="November" {%if formDict['GraduationMonth']=='November'%} selected {%endif%}>November</option>
+                                            <option value="December" {%if formDict['GraduationMonth']=='December'%} selected {%endif%}>December</option>
                                     </select>
                                     </font><font size="3" face="Arial, Helvetica, sans-serif"> <select
                                         size="1" name="BACHELORYEAR">
-                                            <option value="2016" selected="{{formDict['GraduationYear']=='2016'}}">2016</option>
-                                            <option value="2017" selected="{{formDict['GraduationYear']=='2017'}}">2017</option>
-                                            <option value="2018" selected="{{formDict['GraduationYear']=='2018'}}">2018</option>
-                                            <option value="2019" selected="{{formDict['GraduationYear']=='2019'}}">2019</option>
+                                            <option value="2016" {%if formDict['GraduationYear']=='2016'%} selected {%endif%}>2016</option>
+                                            <option value="2017" {%if formDict['GraduationYear']=='2017'%} selected {%endif%}>2017</option>
+                                            <option value="2018" {%if formDict['GraduationYear']=='2018'%} selected {%endif%}>2018</option>
+                                            <option value="2019" {%if formDict['GraduationYear']=='2019'%} selected {%endif%}>2019</option>
                                     </select>
                                     </font><font face="Arial"> </font>
                                 </p></td>
@@ -364,16 +364,19 @@
                                 face="Arial, Helvetica, sans-serif">Advanced Degree
                                     Objective: </font></td>
                             <td height="22" align="left"><p>
-                                    <font size="3" face="Arial, Helvetica, sans-serif"> <input
-                                        type="radio" name="ADVANCEDDEGREE" value="PHD"> Ph. D.<br>
-                                        <input type="radio" name="ADVANCEDDEGREE" value="MDPHD">
-                                        M. D./Ph. D.<br> <input type="radio"
-                                        name="ADVANCEDDEGREE" value="MAMS"> M. A./M. S.<br>
-                                        <input type="radio" name="ADVANCEDDEGREE" value="MD">
-                                        M.D.<br> <input type="radio" name="ADVANCEDDEGREE"
-                                        value="Other"> Other, Please Specify: <font
-                                        color="#000000"> <input name="ADVANCEDDEGREEOTHER"
-                                            size="40" type="text" value="">
+                                    <font size="3" face="Arial, Helvetica, sans-serif"> 
+                                        <input type="radio" name="ADVANCEDDEGREE" value="PHD" {% if formDict['AdvancedDegreeObjective']=='PHD'%} checked {%endif%}> Ph. D.<br>
+                                        <input type="radio" name="ADVANCEDDEGREE" value="MDPHD" {% if formDict['AdvancedDegreeObjective']=='MDPHD'%} checked {%endif%}>
+                                        M. D./Ph. D.<br> 
+                                        <input type="radio"
+                                        name="ADVANCEDDEGREE" value="MAMS" {% if formDict['AdvancedDegreeObjective']=='MAMS'%} checked {%endif%}>M. A./M. S.<br>
+                                        <input type="radio" name="ADVANCEDDEGREE" value="MD" {% if formDict['AdvancedDegreeObjective']=='MD'%} checked {%endif%}>
+                                        M.D.<br> 
+                                        <input type="radio" name="ADVANCEDDEGREE"
+                                        value="Other" {% if formDict['AdvancedDegreeObjective']=='Other'%} checked {%endif%}> Other, Please Specify: <font
+                                        color="#000000"> 
+                                        <input name="ADVANCEDDEGREEOTHER"
+                                            size="40" type="text" value="{{formDict['AdvancedDegreeObjectiveOther']}}">
                                     </font></font>
                                 </p></td>
                         </tr>
@@ -381,9 +384,9 @@
                             face="Arial, Helvetica, sans-serif">Does your four-year
                                 college or university offer an undergraduate research program? </font></td>
                         <td height="22" align="left"><p>
-                                <font size="3" face="Arial, Helvetica, sans-serif"> <input
-                                    type="radio" name="RESEARCHOFFER" value="Yes"> Yes<br>
-                                    <input type="radio" name="RESEARCHOFFER" value="No"> No<br>
+                                <font size="3" face="Arial, Helvetica, sans-serif"> 
+                                    <input type="radio" name="RESEARCHOFFER" value="Yes" {% if formDict['IsUndergraduateResearchProgramOffered']=='Yes'%} checked {%endif%}>Yes<br>
+                                    <input type="radio" name="RESEARCHOFFER" value="No" {% if formDict['IsUndergraduateResearchProgramOffered']=='No'%} checked {%endif%}>No<br>
                                 </font>
                             </p></td>
                         </tr>
@@ -392,36 +395,29 @@
                             <td><font size="3" face="Arial, Helvetica, sans-serif">How
                                     did you hear about the Amgen Scholars program? </font></td>
                             <td><p>
-                                    <font size="3" face="Arial, Helvetica, sans-serif"> <input
-                                        type=checkbox name="AMGENSITE"> Amgen National Website
-                                        <BR> <input type=checkbox name="UNIVERSITYSITE">
-                                        University website, University name:
+                                    <font size="3" face="Arial, Helvetica, sans-serif"> 
+                                        <input type=checkbox name="AMGENSITE" {% if 'Amgen National Website' in formDict['HowDidYouHear']%} checked {%endif%}>Amgen National Website
+                                        <BR> 
+                                        <input type=checkbox name="UNIVERSITYSITE" {% if 'University website, University name' in formDict['HowDidYouHear']%} checked {%endif%}> University website, University name:
                                     </font><font face="Arial, Helvetica, sans-serif" size="3"
-                                        color="#000000"> <input name="UNIVERSITYSITENAME"
-                                        size="25" type="text" value="{{formDict['HowDidYouHearUniversityName']}}">
+                                        color="#000000"> 
+                                        <input name="UNIVERSITYSITENAME" size="25" type="text" value="{{formDict['HowDidYouHearUniversityName']}}">
                                     </font><font size="3" face="Arial, Helvetica, sans-serif"><BR>
-                                        <input type=checkbox name="EMAILANNOUNCEMENT"> E-mail
-                                        Announcement <BR> <input type=checkbox name="POSTER">
-                                        Poster<BR> <input type=checkbox name="CONFERENCE">
-                                        Conference, Conference name: </font><font
-                                        face="Arial, Helvetica, sans-serif" size="3" color="#000000">
+                                        <input type=checkbox name="EMAILANNOUNCEMENT" {% if 'E-mail Announcement' in formDict['HowDidYouHear']%} checked {%endif%}>E-mail Announcement<BR> 
+                                        <input type=checkbox name="POSTER" {% if 'Poster' in formDict['HowDidYouHear']%} checked {%endif%}>Poster<BR> 
+                                        <input type=checkbox name="CONFERENCE" {% if 'Conference, Conference Name' in formDict['HowDidYouHear']%} checked {%endif%}> Conference, Conference name: 
+                                    </font><font face="Arial, Helvetica, sans-serif" size="3" color="#000000">
                                         <input name="CONFERENCENAME" size="30" type="text" value="{{formDict['HowDidYouHearConferenceName']}}">
                                     </font><font size="3" face="Arial, Helvetica, sans-serif"><BR>
-                                        <input type=checkbox name="ACADEMICADVISOR"> Academic
-                                        Advisor <BR> <input type=checkbox name="INTERNETSEARCH">
-                                        Internet Search <BR> <input type=checkbox
-                                        name="HOMEUNIVERSITY"> Faculty/Staff from home
-                                        university <BR> <input type=checkbox
-                                        name="OTHERUNIVERSITY"> Faculty/Staff from other
-                                        university <br> University name: </font><font
-                                        face="Arial, Helvetica, sans-serif" size="3" color="#000000">
-                                        <input name="OTHERUNIVERSITYNAME" size="25" type="text"
-                                        value="{{formDict['HowDidYouHearOtherUniversityName']}}">
+                                        <input type=checkbox name="ACADEMICADVISOR" {% if 'Academic Advisor' in formDict['HowDidYouHear']%} checked {%endif%}> Academic Advisor <BR> 
+                                        <input type=checkbox name="INTERNETSEARCH" {% if 'Internet Search' in formDict['HowDidYouHear']%} checked {%endif%}>Internet Search<BR>
+                                        <input type=checkbox name="HOMEUNIVERSITY" {% if 'Faculty/Staff from home university' in formDict['HowDidYouHear']%} checked {%endif%}> Faculty/Staff from home university <BR>
+                                        <input type=checkbox name="OTHERUNIVERSITY" {% if 'Faculty/Staff from home university' in formDict['HowDidYouHear']%} checked {%endif%}> Faculty/Staff from other university <br> University name: 
+                                    </font><font face="Arial, Helvetica, sans-serif" size="3" color="#000000">
+                                        <input name="OTHERUNIVERSITYNAME" size="25" type="text" value="{{formDict['HowDidYouHearOtherUniversityName']}}">
                                     </font><font size="3" face="Arial, Helvetica, sans-serif"><br>
-                                        <input type=checkbox name="AMGENOTHER"> Other, please
-                                        specify: </font><font face="Arial, Helvetica, sans-serif" size="3"
-                                        color="#000000"> <input name="AMGENOTHERNAME" size="25"
-                                        type="text" value="{{formDict['HowDidYouHearOther']}}">
+                                        <input type=checkbox name="AMGENOTHER" {% if 'Other' in formDict['HowDidYouHear']%} checked {%endif%}> Other, please specify: </font><font face="Arial, Helvetica, sans-serif" size="3" color="#000000">
+                                        <input name="AMGENOTHERNAME" size="25" type="text" value="{{formDict['HowDidYouHearOther']}}">
                                     </font>
                                 </p></td>
                         </tr>
@@ -429,11 +425,10 @@
                             face="Arial, Helvetica, sans-serif">Are you applying to
                                 any other Amgen Scholars sites?</font></td>
                         <td height="22" align="left" width="60%"><p>
-                                <font size="3" face="Arial, Helvetica, sans-serif"> <input
-                                    type="radio" name="APPLYINGOTHER" value="No"> No<br>
-                                    <input type="radio" name="APPLYINGOTHER" value="Yes">
-                                    Yes (if yes, where? <input name="APPLYINGOTHERSPECIFY"
-                                    maxlength="30" size="30" type="text" value="{{formDict['AnyOtherAmgenScholarsSite']}}"> )<br>
+                                <font size="3" face="Arial, Helvetica, sans-serif"> 
+                                    <input type="radio" name="APPLYINGOTHER" value="No" {% if formDict['AnyOtherAmgenScholarsSite']=='No'%} checked {%endif%}>No<br>
+                                    <input type="radio" name="APPLYINGOTHER" value="Yes" {% if formDict['AnyOtherAmgenScholarsSite']=='Yes'%} checked {%endif%}>Yes (if yes, where? 
+                                    <input name="APPLYINGOTHERSPECIFY" maxlength="30" size="30" type="text" value="{{formDict['AnyOtherAmgenScholarsSite']}}"> )<br>
                                     <br>
                                 </font>
                             </p></td>
@@ -444,9 +439,9 @@
                                 </p></td>
                             <td height="22" align="left" width="60%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"> <input
-                                        type="radio" name="PARTICIPATED" value="notparticipated">
-                                        No<br> <input type="radio" name="PARTICIPATED"
-                                        value="participated"> Yes
+                                        type="radio" name="PARTICIPATED" value="notparticipated" {% if formDict['PastAmgenScholarParticipation']=='notparticipated'%} checked {%endif%}>
+                                        No<br> 
+                                        <input type="radio" name="PARTICIPATED" value="participated" {% if formDict['PastAmgenScholarParticipation']=='participated'%} checked {%endif%}> Yes
                                     </font><font size="2" face="Arial, Helvetica, sans-serif"><br>
                                         (note that if you have participated IN THE AMGEN SCHOLARS
                                         PROGRAM AT ANY OF THE TEN UNIVERSITIES that you are NOT
@@ -462,9 +457,9 @@
                                         your own project?</font><br>
                                 </p></td>
                             <td height="22" align="left" width="60%"><p>
-                                    <font size="3" face="Arial, Helvetica, sans-serif"> <input
-                                        type="radio" name="UG_RESEARCH" value="Yes"> Yes<br>
-                                        <input type="radio" name="UG_RESEARCH" value="No"> No
+                                    <font size="3" face="Arial, Helvetica, sans-serif"> 
+                                    <input type="radio" name="UG_RESEARCH" value="Yes" {% if formDict['OriginalResearchPerformed']=='Yes'%} checked {%endif%}> Yes<br>
+                                    <input type="radio" name="UG_RESEARCH" value="No" {% if formDict['OriginalResearchPerformed']=='No'%} checked {%endif%}> No
                                     </font> </font>
                                 </p></td>
                         </tr>
@@ -475,12 +470,12 @@
                                         the day after Memorial Day each year? </font><br />
                                 </p></td>
                             <td height="22" align="left" width="60%"><p>
-                                    <font size="3" face="Arial, Helvetica, sans-serif"> <input
-                                        type="radio" name="ARRIVEONFIRSTDAY" value="Yes"> Yes<br>
-                                        <input type="radio" name="ARRIVEONFIRSTDAY" value="No">
-                                        No <br /> Comments: <br /> <textarea
+                                    <font size="3" face="Arial, Helvetica, sans-serif"> 
+                                        <input type="radio" name="ARRIVEONFIRSTDAY" value="Yes" {% if formDict['CanArriveAtColumbiaMemorialDay']=='Yes'%} checked {%endif%}> Yes<br>
+                                        <input type="radio" name="ARRIVEONFIRSTDAY" value="No" {% if formDict['CanArriveAtColumbiaMemorialDay']=='No'%} checked {%endif%}>No <br /> 
+                                        Comments: <br /> <textarea
                                             name="ARRIVEONFIRSTDAYX" rows="4" style="width: 99%"
-                                            maxlength="250" value="{{formDict['ArriveAtColumbiaComments']}}"></textarea>
+                                            maxlength="250">{{formDict['ArriveAtColumbiaComments']}}</textarea>
                                     </font> </font>
                                 </p></td>
                         </tr>
@@ -499,7 +494,7 @@
                                         College/University: </font></td>
                             <td><select name="university" id="universitySelect" ONCHANGE="goto(this.form)">
                                     {% for u in universityList %}
-                                        <option value="{{ u }}" selected="{{u==formDict['CurrentlyAttendingUniversity']}}">{{ u }}</option>
+                                        <option value="{{ u }}" {%if u==formDict['CurrentlyAttendingUniversity']%} selected {%endif%}>{{ u }}</option>
                                     {% endfor %}
                             </select></td>
                         </tr>

@@ -45,6 +45,7 @@ def checkUsername():
   formDict=mysql_dao.checkUser(dbcon,name,passwrd)
  
   if formDict:
+      print formDict
       session['logged_in'] = True
       session['user'] = formDict
       universityList = mysql_dao.getUniversityList(dbcon)
@@ -104,10 +105,14 @@ def addFirstForm():
   formDict['CampusState'] = str(request.form.get('CAMPUS_STATE'))
   formDict['CampusZipCode'] = str(request.form.get('CAMPUS_ZIP'))
   formDict['HomeCity'] = str(request.form.get('HOMECITY'))
-  formDict['UserId'] = str(request.form.get('HOMESTATE'))
+  formDict['HomeState'] = str(request.form.get('HOMESTATE'))
   formDict['Gender'] = str(request.form.get('GENDER'))      
-  formDict['Ethnicity'] = str(request.form.get('ethinicity'))  
+  formDict['Ethnicity'] = str(request.form.get('ethinicity')) 
+  if(formDict['Ethnicity']=='Other'):
+      formDict["EthnicityOther"] = str(request.form.get('ethnicityother'))
   formDict['CitizenshipStatus'] = str(request.form.get('CITIZENSHIP'))
+  if(formDict['CitizenshipStatus']=='resident'):
+      formDict['PlaceOfBirth']=str(request.form.get('PLACEOFBIRTH'))
   formDict['MotherDegree'] = str(request.form.get('MOTHERDEGREE'))
   formDict['FatherDegree'] = str(request.form.get('FATHERDEGREE'))
   formDict['ClassCompletedSpring'] = str(request.form.get('CLASSCOMPLETE'))
@@ -115,6 +120,8 @@ def addFirstForm():
   formDict['GraduationYear'] = str(request.form.get('BACHELORYEAR'))
   formDict['CumulativeGPA'] = str(request.form.get('CUMULATIVEGPA'))
   formDict['AdvancedDegreeObjective'] = str(request.form.get('ADVANCEDDEGREE'))
+  if(formDict['AdvancedDegreeObjective']=='Other'):
+      formDict['AdvancedDegreeObjectiveOther'] = str(request.form.get('ADVANCEDDEGREEOTHER'))
   formDict['IsUndergraduateResearchProgramOffered'] = str(request.form.get('RESEARCHOFFER'))
   
   if request.form.get('AMGENSITE'):
@@ -150,6 +157,7 @@ def addFirstForm():
   else:
     formDict['HowDidYouHearOther'] = ""
   formDict['HowDidYouHear'] = l
+
   formDict['AnyOtherAmgenScholarsSite'] = str(request.form.get('APPLYINGOTHER'))
   formDict['YesOtherAmgenScholarsSite'] = str(request.form.get('APPLYINGOTHERSPECIFY'))
   formDict['PastAmgenScholarParticipation'] = str(request.form.get('PARTICIPATED'))
@@ -164,6 +172,7 @@ def addFirstForm():
   #mysql_dao.createNewUser(dbcon,,formDict) 
   return flask.render_template('second.html')
 
+
 '''
 @app.route('/submitFirstForm', methods=['POST'])
 def addSecondForm():
@@ -171,16 +180,54 @@ if request.form['submitBut'] == 'Next':
   return flask.render_template('third.html')
 '''    
 
+#@app.route('/upload', methods=['GET', 'POST'])
+
+#@app.route('/submitFirstForm', methods=['POST'])
+#def addSecondForm():
+
+    
+
+
+
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
-    # file upload handler code will be here
   if request.method == 'POST':
-      file = request.files['file']
-      extension = os.path.splitext(file.filename)[1]
-      f_name = str(uuid.uuid4()) + extension
-      app.config['UPLOAD_FOLDER'] = 'static/Uploads'
-      file.save(os.path.join(app.config['UPLOAD_FOLDER'], f_name))
-  return json.dumps({'filename':f_name})
+    formDict = dict()
+    if request.form['submitBut'] == 'Next':
+      formDict['ScienceExperience'] = str(request.form['EXPERIENCE'])
+      formDict['CareerPlans'] = str(request.form['CAREER_PLANS'])
+      formDict['AspirationNext20Yrs'] = str(request.form['whysurf'])
+      formDict['Mentor1'] = str(request.form['mentor0'])
+      formDict['Mentor2'] = str(request.form['mentor1'])
+      formDict['Mentor3'] = str(request.form['mentor2'])
+      formDict['Mentor4'] = str(request.form['mentor3'])
+      formDict['Mentor5'] = str(request.form['mentor4'])
+
+      #file = request.files['fileupload']
+      #formDict['Transcript'] = open('file', 'rb').read()
+      #formDict['Transcript'] = str(request.form['fileupload'])
+      if request.form.get("agree") == "agree":
+        if request.form['submitBut'] == 'Next':
+          formDict['IsApplicationSubmitted'] = "Y" 
+          mysql_dao.insertSecondForm(dbcon,"tb",formDict)
+          for i in range(0,26):
+            if request.form['stitle'+''+str(i)] != '':
+              formDict['stitle'+''+str(i)] = request.form['stitle'+''+str(i)]
+              formDict['scredits'+''+str(i)] = request.form['scredits'+''+str(i)]
+              formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]
+              print('stitle'+''+str(i))
+              mysql_dao.insertStudentCourse(dbcon, "tb", formDict, 'stitle'+''+str(i), 'scredits'+''+str(i), 'sgrade'+''+str(i))
+          return flask.render_template('third.html')
+      else:
+        error="Please accept terms and condition"
+        return flask.render_template('second.html', error=error)
+      if request.form['submitBut'] == 'Back':
+        return flask.render_template('first.html')
+
+
+  
+
 
 if __name__ == "__main__":
   app.secret_key = os.urandom(24)

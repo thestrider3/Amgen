@@ -54,8 +54,12 @@ def getUser(conn,username):
     formDict=rs.fetchone()
     return formDict
 
+
 '''
 def insertFirstForm(conn,userid,formDict):
+=======
+def insertFirstForm(conn,username,formDict):
+>>>>>>> 7976302f4271f25f8d4c5bb350370076f2c2ed2d
     metadata = MetaData(conn)
     studentFormData = Table('studentFormData',metadata, autoload=True)
     i = studentFormData.merge(studentFormData.c.UserId = formDict['UserId'],
@@ -124,7 +128,7 @@ def insertFirstForm(conn,formDict):
     CampusState  = formDict['CampusState'],
     CampusZipCode  = formDict['CampusZipCode'],
     HomeCity  = formDict['HomeCity'],
-    HomeState  = formDict['UserId'],
+    HomeState  = formDict['HomeState'],
     Gender  = formDict['Gender'],
     Ethnicity  = formDict['Ethnicity'],
     CitizenshipStatus  = formDict['CitizenshipStatus'],
@@ -149,5 +153,42 @@ def insertFirstForm(conn,formDict):
     ArriveAtColumbiaComments  = formDict['ArriveAtColumbiaComments'],
     CurrentlyAttendingUniversity  = formDict['CurrentlyAttendingUniversity'],
     Major  = formDict['Major'],
-    DateSpringSemesterEnds  = formDict['DateSpringSemesterEnds'])
+    DateSpringSemesterEnds  = formDict['DateSpringSemesterEnds'],
+    EthnicityOther=formDict["EthnicityOther"],
+    PlaceOfBirth=formDict['PlaceOfBirth'],
+    AdvancedDegreeObjectiveOther=formDict['AdvancedDegreeObjectiveOther'])
+    conn.execute(i)
+
+def getFirstFormData(conn,Username):
+    metadata = MetaData(conn)
+    studentData = Table('studentData', metadata, autoload=True)
+    s= studentData.select(studentData.c.Username==Username)
+    rs = s.execute()
+    formDict = rs.fetchone()
+    return formDict
+
+def insertSecondForm(conn,username,formDict):
+    metadata = MetaData(conn)
+    studentData = Table('studentData',metadata, autoload=True)
+    i = studentData.update().where(studentData.c.Username == username).values(
+    ScienceExperience = formDict['ScienceExperience'],  
+    CareerPlans = formDict['CareerPlans'],  
+    AspirationNext20Yrs = formDict['AspirationNext20Yrs'],  
+    Mentor1 = formDict['Mentor1'],  
+    Mentor2 = formDict['Mentor2'],  
+    Mentor3 = formDict['Mentor3'],  
+    Mentor4 = formDict['Mentor4'], 
+    Mentor5 = formDict['Mentor5'],  
+    #Transcript = formDict['Transcript'],  
+    IsApplicationSubmitted = formDict['IsApplicationSubmitted'])
+    conn.execute(i)
+
+def insertStudentCourse(conn, username, formDict, title, grade, credit):
+    metadata = MetaData(conn)
+    Courses = Table('Courses',metadata, autoload=True)
+    i = Courses.insert().values(
+    Username = username,
+    Title = formDict[title],  
+    Credits = formDict[credit],  
+    Grade = formDict[grade])
     conn.execute(i)
