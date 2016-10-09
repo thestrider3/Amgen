@@ -16,7 +16,14 @@ def getUniversityList(conn):
     colleges = Table('colleges',metadata,autoload=True)
     rs = select([colleges.c.name]).execute()
     rs = [item[0] for item in rs.fetchall()]
-    return rs    
+    return rs 
+
+def getMentorsList(conn):
+    metadata = MetaData(conn)
+    mentors = Table('Mentors',metadata,autoload=True)
+    rs = select([mentors.c.Name]).execute()
+    rs = [item[0] for item in rs.fetchall()]
+    return rs  
     
 def createDatabaseConnection():
     try:
@@ -33,7 +40,19 @@ def checkUser(conn,name,passwrd):
     s= user_info.select(and_(user_info.c.Username==name , user_info.c.Password==passwrd))
     rs = s.execute()
     formDict=rs.fetchone()
-    return dict(formDict)
+    formDict=dict(formDict)
+    
+    if formDict:
+        courses = Table('Courses', metadata, autoload=True)
+        s= courses.select(courses.c.UserId==name)
+        rs=s.execute()
+        i=0
+        for row in rs:
+            formDict['stitle'+''+str(i)] = row['Title']
+            formDict['scredits'+''+str(i)] = row['Credits']
+            formDict['sgrade'+''+str(i)] = row['Grade']
+            i=i+1
+    return formDict
 
 def createNewUser(conn,name,passwrd):
     metadata = MetaData(conn)
@@ -53,56 +72,6 @@ def getUser(conn,username):
     rs = s.execute()
     formDict=rs.fetchone()
     return formDict
-
-
-'''
-def insertFirstForm(conn,userid,formDict):
-=======
-def insertFirstForm(conn,username,formDict):
->>>>>>> 7976302f4271f25f8d4c5bb350370076f2c2ed2d
-    metadata = MetaData(conn)
-    studentFormData = Table('studentFormData',metadata, autoload=True)
-    i = studentFormData.merge(studentFormData.c.UserId = formDict['UserId'],
-    studentFormData.c.FirstName = formDict['FirstName'],
-    studentFormData.c.LastName  = formDict['LastName'],
-    studentFormData.c.DOB = formDict['DOB'],
-    studentFormData.c.Email = formDict['Email'], 
-    studentFormData.c.AlternativeEmail  = formDict['AlternativeEmail'],
-    studentFormData.c.Phone  = formDict['Phone'],
-    studentFormData.c.PermStreetAdr1  = formDict['PermStreetAdr1'],
-    studentFormData.c.PermStreetAdr2  = formDict['PermStreetAdr2'],
-    studentFormData.c.PermanentCity  = formDict['PermanentCity'],
-    studentFormData.c.PermanentState  = formDict['PermanentState'],
-    studentFormData.c.PermanentZipCode  = formDict['PermanentZipCode'],
-    studentFormData.c.CampusAdr1  = formDict['CampusAdr1'],
-    studentFormData.c.CampusAdr2  = formDict['CampusAdr2'],
-    studentFormData.c.CampusCity  = formDict['CampusCity'],
-    studentFormData.c.CampusState  = formDict['CampusState'],
-    studentFormData.c.CampusZipCode  = formDict['CampusZipCode'],
-    studentFormData.c.HomeCity  = formDict['HomeCity'],
-    studentFormData.c.HomeState  = formDict['UserId'],
-    studentFormData.c.Gender  = formDict['Gender'],
-    studentFormData.c.Ethnicity  = formDict['Ethnicity'],
-    studentFormData.c.CitizenshipStatus  = formDict['CitizenshipStatus'],
-    studentFormData.c.MotherDegree  = formDict['MotherDegree'],
-    studentFormData.c.FatherDegree  = formDict['FatherDegree'],
-    studentFormData.c.ClassCompletedSpring  = formDict['ClassCompletedSpring'],
-    studentFormData.c.GraduationMonth  = formDict['GraduationMonth'],
-    studentFormData.c.GraduationYear  = formDict['GraduationYear'],
-    studentFormData.c.CumulativeGPA  = formDict['CumulativeGPA'],
-    studentFormData.c.AdvancedDegreeObjective  = formDict['AdvancedDegreeObjective'],
-    studentFormData.c.IsUndergraduateResearchProgramOffered  = formDict['IsUndergraduateResearchProgramOffered'],
-    studentFormData.c.HowDidYouHear  = formDict['HowDidYouHear'],
-    studentFormData.c.AnyOtherAmgenScholarsSite  = formDict['AnyOtherAmgenScholarsSite'],
-    studentFormData.c.YesOtherAmgenScholarsSite  = formDict['YesOtherAmgenScholarsSite'],
-    studentFormData.c.PastAmgenScholarParticipation  = formDict['PastAmgenScholarParticipation'],
-    studentFormData.c.OriginalResearchPerformed  = formDict['OriginalResearchPerformed'],
-    studentFormData.c.CanArriveAtColumbiaMemorialDay  = formDict['CanArriveAtColumbiaMemorialDay'],
-    studentFormData.c.ArriveAtColumbiaComments  = formDict['ArriveAtColumbiaComments'],
-    studentFormData.c.CurrentlyAttendingUniversity  = formDict['CurrentlyAttendingUniversity'],
-    studentFormData.c.Major  = formDict['Major'],
-    studentFormData.c.DateSpringSemesterEnds  = formDict['DateSpringSemesterEnds'])
-  '''
 
 def insertFirstForm(conn,formDict):
     metadata = MetaData(conn)
@@ -167,10 +136,12 @@ def getFirstFormData(conn,Username):
     formDict = rs.fetchone()
     return formDict
 
-def insertSecondForm(conn,username,formDict):
+def insertSecondForm(conn,formDict):
+    print()
+    print(formDict)
     metadata = MetaData(conn)
     studentData = Table('studentData',metadata, autoload=True)
-    i = studentData.update().where(studentData.c.Username == username).values(
+    i = studentData.update().where(studentData.c.Username == formDict['Username']).values(
     ScienceExperience = formDict['ScienceExperience'],  
     CareerPlans = formDict['CareerPlans'],  
     AspirationNext20Yrs = formDict['AspirationNext20Yrs'],  
@@ -182,13 +153,27 @@ def insertSecondForm(conn,username,formDict):
     #Transcript = formDict['Transcript'],  
     IsApplicationSubmitted = formDict['IsApplicationSubmitted'])
     conn.execute(i)
-
-def insertStudentCourse(conn, username, formDict, title, grade, credit):
-    metadata = MetaData(conn)
+    
     Courses = Table('Courses',metadata, autoload=True)
-    i = Courses.insert().values(
-    Username = username,
-    Title = formDict[title],  
-    Credits = formDict[credit],  
-    Grade = formDict[grade])
-    conn.execute(i)
+    for i in range(0,26):
+        if 'stitle'+''+str(i) in formDict:
+            print('formDict not none')
+            query = Courses.select(and_(Courses.c.UserId==formDict['Username'],Courses.c.Title==formDict['stitle'+''+str(i)]))
+            rs = query.execute()
+            if rs.fetchone():
+                query = Courses.update().where(and_(Courses.c.UserId==formDict['Username'],Courses.c.Title==formDict['stitle'+''+str(i)])).values(
+                UserId = formDict['Username'],
+                Title = formDict['stitle'+''+str(i)],  
+                Credits = formDict['scredits'+''+str(i)],  
+                Grade = formDict['sgrade'+''+str(i)])
+                conn.execute(query)
+            else:
+                print('value to be inserted'+'stitle'+''+str(i))
+                query = Courses.insert().values(
+                UserId = formDict['Username'],
+                Title = formDict['stitle'+''+str(i)],  
+                Credits = formDict['scredits'+''+str(i)],  
+                Grade = formDict['sgrade'+''+str(i)])
+                conn.execute(query)
+        else:
+            break

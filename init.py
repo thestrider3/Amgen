@@ -14,10 +14,10 @@ app = Flask(__name__)
 
 @app.before_request
 def before_request():
-    global dbcon,engine,userSession
+    global dbcon,engine,dbSession
     dbcon,engine = mysql_dao.createDatabaseConnection()
     Session = sessionmaker(bind=engine)
-    userSession = Session()
+    dbSession = Session()
 
 @app.teardown_request
 def teardown_request(exception):
@@ -45,7 +45,7 @@ def checkUsername():
   formDict=mysql_dao.checkUser(dbcon,name,passwrd)
  
   if formDict:
-      print formDict
+      print(formDict)
       session['logged_in'] = True
       session['user'] = formDict
       universityList = mysql_dao.getUniversityList(dbcon)
@@ -59,17 +59,12 @@ def addUser():
   global userSession
   name = str(request.form['username'])
   passwrd = str(request.form['passwrd'])
-  print(name)
-  print(passwrd)
 
   user = mysql_dao.createNewUser(dbcon,name,passwrd)
   
   if user:
-      print("successfully created user")
       session['logged_in'] = True
       session['user'] = user
-      print(session['logged_in'])
-      print(session['user'])
       universityList = mysql_dao.getUniversityList(dbcon)
       return render_template('first.html',formDict=dict(),universityList=universityList)
   else:
@@ -78,15 +73,9 @@ def addUser():
       
 @app.route('/submitFirstForm', methods=['POST'])
 def addFirstForm():
-  print("inside submit first form")
-  #userid = os.urandom(24)
+
   l=list()
   formDict=session['user']
-  #user = User(name,passwrd,True);
-  #login_user(user)
-  #next = flask.request.args.get('next')
-        # next_is_valid should check if the user has valid
-        # permission to access the `next` url
 
   formDict['FirstName'] = str(request.form.get('FNAME'))
   formDict['LastName'] = str(request.form.get('LNAME'))
@@ -169,34 +158,19 @@ def addFirstForm():
   formDict['DateSpringSemesterEnds'] = str(request.form.get('SEMESTER_END'))
   mysql_dao.insertFirstForm(dbcon,formDict)
   session['user'] = formDict
-  #mysql_dao.createNewUser(dbcon,,formDict) 
-  return flask.render_template('second.html')
-
-
-'''
-@app.route('/submitFirstForm', methods=['POST'])
-def addSecondForm():
-if request.form['submitBut'] == 'Next':
-  return flask.render_template('third.html')
-'''    
-
-#@app.route('/upload', methods=['GET', 'POST'])
-
-#@app.route('/submitFirstForm', methods=['POST'])
-#def addSecondForm():
-
-    
-
-
+  
+  mentorsList = mysql_dao.getMentorsList(dbcon)
+  return flask.render_template('second.html',formDict=formDict,mentorsList=mentorsList)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
   if request.method == 'POST':
-    formDict = dict()
+    formDict = session['user']
     if request.form['submitBut'] == 'Next':
+      print('next button pressed')
       formDict['ScienceExperience'] = str(request.form.get('EXPERIENCE'))
-      formDict['CareerPlans'] = str(request.form.get('CAREER_PLANS')
+      formDict['CareerPlans'] = str(request.form.get('CAREER_PLANS'))
       formDict['AspirationNext20Yrs'] = str(request.form.get('whysurf'))
       formDict['Mentor1'] = str(request.form.get('mentor0'))
       formDict['Mentor2'] = str(request.form.get('mentor1'))
@@ -204,30 +178,27 @@ def upload():
       formDict['Mentor4'] = str(request.form.get('mentor3'))
       formDict['Mentor5'] = str(request.form.get('mentor4'))
 
-      #file = request.files['fileupload']
-      #formDict['Transcript'] = open('file', 'rb').read()
-      #formDict['Transcript'] = str(request.form['fileupload'])
       if request.form.get("agree") == "agree":
         if request.form['submitBut'] == 'Next':
           formDict['IsApplicationSubmitted'] = "Y" 
-          mysql_dao.insertSecondForm(dbcon,"tb",formDict)
           for i in range(0,26):
             if request.form['stitle'+''+str(i)] != '':
               formDict['stitle'+''+str(i)] = request.form['stitle'+''+str(i)]
               formDict['scredits'+''+str(i)] = request.form['scredits'+''+str(i)]
               formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]
               print('stitle'+''+str(i))
-              mysql_dao.insertStudentCourse(dbcon, "tb", formDict, 'stitle'+''+str(i), 'scredits'+''+str(i), 'sgrade'+''+str(i))
+            else:
+              break;
+          mysql_dao.insertSecondForm(dbcon,formDict)
+          session['user'] = formDict
           return flask.render_template('third.html')
       else:
         error="Please accept terms and condition"
-        return flask.render_template('second.html', error=error)
+        mentorsList = mysql_dao.getMentorsList(dbcon)
+        return flask.render_template('second.html', error=error,formDict=formDict,mentorsList=mentorsList)
       if request.form['submitBut'] == 'Back':
-        return flask.render_template('first.html')
-
-
-  
-
+        universityList = mysql_dao.getUniversityList(dbcon)
+        return flask.render_template('first.html',formDict=formDict,universityList=universityList)
 
 if __name__ == "__main__":
   app.secret_key = os.urandom(24)
