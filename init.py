@@ -200,6 +200,40 @@ def upload():
         universityList = mysql_dao.getUniversityList(dbcon)
         return flask.render_template('first.html',formDict=formDict,universityList=universityList)
 
+@app.route('/submitThirdForm', methods=['GET', 'POST'])
+def submitThirdForm():
+  if request.method == 'POST':
+    formDict = session['user']    #check with Shivani
+    if request.form['submitBut'] == 'Submit':
+      print('submit button pressed')
+      for i in range(0,2):        ##check with shivani how may ref columns?
+        formDict['Name'] = str(form.request.get('REFERENCE_'+str(i)))
+        formDict['Email'] = str(form.request.get('ref'+str(i)+'email'))
+        fromaddr = str(form.request.get('ref'+str(i)+'email'))        
+        mysql_dao.insertThirdForm(dbcon,formDict)
+        sendEMail(fromaddr)
+        return sendEMailflask.render_template('third.html', formDict = formDict)
+    elif request.form['submitBut'] == 'Reset':
+      print('reset button pressed')
+      for i in range(0,2):        ##check with shivani how may ref columns?
+        formDict['Name'] = str(form.request.get('REFERENCE_'+str(i)))
+        formDict['Email'] = str(form.request.get('ref'+str(i)+'email'))
+        mysql_dao.deleteThirdForm(dbcon,formDict)         #check with Chanda whether old referrer needs to be deleted
+        return flask.render_template('third.html')
+
+def sendEMail(fromaddr):
+  msg = MIMEMultipart()
+  msg['From'] = fromaddr
+  msg['To'] = toaddr
+  msg['Subject'] = ""
+  body = ""
+  msg.attach(MIMEText(body, 'plain'))
+  server = smtplib.SMTP_SSL('smtp.googlemail.com', 465)
+  server.login(toaddr, "########")
+  text = msg.as_string()
+  server.sendmail(fromaddr, toaddr, text)
+  server.quit()
+
 if __name__ == "__main__":
   app.secret_key = os.urandom(24)
   app.run(threaded=True)
