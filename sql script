@@ -1,6 +1,7 @@
 drop table columbiaamgen.Courses;
 drop table columbiaamgen.References;
 drop table columbiaamgen.studentData;
+drop table columbiaamgen.Mentors;
 
 CREATE TABLE `columbiaamgen`.`studentData` (
   `Username` VARCHAR(45) NULL,
@@ -67,10 +68,9 @@ CREATE TABLE `columbiaamgen`.`studentData` (
 
 CREATE TABLE `columbiaamgen`.`References` (
   `UserId` VARCHAR(24) NOT NULL,
-  `ReferenceId` VARCHAR(45) NOT NULL,
   `Name` VARCHAR(100) NULL,
   `Email` VARCHAR(100) NULL,
-  PRIMARY KEY (`UserId`,`ReferenceId`));
+  PRIMARY KEY (`UserId`,`Email`));
 
 CREATE TABLE `columbiaamgen`.`Courses` (
   `UserId` VARCHAR(24) NOT NULL,
@@ -78,3 +78,130 @@ CREATE TABLE `columbiaamgen`.`Courses` (
   `Credits` INT NULL,
   `Grade` VARCHAR(5) NULL,
   PRIMARY KEY (`UserId`, `Title`));
+  
+CREATE TABLE `columbiaamgen`.`Mentors` (
+  `Id` INT NOT NULL,
+  `Name` VARCHAR(45) NULL,
+  PRIMARY KEY (`Id`));
+  
+Insert into columbiaamgen.Mentors values(498,'Abate-Shen, Cory');
+Insert into columbiaamgen.Mentors values(330,'Abeliovich, Asa');
+Insert into columbiaamgen.Mentors values(494,'Alaedini, Armin');
+Insert into columbiaamgen.Mentors values(540,'Arancio, Ottavio');
+Insert into columbiaamgen.Mentors values(396,'Ateshian, Gerard');
+Insert into columbiaamgen.Mentors values(292,'Barasch, Jonathan');
+Insert into columbiaamgen.Mentors values(529,'Basu, Uttiya');
+Insert into columbiaamgen.Mentors values(430,'Bestor, Tim');
+Insert into columbiaamgen.Mentors values(449,'Bruce, Jeffrey');
+Insert into columbiaamgen.Mentors values(491,'Bruno, Randy');
+Insert into columbiaamgen.Mentors values(294,'Bulinski, Chloe');
+Insert into columbiaamgen.Mentors values(464,'Canman, Julie');
+Insert into columbiaamgen.Mentors values(401,'Canoll, Peter');
+Insert into columbiaamgen.Mentors values(538,'Causton, Helen');
+Insert into columbiaamgen.Mentors values(295,'Chalfie, Martin');
+Insert into columbiaamgen.Mentors values(332,'Champagne, Frances');
+Insert into columbiaamgen.Mentors values(247,'Chasin, Larry');
+Insert into columbiaamgen.Mentors values(530,'Ciccia, Alberto');
+Insert into columbiaamgen.Mentors values(513,'Curley, James');
+Insert into columbiaamgen.Mentors values(374,'Dalla-Favera, Riccardo');
+Insert into columbiaamgen.Mentors values(511,'Denny, Christine');
+Insert into columbiaamgen.Mentors values(471,'Dietrich, Lars');
+Insert into columbiaamgen.Mentors values(432,'Dranovsky, Alex');
+Insert into columbiaamgen.Mentors values(504,'Dworkin, Jonathan');
+Insert into columbiaamgen.Mentors values(536,'Eisenthal, Kenneth');
+Insert into columbiaamgen.Mentors values(542,'Farber, Donna');
+Insert into columbiaamgen.Mentors values(470,'Fernandez, Julio');
+Insert into columbiaamgen.Mentors values(510,'Ferrando, Adolfo');
+Insert into columbiaamgen.Mentors values(437,'Ferrera, Vincent');
+Insert into columbiaamgen.Mentors values(439,'Fidock, David');
+Insert into columbiaamgen.Mentors values(248,'Firestein, Stuart');
+Insert into columbiaamgen.Mentors values(427,'Frank, Joachim');
+Insert into columbiaamgen.Mentors values(289,'Gingrich, Jay');
+Insert into columbiaamgen.Mentors values(314,'Goff, Stephen');
+Insert into columbiaamgen.Mentors values(452,'Goldman, James');
+Insert into columbiaamgen.Mentors values(318,'Gonzalez, Ruben');
+Insert into columbiaamgen.Mentors values(497,'Gordon, Joshua');
+Insert into columbiaamgen.Mentors values(339,'Gottesman, Maxwell');
+Insert into columbiaamgen.Mentors values(313,'Greene, Eric');
+Insert into columbiaamgen.Mentors values(300,'Greenwald, Iva');
+Insert into columbiaamgen.Mentors values(331,'Grueber, Wes');
+Insert into columbiaamgen.Mentors values(257,'Guo, Edward');
+Insert into columbiaamgen.Mentors values(522,'Haeusler, Rebecca');
+Insert into columbiaamgen.Mentors values(537,'Han, Yiping');
+Insert into columbiaamgen.Mentors values(495,'Hawkins, Robert');
+Insert into columbiaamgen.Mentors values(509,'Hayden, Matthew');
+Insert into columbiaamgen.Mentors values(340,'Hazelrigg, Tulle');
+Insert into columbiaamgen.Mentors values(301,'Hen, Rene');
+Insert into columbiaamgen.Mentors values(341,'Hobert, Oliver');
+Insert into columbiaamgen.Mentors values(266,'Hood, Don');
+Insert into columbiaamgen.Mentors values(369,'Hung, Clark');
+Insert into columbiaamgen.Mentors values(249,'Hunt, John');
+Insert into columbiaamgen.Mentors values(512,'Javitch, Jonathan');
+Insert into columbiaamgen.Mentors values(342,'Jia, Songtao');
+Insert into columbiaamgen.Mentors values(320,'Johnston, Laura');
+Insert into columbiaamgen.Mentors values(328,'Kalderon, Dan');
+Insert into columbiaamgen.Mentors values(322,'Kam, Lance');
+Insert into columbiaamgen.Mentors values(543,'Karsenty, Gerard');
+Insert into columbiaamgen.Mentors values(422,'Kaufman, Laura');
+Insert into columbiaamgen.Mentors values(251,'Kelley, Darcy');
+Insert into columbiaamgen.Mentors values(496,'Kernie, Steven');
+Insert into columbiaamgen.Mentors values(450,'Kim, Tae-Wan');
+Insert into columbiaamgen.Mentors values(532,'Kohwi, Minoree');
+Insert into columbiaamgen.Mentors values(275,'Landry, Donald');
+Insert into columbiaamgen.Mentors values(476,'Laufer, Edward');
+Insert into columbiaamgen.Mentors values(261,'Lu, Helen');
+Insert into columbiaamgen.Mentors values(453,'Manley, James');
+Insert into columbiaamgen.Mentors values(370,'Mann, Richard');
+Insert into columbiaamgen.Mentors values(346,'Mao, Yinghui');
+Insert into columbiaamgen.Mentors values(426,'Mao, Jeremy');
+Insert into columbiaamgen.Mentors values(306,'Mason, Carol');
+Insert into columbiaamgen.Mentors values(307,'McCabe, Brian');
+Insert into columbiaamgen.Mentors values(308,'McDermott, Ann');
+Insert into columbiaamgen.Mentors values(461,'Miller, Ken');
+Insert into columbiaamgen.Mentors values(469,'Min, Wei');
+Insert into columbiaamgen.Mentors values(435,'Moore, Holly');
+Insert into columbiaamgen.Mentors values(505,'Moron-Concepcion, Jose');
+Insert into columbiaamgen.Mentors values(262,'Morrison, Barclay');
+Insert into columbiaamgen.Mentors values(454,'Nagy, Peter');
+Insert into columbiaamgen.Mentors values(399,'Ohlstein, Benjamin');
+Insert into columbiaamgen.Mentors values(503,'Olive, Kenneth');
+Insert into columbiaamgen.Mentors values(467,'Olson, Elizabeth');
+Insert into columbiaamgen.Mentors values(524,'Owens, David');
+Insert into columbiaamgen.Mentors values(351,'Papaioannou, Virginia');
+Insert into columbiaamgen.Mentors values(539,'Parker, Dane');
+Insert into columbiaamgen.Mentors values(270,'Pon, Liza');
+Insert into columbiaamgen.Mentors values(309,'Prince, Alice');
+Insert into columbiaamgen.Mentors values(507,'Prives, Carol');
+Insert into columbiaamgen.Mentors values(463,'Przedborski, Serge');
+Insert into columbiaamgen.Mentors values(534,'Racaniello, Vincent');
+Insert into columbiaamgen.Mentors values(533,'Rao, Meenakshi');
+Insert into columbiaamgen.Mentors values(357,'Rayport, Stephen');
+Insert into columbiaamgen.Mentors values(415,'Reiner, Steven');
+Insert into columbiaamgen.Mentors values(407,'Reizis, Boris');
+Insert into columbiaamgen.Mentors values(359,'Rothstein, Rodney');
+Insert into columbiaamgen.Mentors values(501,'Sahin, Ozgur');
+Insert into columbiaamgen.Mentors values(310,'Schindler, Christian');
+Insert into columbiaamgen.Mentors values(468,'Shirasu-Hiza, Mimi');
+Insert into columbiaamgen.Mentors values(395,'Sia, Samuel');
+Insert into columbiaamgen.Mentors values(363,'Siegelbaum, Steven');
+Insert into columbiaamgen.Mentors values(284,'Silverstein, Samuel');
+Insert into columbiaamgen.Mentors values(541,'Snoeck, Hans-Wilem');
+Insert into columbiaamgen.Mentors values(253,'Stockwell, Brent');
+Insert into columbiaamgen.Mentors values(413,'Struhl, Gary');
+Insert into columbiaamgen.Mentors values(368,'Sykes, Megan');
+Insert into columbiaamgen.Mentors values(365,'Symington, Lorraine');
+Insert into columbiaamgen.Mentors values(493,'Targoff, Kimara');
+Insert into columbiaamgen.Mentors values(441,'Tong, Liang');
+Insert into columbiaamgen.Mentors values(280,'Troy, Carol');
+Insert into columbiaamgen.Mentors values(254,'Tzagoloff, Alex');
+Insert into columbiaamgen.Mentors values(425,'Vunjak-Novakovic, Gordana');
+Insert into columbiaamgen.Mentors values(523,'Wang, Harris');
+Insert into columbiaamgen.Mentors values(480,'Wichterle, Hynek');
+Insert into columbiaamgen.Mentors values(528,'Wolgemuth, Debra');
+Insert into columbiaamgen.Mentors values(382,'Woolley, Sarah');
+Insert into columbiaamgen.Mentors values(255,'Yang, Jian');
+Insert into columbiaamgen.Mentors values(316,'Yuste, Rafael');
+Insert into columbiaamgen.Mentors values(472,'Zha, Shan');
+Insert into columbiaamgen.Mentors values(508,'Zhang, Chaolin');
+Insert into columbiaamgen.Mentors values(535,'Zuker, Charles');
+  
