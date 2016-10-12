@@ -1,7 +1,8 @@
 #!/usr/bin/env python2.7
 
-import os, uuid, json,flask,mysql_dao
-
+import os, uuid, json, flask, mysql_dao, smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
 from flask import Flask, request, flash, render_template, session, abort, g, redirect, Response
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
@@ -207,12 +208,16 @@ def submitThirdForm():
     if request.form['submitBut'] == 'Submit':
       print('submit button pressed')
       for i in range(0,2):        ##check with shivani how may ref columns?
-        formDict['Name'] = str(form.request.get('REFERENCE_'+str(i)))
-        formDict['Email'] = str(form.request.get('ref'+str(i)+'email'))
+        formDict['RefName'+str(i)] = str(form.request.get('REFERENCE_'+str(i)))
+        formDict['RefEmail'+str(i)] = str(form.request.get('ref'+str(i)+'email'))
         fromaddr = str(form.request.get('ref'+str(i)+'email'))        
-        mysql_dao.insertThirdForm(dbcon,formDict)
         sendEMail(fromaddr)
-        return sendEMailflask.render_template('third.html', formDict = formDict)
+      mysql_dao.insertThirdForm(dbcon,formDict)
+      formDict['ReviewWaiver'] = str(form.request.get('REFERENCE_WAIVER'))
+      session['user'] = formDict
+      mysql_dao.insertReviewWaiver(dbcon, formDict)
+
+      return sendEMailflask.render_template('third.html', formDict = formDict)
     elif request.form['submitBut'] == 'Reset':
       print('reset button pressed')
       for i in range(0,2):        ##check with shivani how may ref columns?
