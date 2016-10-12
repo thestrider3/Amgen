@@ -54,15 +54,15 @@ def checkUser(conn,name,passwrd):
             i=i+1
     return formDict
 
-def createNewUser(conn,name,passwrd):
+def createNewUser(conn,name,passwrd,status):
     metadata = MetaData(conn)
     user_info = Table('studentData', metadata, autoload=True)
     s= user_info.select(user_info.c.Username==name)
     rs = s.execute()
     if rs.fetchone():
         return None
-    conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`) Values (%s,%s)', [name,passwrd])
-    formDict = {"Username":name}
+    conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`,`ApplicationStatus`) Values (%s,%s,%s)', [name,passwrd,status])
+    formDict = {"Username":name,"ApplicationStatus":status}
     return formDict
     
 def getUser(conn,username):
@@ -71,6 +71,18 @@ def getUser(conn,username):
     s= user_info.select(user_info.c.Username==username)
     rs = s.execute()
     formDict=rs.fetchone()
+    formDict=dict(formDict)
+    
+    if formDict:
+        courses = Table('Courses', metadata, autoload=True)
+        s= courses.select(courses.c.UserId==username)
+        rs=s.execute()
+        i=0
+        for row in rs:
+            formDict['stitle'+''+str(i)] = row['Title']
+            formDict['scredits'+''+str(i)] = row['Credits']
+            formDict['sgrade'+''+str(i)] = row['Grade']
+            i=i+1
     return formDict
 
 def insertFirstForm(conn,formDict):
