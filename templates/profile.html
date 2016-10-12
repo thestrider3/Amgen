@@ -17,7 +17,8 @@
                                 size="3" face="Arial" color="#ffffff"><b>Columbia
                                         University<br> Department of Biological Sciences
                                 </b></font><font size="4" face="Arial" color="#ffffff"> <br> <b>Amgen
-                                        Scholars Summer Research Program 2016 </b></font><b><font
+                                        Scholars Summer Research Program 2016 </b>
+                                        <br> <b>Student Profile: {{formDict['FirstName']}} {{formDict['LastName']}} </b></font><b><font
                                     face="Arial" size="4" color="#ffffff"></font></b></td>
                         </tr>
                     </tbody>
@@ -180,8 +181,7 @@
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"> <input name="HOMECITY" size="3"
                                     type="text" value="{{formDict['HomeCity']}}"\>
-                            </font>If you graduated high school in the US, which City did you
-                                graduate in</td>
+                            </font>If graduated high school in the US</td>
                         </tr>
                         <tr>
                             <td height="22" width="40%"><font face="Arial Unicode MS">Home
@@ -189,8 +189,7 @@
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"> <input name="HOMESTATE"
                                     size="3" type="text" value="{{formDict['HomeState']}}"\>
-                            </font>If you graduated high school in the US, which state did you
-                                graduate in</td>
+                            </font>If graduated high school in the US</td>
                         </tr>
                     </tbody>
                 </table>
@@ -315,8 +314,7 @@
                         <tr>
                             <td height="22" width="40%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif">What
-                                        month and year do you anticipate to graduate with your
-                                        bachelors degree? </font>
+                                        month and year is graduation anticipated? </font>
                                 </p></td>
                             <td height="22" align="left" width="60%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"> </font><font
@@ -349,8 +347,8 @@
                                     <font size="3" face="Arial, Helvetica, sans-serif">Cumulative
                                         GPA:<br>
                                     </font><font size="2" face="Arial, Helvetica, sans-serif"> (on
-                                        a 4.0 scale; you must have a cumulative GPA &gt; 3.2 to apply.
-                                        Use #.## format) -- MIT students please enter on a 5.0 scale</font>
+                                        a 4.0 scale; a cumulative GPA &gt; 3.2 to apply.
+                                         -- MIT students entered on a 5.0 scale</font>
                                 </p></td>
                             <td height="22" align="left" width="60%"><p>
                                     <font face="Arial, Helvetica, sans-serif" size="3"
@@ -381,7 +379,7 @@
                                 </p></td>
                         </tr>
                         <td height="22"><font size="3"
-                            face="Arial, Helvetica, sans-serif">Does your four-year
+                            face="Arial, Helvetica, sans-serif">Does their four-year
                                 college or university offer an undergraduate research program? </font></td>
                         <td height="22" align="left"><p>
                                 <font size="3" face="Arial, Helvetica, sans-serif"> 
@@ -393,7 +391,7 @@
 
                         <tr>
                             <td><font size="3" face="Arial, Helvetica, sans-serif">How
-                                    did you hear about the Amgen Scholars program? </font></td>
+                                    did the student hear about the Amgen Scholars program? </font></td>
                             <td><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"> 
                                         <input type=checkbox name="AMGENSITE" {% if 'Amgen National Website' in formDict['HowDidYouHear']%} checked {%endif%}>Amgen National Website
@@ -422,7 +420,7 @@
                                 </p></td>
                         </tr>
                         <td height="22" width="40%"><font size="3"
-                            face="Arial, Helvetica, sans-serif">Are you applying to
+                            face="Arial, Helvetica, sans-serif">Is the student applying to
                                 any other Amgen Scholars sites?</font></td>
                         <td height="22" align="left" width="60%"><p>
                                 <font size="3" face="Arial, Helvetica, sans-serif"> 
@@ -434,8 +432,8 @@
                             </p></td>
                         <tr>
                             <td height="22" width="40%"><p>
-                                    <font size="3" face="Arial, Helvetica, sans-serif">Have
-                                        you participated as an Amgen Scholar in the past?</font><br>
+                                    <font size="3" face="Arial, Helvetica, sans-serif">Has
+                                        the student participated as an Amgen Scholar in the past?</font><br>
                                 </p></td>
                             <td height="22" align="left" width="60%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"> <input
@@ -443,8 +441,8 @@
                                         No<br> 
                                         <input type="radio" name="PARTICIPATED" value="participated" {% if formDict['PastAmgenScholarParticipation']=='participated'%} checked {%endif%}> Yes
                                     </font><font size="2" face="Arial, Helvetica, sans-serif"><br>
-                                        (note that if you have participated IN THE AMGEN SCHOLARS
-                                        PROGRAM AT ANY OF THE TEN UNIVERSITIES that you are NOT
+                                        (note that if the student has participated IN THE AMGEN SCHOLARS
+                                        PROGRAM AT ANY OF THE TEN UNIVERSITIES that the student is NOT
                                         ELIGIBLE to participate again)</font><font size="3"
                                         face="Arial, Helvetica, sans-serif"><br> <br>
                                     </font>
@@ -453,8 +451,8 @@
                         <tr>
                             <td height="22" width="40%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif">Did
-                                        you perform original research before this summer where you had
-                                        your own project?</font><br>
+                                        the student perform original research before this summer where the student had
+                                        his/her own project?</font><br>
                                 </p></td>
                             <td height="22" align="left" width="60%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"> 
@@ -466,7 +464,7 @@
                         <tr>
                             <td height="22" width="40%"><p>
                                     <font size="3" face="Arial, Helvetica, sans-serif"> Can
-                                        you arrive at CU for the first day of the program, which is
+                                        the student arrive at CU for the first day of the program, which is
                                         the day after Memorial Day each year? </font><br />
                                 </p></td>
                             <td height="22" align="left" width="60%"><p>
@@ -498,25 +496,13 @@
                                     {% endfor %}
                             </select></td>
                         </tr>
-                        <tr>
-                            <td colspan=2>
-                                <p align="justify">
-                                    <br> <font size="3" face="Arial, Helvetica, sans-serif">You
-                                        must be attending a four-year college or university in the
-                                        United States, Puerto Rico, or other US territory. If your
-                                        school is not listed, please email <a
-                                        href="mailto:surf@biology.columbia.edu">surf@biology.columbia.edu</a>
-                                        and we will add it immediately.
-                                    </font>
-                                <p>
-                            </td>
-                        </tr>
+                        
                 </table>
                 <table cellpadding="0" width="79%" border="0">
                     <tbody>
                         <tr>
                             <td width="79%"><font size="3" face="Arial Unicode MS">
-                                    Your major (declared or expected)</font></td>
+                                     Major (declared or expected)</font></td>
                             <td width="42%"><font face="Arial"><input size="26"
                                     name="MAJOR" value="{{formDict['Major']}}"></font></td>
                         </tr>
@@ -530,14 +516,259 @@
                 </table>
             </center>
         </div>
+        <div></div>
+        <div align="center">
+            <center>
+                </br>
+
+                <table width="75%" cellspacing="0" cellpadding="2" border="0">
+                    <tbody>
+                        <tr>
+                            <td bgcolor="#004488" width="100%" align="center"><font
+                                size="4" face="Arial" color="#ffffff">Laboratory or
+                                    science-related experience<br>
+                            </font><b><font face="Arial Unicode MS" size="3" color="#ffffff">Have
+                                        you participated in research as an UNDERGRADUATE (either
+                                        during the academic year or the summer)? If yes, please list
+                                        the dates of participation, the institution, the name of the
+                                        principal investigator and explain the project. (Limit: 700
+                                        characters with spaces, or about 100 words). </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>
+        </div>
+
         <div align="center">
             <center>
                 <p>
-                    <font face="Arial Unicode MS"> Hit the Submit button, and
-                        wait a minute for it to send.</font>
+                    <font face="Arial"><textarea wrap="HARD" cols="60" rows="9"
+                            name="EXPERIENCE"
+                            onKeyDown="limitText(this.form.EXPERIENCE,800);"
+                            onKeyUp="limitText(this.form.EXPERIENCE,800);">{{formDict['ScienceExperience']}}</textarea></font>
                 </p>
-
             </center>
+        </div>
+        <div align="center">
+            <center>
+                <p></p>
+            </center>
+        </div>
+        <div align="center">
+            <center>
+                <table width="75%" cellspacing="0" cellpadding="2" border="0">
+                    <tbody>
+                        <tr>
+                            <td bgcolor="#004488" width="100%" align="center"><font
+                                size="4" face="Arial" color="#ffffff">Career Plans</font><font
+                                face="Arial" size="5" color="#ffffff"><br> </font><font
+                                face="Arial Unicode MS" size="3" color="#ffffff"><b>Future Career Plans. (Limit: 500
+                                        characters, about 75 words.)</b></font></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>
+        </div>
+        <div align="center">
+            <center>
+                <p>
+                    <font face="Arial"> <textarea wrap="HARD" cols="60" rows="5"
+                            name="CAREER_PLANS"
+                            onKeyDown="limitText(this.form.CAREER_PLANS,600);"
+                            onKeyUp="limitText(this.form.CAREER_PLANS,600);">{{formDict['CareerPlans']}}</textarea>
+                    </font>
+                </p>
+            </center>
+        </div>
+        <p></p>
+        <div align="center">
+            <center>
+                <table width="75%" cellspacing="0" cellpadding="2" border="0">
+                    <tbody>
+                        <tr>
+                            <td bgcolor="#004488" width="100%" align="center"><font
+                                size="4" face="Arial" color="#ffffff"></font><font face="Arial"
+                                size="5" color="#ffffff"> </font><font face="Arial Unicode MS"
+                                size="3" color="#ffffff"><b>What the student would
+                                        like to be doing at work in 20 years,(ideal job)<br> (Limit: 500 characters,
+                                        about 75 words.)
+                                </b></font></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>
+        </div>
+        <div align="center">
+            <center>
+                <p>
+                    <font face="Arial"> <textarea wrap="HARD" cols="60" rows="7"
+                            name="whysurf" onKeyDown="limitText(this.form.whysurf,600);"
+                            onKeyUp="limitText(this.form.whysurf,600);">{{formDict['AspirationNext20Yrs']}}</textarea>
+                    </font>
+                </p>
+            </center>
+        </div>
+        <blockquote>
+            <p></p>
+            <div align="center">
+                <center>
+                    <table width="75%" cellspacing="0" cellpadding="2" border="0">
+                        <tbody>
+                            <tr>
+                                <td bgcolor="#004488" width="100%" align="center"><div
+                                        align="justify">
+                                        <font face="Arial" size="4" color="#ffffff">List of 5 Mentors <a
+                                            href="http://www.columbia.edu/cu/biology/ug/amgen/Mentors00.html"
+                                            target="_blank">Mentors</a> section of the Amgen webpage.
+                                        </font>
+                                    </div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </div>
+            <div align="center">
+                <center>
+                    <p>
+                        <font face="Arial">
+
+                            <p>
+                                1 <select name="mentor0">
+                                {% for u in mentorsList %}
+                                        <option value="{{ u }}" {%if u==formDict['Mentor1']%} selected {%endif%}>{{ u }}</option>
+                                    {% endfor %}
+                                </select>
+                            <p>
+                                2 <select name="mentor1">
+                                    {% for u in mentorsList %}
+                                        <option value="{{ u }}" {%if u==formDict['Mentor2']%} selected {%endif%}>{{ u }}</option>
+                                    {% endfor %}
+                                    </select>
+                            <p>
+                                3 <select name="mentor2">
+                                    {% for u in mentorsList %}
+                                        <option value="{{ u }}" {%if u==formDict['Mentor3']%} selected {%endif%}>{{ u }}</option>
+                                    {% endfor %}
+                                </select>
+                            <p>
+                                4 <select name="mentor3">
+                                    {% for u in mentorsList %}
+                                        <option value="{{ u }}" {%if u==formDict['Mentor4']%} selected {%endif%}>{{ u }}</option>
+                                    {% endfor %}
+                                </select>
+                            <p>
+                                5 <select name="mentor4">
+                                    {% for u in mentorsList %}
+                                        <option value="{{ u }}" {%if u==formDict['Mentor5']%} selected {%endif%}>{{ u }}</option>
+                                    {% endfor %}
+                                </select>
+                        </font>
+                    </p>
+                    <p></p>
+                </center>
+            </div>
+
+            <center>
+                <table width="61%" cellspacing="0" cellpadding="2" border="0">
+                    <tbody>
+                        <tr>
+                            <td align="center" bgcolor="#004488" width="50%"><div
+                                    align="center">
+                                    <p>
+                                        <font size="4" face="Arial" color="#ffffff">Science
+                                            Courses</font>
+                                    </p>
+                                </div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>
+            <p>
+                <font size="3" face="Arial, Helvetica, sans-serif">Enter the
+                    titles, credit values, and grades you recieved in all science
+                    courses you have taken. Include courses taken in biology,
+                    neuroscience, mathematics, computer science, engineering, and
+                    physics, but LIST ONLY COURSES MEANT SPECIFICALLY FOR SCIENCE
+                    MAJORS.</font>
+            <p>
+            <center>
+                <table cellpadding=2>
+                    <tr>
+                        <td>Title</td>
+                        <td>Credits</td>
+                        <td>Grade</td>
+                    </tr>
+                    {% for i in range(26)  if formDict['stitle'+i|string()]%}
+                        <tr>
+                            <td><input type="text" name={{'stitle'+i|string() }} value="{{formDict['stitle'+i|string()]}}"></td>
+                            <td><input type="text" size=3 name={{'scredits'+i|string() }} value="{{formDict['scredits'+i|string()]}}"></td>
+                            <td><select name={{'sgrade'+i|string() }}>
+                                    <option value="-1" {%if formDict['sgrade'+i|string()] == '-1'%} selected {% endif %}></option>
+                                    <option value="0" {%if formDict['sgrade'+i|string()] == '0'%} selected {% endif %}>A+</option>
+                                    <option value="1" {%if formDict['sgrade'+i|string()] == '1'%} selected {% endif %}>A</option>
+                                    <option value="2" {%if formDict['sgrade'+i|string()] == '2'%} selected {% endif %}>A-</option>
+                                    <option value="3" {%if formDict['sgrade'+i|string()] == '3'%} selected {% endif %}>B+</option>
+                                    <option value="4" {%if formDict['sgrade'+i|string()] == '4'%} selected {% endif %}>B</option>
+                                    <option value="5" {%if formDict['sgrade'+i|string()] == '5'%} selected {% endif %}>B-</option>
+                                    <option value="6" {%if formDict['sgrade'+i|string()] == '6'%} selected {% endif %}>C+</option>
+                                    <option value="7" {%if formDict['sgrade'+i|string()] == '7'%} selected {% endif %}>C</option>
+                                    <option value="8" {%if formDict['sgrade'+i|string()] == '8'%} selected {% endif %}>C-</option>
+                                    <option value="9" {%if formDict['sgrade'+i|string()] == '9'%} selected {% endif %}>D</option>
+                                    <option value="10" {%if formDict['sgrade'+i|string()] == '10'%} selected {% endif %}>P</option>
+                                    <option value="11" {%if formDict['sgrade'+i|string()] == '11'%} selected {% endif %}>F</option>
+                            </select></td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </center>
+            <br> <br>
+
+            <center>
+                <table width="61%" cellspacing="0" cellpadding="2" border="0">
+                    <tbody>
+                        <tr>
+                            <td align="center" bgcolor="#004488" width="50%"><div
+                                    align="center">
+                                    <p>
+                                        <font size="4" face="Arial" color="#ffffff">Transcript</font>
+                                    </p>
+                                </div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>
+            </div>
+            <p>
+                <font face="Arial Unicode MS">
+                    <center>
+                        Please upload your transcript in pdf format:
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>
+                                    <p>
+                                        <input type="file" id="fileupload" name="file">
+                                    <p>
+                                </td>
+                            </tr>
+                        </table>
+                    </center>
+                </font>
+            </p>
+            </center>
+            </div>
+            <div align="center">
+                <center>
+                    <table width="75%" cellspacing="0" cellpadding="2" border="0">
+                        <p>
+                        <p></p>
+                        </div>
+                        <div align="center">
+                            <center>
+                                <table width="75%" cellspacing="0" cellpadding="2" border="0">
+                                    <tbody>
+                                        <p></p>
+                                        </div>
         </div>
         <div align="center">
             <center>
