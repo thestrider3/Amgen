@@ -184,3 +184,30 @@ def insertSecondForm(conn,formDict):
             conn.execute(query)
         else:
             break
+
+def insertReviewWaiver(conn, formDict):
+    metadata = MetaData(conn)
+    References = Table('References',metadata, autoload=True)
+    for i in range(0,2):
+        i = References.insert().values(
+        UserId = formDict['Username'],
+        Name = formDict['RefName'+str(i)],  
+        Email = formDict['RefEmail'+str(i)])
+        conn.execute(i)
+
+def insertReviewWaiver(conn, formDict):
+    metadata = MetaData(conn)
+    studentData = Table('studentData',metadata, autoload=True)
+    i = studentData.update().where(studentData.c.Username == formDict['Username']).values(
+    ReviewWaiver = formDict['ReviewWaiver'])
+    conn.execute(i)
+
+def deleteThirdForm(conn, formDict):
+    MetaData = MetaData(conn)
+    References = Table('References',metadata, autoload=True)
+    for i in range(0,2):
+        i = References.delete().where(
+        UserId == formDict['Username'])
+        conn.execute(i)
+      
+
