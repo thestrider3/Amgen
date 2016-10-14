@@ -494,7 +494,7 @@
                                         College/University: </font></td>
                             <td><select name="university" id="universitySelect" ONCHANGE="goto(this.form)">
                                     {% for u in universityList %}
-                                        <option value="{{ u }}" {%if u==formDict['CurrentlyAttendingUniversity']%} selected {%endif%}>{{ u }}></option>
+                                        <option value="{{ u }}" {%if u==formDict['CurrentlyAttendingUniversity']%} selected {%endif%}>{{ u }}</option>
                                     {% endfor %}
                             </select></td>
                         </tr>

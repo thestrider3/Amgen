@@ -5,7 +5,7 @@ drop table columbiaamgen.studentData;
 select * from columbiaamgen.studentData;
 select * from columbiaamgen.Courses;
 select * from columbiaamgen.References;
-update columbiaamgen.studentData set UserType='Student' where Username in ('shivani','tulika')
+update columbiaamgen.studentData set UserType='IncompleteApplication' where Username in ('shivani','tulika')
 Insert into columbiaamgen.studentData(Username,Password) values ('patan','temp')
 Insert into columbiaamgen.studentData(Username,Password,UserType) values ('admin','temp','Admin')
 
@@ -68,6 +68,9 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `HowDidYouHearOtherUniversityName` VARCHAR(100) NULL,
   `HowDidYouHearOther` VARCHAR(100) NULL,
   `UserType` VARCHAR(45) NOT NULL DEFAULT 'Student',
+  `EthnicityOther` VARCHAR(30) NULL,
+  `PlaceOfBirth` VARCHAR(30) NULL,
+  `AdvancedDegreeObjectiveOther` VARCHAR(30) NULL,
   PRIMARY KEY (`UserId`));
   
 
@@ -79,10 +82,9 @@ CREATE TABLE `columbiaamgen`.`References` (
   `Email` VARCHAR(100) NULL,
   PRIMARY KEY (`UserId`,`ReferenceId`));
 
-drop table columbiaamgen.Courses;
 CREATE TABLE `columbiaamgen`.`Courses` (
-  `Username` VARCHAR(24) NOT NULL,
+  `UserId` VARCHAR(24) NOT NULL,
   `Title` VARCHAR(100) NOT NULL,
   `Credits` INT NULL,
   `Grade` VARCHAR(5) NULL,
-  PRIMARY KEY (`Username`, `Title`));
+  PRIMARY KEY (`UserId`, `Title`));

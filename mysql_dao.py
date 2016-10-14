@@ -156,14 +156,15 @@ def insertSecondForm(conn,formDict):
     i = studentData.update().where(studentData.c.Username == formDict['Username']).values(
     ScienceExperience = formDict['ScienceExperience'],  
     CareerPlans = formDict['CareerPlans'],  
-    AspirationNext20Yrs = formDict['AspirationNext20Yrs'],  
+    AspirationNext20Yrs = formDict['AspirationNext20Yrs'],
+    ApplicationStatus = formDict['ApplicationStatus'],  
     Mentor1 = formDict['Mentor1'],  
     Mentor2 = formDict['Mentor2'],  
     Mentor3 = formDict['Mentor3'],  
     Mentor4 = formDict['Mentor4'], 
-    Mentor5 = formDict['Mentor5'],  
+    Mentor5 = formDict['Mentor5'])  
     #Transcript = formDict['Transcript'],  
-    IsApplicationSubmitted = formDict['IsApplicationSubmitted'])
+    #IsApplicationSubmitted = formDict['IsApplicationSubmitted'])
     conn.execute(i)
     
     Courses = Table('Courses',metadata, autoload=True)
@@ -173,19 +174,13 @@ def insertSecondForm(conn,formDict):
             query = Courses.select(and_(Courses.c.UserId==formDict['Username'],Courses.c.Title==formDict['stitle'+''+str(i)]))
             rs = query.execute()
             if rs.fetchone():
-                query = Courses.update().where(and_(Courses.c.UserId==formDict['Username'],Courses.c.Title==formDict['stitle'+''+str(i)])).values(
-                UserId = formDict['Username'],
-                Title = formDict['stitle'+''+str(i)],  
-                Credits = formDict['scredits'+''+str(i)],  
-                Grade = formDict['sgrade'+''+str(i)])
+                query = Courses.delete().where(and_(Courses.c.UserId==formDict['Username'],Courses.c.Title==formDict['stitle'+''+str(i)]))
                 conn.execute(query)
-            else:
-                print('value to be inserted'+'stitle'+''+str(i))
-                query = Courses.insert().values(
-                UserId = formDict['Username'],
-                Title = formDict['stitle'+''+str(i)],  
-                Credits = formDict['scredits'+''+str(i)],  
-                Grade = formDict['sgrade'+''+str(i)])
-                conn.execute(query)
+            query = Courses.insert().values(
+            UserId = formDict['Username'],
+            Title = formDict['stitle'+''+str(i)],  
+            Credits = formDict['scredits'+''+str(i)],  
+            Grade = formDict['sgrade'+''+str(i)])
+            conn.execute(query)
         else:
             break
