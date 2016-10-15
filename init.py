@@ -32,12 +32,15 @@ def teardown_request(exception):
 
 @app.route('/')
 def main():
+    return render_template('third.html')
+    '''
     print(session.get('logged_in'))
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
         universityList = mysql_dao.getUniversityList(dbcon)
         return render_template('first.html',formDict=session['user'],universityList=universityList)
+    '''
 
 @app.route('/checkUsername', methods=['POST'])
 def checkUsername():
