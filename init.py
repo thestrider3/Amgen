@@ -181,7 +181,7 @@ def addFirstForm():
         return flask.render_template('second.html',formDict=formDict,mentorsList=mentorsList)
     elif request.form['submitButton'] == 'Save':
         universityList = mysql_dao.getUniversityList(dbcon)
-        return render_template('first.html',formDict=dict(),universityList=universityList)
+        return render_template('first.html',formDict=formDict,universityList=universityList)
     elif request.form['submitButton'] == 'Logout':
         session['logged_in']=False
         session.pop('user')
@@ -241,23 +241,24 @@ def submitThirdForm():
     if request.form['submitButton'] == 'Submit':
       print('submit button pressed')
       for i in range(0,2):        ##check with shivani how may ref columns?
-        formDict['RefName'+str(i)] = str(form.request.get('REFERENCE_'+str(i)))
-        formDict['RefEmail'+str(i)] = str(form.request.get('ref'+str(i)+'email'))
-        fromaddr = str(form.request.get('ref'+str(i)+'email'))        
+        formDict['RefName'+str(i)] = str(request.form.get('REFERENCE_'+str(i)))
+        formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
+        fromaddr = str(request.form.get('ref'+str(i)+'email'))        
         sendEMail(fromaddr)
       mysql_dao.insertThirdForm(dbcon,formDict)
-      formDict['ReviewWaiver'] = str(form.request.get('REFERENCE_WAIVER'))
+      formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
       session['user'] = formDict
       mysql_dao.insertReviewWaiver(dbcon, formDict)
       return sendEMailflask.render_template('third.html', formDict = formDict)
-    elif request.form['submitBut'] == 'Reset':
+    elif request.form['submitButton'] == 'Reset':
       print('reset button pressed')
       for i in range(0,2):        ##check with shivani how may ref columns?
-        formDict['Name'] = str(form.request.get('REFERENCE_'+str(i)))
-        formDict['Email'] = str(form.request.get('ref'+str(i)+'email'))
+        formDict['Name'] = str(request.form.get('REFERENCE_'+str(i)))
+        formDict['Email'] = str(request.form.get('ref'+str(i)+'email'))
         mysql_dao.deleteThirdForm(dbcon,formDict)         #check with Chanda whether old referrer needs to be deleted
         return flask.render_template('third.html')
     elif request.form['submitButton'] == 'Logout':
+        print('logout')
         session['logged_in']=False
         session.pop('user')
         return render_template('login.html')
