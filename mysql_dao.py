@@ -185,7 +185,7 @@ def insertSecondForm(conn,formDict):
         else:
             break
 
-def insertReviewWaiver(conn, formDict):
+def insertThirdForm(conn, formDict):
     metadata = MetaData(conn)
     References = Table('References',metadata, autoload=True)
     for i in range(0,2):
@@ -209,5 +209,21 @@ def deleteThirdForm(conn, formDict):
         i = References.delete().where(
         UserId == formDict['Username'])
         conn.execute(i)
+
+def getStudentList(conn):
+    metadata = MetaData(conn)
+    studentData = Table('studentData', metadata, autoload=True)
+    s= select([studentData.c.Username,studentData.c.FirstName,studentData.c.LastName])
+    rs = s.execute().fetchall()
+    #print(rs)
+    '''
+    studentDict = dict()
+    for row in rs:
+        studentDict['UserName'] = row[0]
+        studentDict['FirstName'] = row[1]
+        studentDict['LastName'] = row[2]
+    print(studentDict)
+    '''
+    return rs
       
 

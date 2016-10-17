@@ -275,6 +275,13 @@ def sendEMail(fromaddr):
   text = msg.as_string()
   server.sendmail(fromaddr, toaddr, text)
   server.quit()
+  
+@app.route('/getStudentList', methods=['GET', 'POST'])
+def getStudentList():
+    if request.method == 'GET':
+        studentList = mysql_dao.getStudentList(dbcon)
+        
+        return render_template('studentList.html', studentList = studentList)
 
 if __name__ == "__main__":
   app.secret_key = os.urandom(24)
