@@ -49,17 +49,19 @@ def checkUsername():
   passwrd = str(request.form['passwrd'])
   
   formDict=mysql_dao.checkUser(dbcon,name,passwrd)
-  
-  if formDict['UserType'] == UserType.Student.name and formDict['ApplicationStatus'] == ApplicationStatus.IncompleteApplication.name:
+  #print(formDict)
+  #print(UserType.Student.name)
+  formDict['UserType'] = 'Student'
+  if formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.IncompleteApplication:
       session['logged_in'] = True
       session['user'] = formDict
       universityList = mysql_dao.getUniversityList(dbcon)
       return render_template('first.html',formDict=formDict,universityList=universityList)
-  elif formDict['UserType'] == UserType.Student.name and formDict['ApplicationStatus'] == ApplicationStatus.UnderReview.name:
+  elif formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.UnderReview:
       session['logged_in'] = True
       session['user'] = formDict
       return render_template('third.html')
-  elif formDict['UserType'] == UserType.Admin.name:
+  elif formDict['UserType'] == UserType.Admin:
       session['logged_in'] = True
       formDict=mysql_dao.getUser(dbcon,'shivani')
       universityList = mysql_dao.getUniversityList(dbcon)
@@ -74,7 +76,7 @@ def addUser():
   name = str(request.form['username'])
   passwrd = str(request.form['passwrd'])
 
-  user = mysql_dao.createNewUser(dbcon,name,passwrd,ApplicationStatus.IncompleteApplication.name)
+  user = mysql_dao.createNewUser(dbcon,name,passwrd,ApplicationStatus.IncompleteApplication)
   
   if user:
       session['logged_in'] = True
@@ -111,7 +113,9 @@ def addFirstForm():
     formDict['Gender'] = str(request.form.get('GENDER'))      
     formDict['Ethnicity'] = str(request.form.get('ethinicity')) 
     if(formDict['Ethnicity']=='Other'):
-        formDict["EthnicityOther"] = str(request.form.get('ethnicityother'))
+      formDict["EthnicityOther"] = str(request.form.get('ethnicityother'))
+    else:
+      formDict["EthnicityOther"] = ""
     formDict['CitizenshipStatus'] = str(request.form.get('CITIZENSHIP'))
     if(formDict['CitizenshipStatus']=='resident'):
         formDict['PlaceOfBirth']=str(request.form.get('PLACEOFBIRTH'))
@@ -187,6 +191,8 @@ def addFirstForm():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
+        print(session)
+        session['logged_in'] = True
         formDict = session['user']
         formDict['ScienceExperience'] = str(request.form.get('EXPERIENCE'))
         formDict['CareerPlans'] = str(request.form.get('CAREER_PLANS'))
