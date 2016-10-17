@@ -10,7 +10,6 @@ Insert into columbiaamgen.studentData(Username,Password) values ('patan','temp')
 Insert into columbiaamgen.studentData(Username,Password,UserType) values ('admin','temp','Admin')
 
 CREATE TABLE `columbiaamgen`.`studentData` (
-  `UserId` VARCHAR(45) NOT NULL,
   `Username` VARCHAR(45) NULL,
   `Password` VARCHAR(45) NULL,
   `FirstName` VARCHAR(45) NULL,
@@ -71,7 +70,7 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `EthnicityOther` VARCHAR(30) NULL,
   `PlaceOfBirth` VARCHAR(30) NULL,
   `AdvancedDegreeObjectiveOther` VARCHAR(30) NULL,
-  PRIMARY KEY (`UserId`));
+  PRIMARY KEY (`Username`));
   
 
 
