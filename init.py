@@ -44,24 +44,27 @@ def main():
 
 @app.route('/checkUsername', methods=['POST'])
 def checkUsername():
+  print("inside checkUsername")
   global userSession
   name = str(request.form['username'])
   passwrd = str(request.form['passwrd'])
   
   formDict=mysql_dao.checkUser(dbcon,name,passwrd)
+  print(formDict['UserType'])
+  print(UserType.Admin.name)
   #print(formDict)
   #print(UserType.Student.name)
-  formDict['UserType'] = 'Student'
-  if formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.IncompleteApplication:
+  if formDict['UserType'] == UserType.Student.name and formDict['ApplicationStatus'] == ApplicationStatus.IncompleteApplication.name:
       session['logged_in'] = True
       session['user'] = formDict
       universityList = mysql_dao.getUniversityList(dbcon)
       return render_template('first.html',formDict=formDict,universityList=universityList)
-  elif formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.UnderReview:
+  elif formDict['UserType'] == UserType.Student.name and formDict['ApplicationStatus'] == ApplicationStatus.UnderReview.name:
       session['logged_in'] = True
       session['user'] = formDict
       return render_template('third.html')
-  elif formDict['UserType'] == UserType.Admin:
+  elif formDict['UserType'] == UserType.Admin.name:
+      print("admin logging in")
       session['logged_in'] = True
       formDict=mysql_dao.getUser(dbcon,'shivani')
       universityList = mysql_dao.getUniversityList(dbcon)

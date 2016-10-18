@@ -3,7 +3,13 @@
 <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
 <title>AMGEN Online Application</title>
 </head>
-
+<head>
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+</style>
 <body text="#000000" bgcolor="#ffffff" link="#0088FF" vlink="#0088FF">
 	<form action="/getStudentList" method="POST">
 		<div align="center">
@@ -28,13 +34,23 @@
 				<table width="75%" cellspacing="0" cellpadding="2" border="0">
 					<tbody>
 						<tr>
-						<td bgcolor="#004488" style="width:100%" align="center"><font
+						<td bgcolor="#004488" style="width:100%" cellpadding="2" align="center"><font
 								face="Arial Unicode MS" size="3" color="#ffffff"><b>
 										Student List </b></font></td>
 						</tr>
+					</tbody>
+				</table>
+				<br>
+			</center>
+		</div>
+		<div align="center">
+			<center>
+				<table width=75% cellpadding="2" border: 1px solid >
+					<tbody>
+						<tr><th>Username</th> <th>First Name</th> <th>Last Name</th> </tr>
 						{% for row in studentList %}
 						<tr>{% for col in row %}
-                                    <td style="width:33%">{{col}}</td>{% endfor %}
+                                    <td >{{col}}</td>{% endfor %}
 						</tr>{% endfor %}
 					</tbody>
 				</table>

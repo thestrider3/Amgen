@@ -8,6 +8,8 @@ Created on Wed Oct  5 17:28:00 2016
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from user import *
+
+from UserType import UserType
 DATABASEURI = "mysql+mysqlconnector://aheicklen:mass67@mysql.columbiasurf.dreamhosters.com:3306/columbiaamgen" 
 engine = create_engine(DATABASEURI)
 
@@ -213,7 +215,7 @@ def deleteThirdForm(conn, formDict):
 def getStudentList(conn):
     metadata = MetaData(conn)
     studentData = Table('studentData', metadata, autoload=True)
-    s= select([studentData.c.Username,studentData.c.FirstName,studentData.c.LastName])
+    s= select([studentData.c.Username,studentData.c.FirstName,studentData.c.LastName]).where(studentData.c.UserType == UserType.Student.name)
     rs = s.execute().fetchall()
     #print(rs)
     '''
