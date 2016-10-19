@@ -5,19 +5,20 @@ drop table columbiaamgen.studentData;
 select * from columbiaamgen.studentData;
 select * from columbiaamgen.Courses;
 select * from columbiaamgen.References;
+update columbiaamgen.studentData set Transcript=null where Username in ('shivani','tulika')
 update columbiaamgen.studentData set UserType='Student' where Username in ('shivani','tulika')
 update columbiaamgen.studentData set ApplicationStatus='IncompleteApplication' where Username in ('shivani','tulika')
 update columbiaamgen.studentData set ApplicationStatus='UnderReview' where Username in ('shivani','tulika')
-update columbiaamgen.studentData set ApplicationStatus='ReferencesRequired'  where Username in ('shivani','tulika')
+update columbiaamgen.studentData set ApplicationStatus='ReferencesRequired' 
 Insert into columbiaamgen.studentData(Username,Password) values ('patan','temp')
 Insert into columbiaamgen.studentData(Username,Password,UserType) values ('admin','temp','Admin')
-
+select Transcript from columbiaamgen.studentData where username='shivani'
 CREATE TABLE `columbiaamgen`.`studentData` (
   `Username` VARCHAR(45) NULL,
   `Password` VARCHAR(45) NULL,
   `FirstName` VARCHAR(45) NULL,
   `LastName` VARCHAR(45) NULL,
-  `DOB` DATE NULL,
+  `DOB` VARCHAR(20) NULL,
   `Email` VARCHAR(100) NULL,
   `AlternativeEmail` VARCHAR(100) NULL,
   `Phone` VARCHAR(20) NULL,
@@ -53,7 +54,7 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `ArriveAtColumbiaComments` VARCHAR(200) CHARACTER SET 'dec8' NULL,
   `CurrentlyAttendingUniversity` VARCHAR(45) NULL,
   `Major` VARCHAR(45) NULL,
-  `DateSpringSemesterEnds` DATE NULL,
+  `DateSpringSemesterEnds` VARCHAR(20) NULL,
   `ScienceExperience` VARCHAR(750) NULL,
   `CareerPlans` VARCHAR(550) NULL,
   `AspirationNext20Yrs` VARCHAR(550) NULL,
@@ -62,7 +63,7 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `Mentor3` VARCHAR(50) NULL,
   `Mentor4` VARCHAR(50) NULL,
   `Mentor5` VARCHAR(50) NULL,
-  `Transcript` BLOB NULL,
+  `Transcript` VARCHAR(200) NULL,
   `ApplicationStatus` VARCHAR(30) NULL,
   `ReviewWaiver` VARCHAR(5) NULL,
   `HowDidYouHearUniversityName` VARCHAR(50) NULL,

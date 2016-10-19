@@ -48,7 +48,7 @@
 					<font face="Arial"><textarea wrap="HARD" cols="60" rows="9"
 							name="EXPERIENCE"
 							onKeyDown="limitText(this.form.EXPERIENCE,800);"
-							onKeyUp="limitText(this.form.EXPERIENCE,800);">{{formDict['ScienceExperience']}}</textarea></font>
+							onKeyUp="limitText(this.form.EXPERIENCE,800);">{{formDict['ScienceExperience'] if formDict['ScienceExperience'] != None else ''}}</textarea></font>
 				</p>
 			</center>
 		</div>
@@ -79,7 +79,7 @@
 					<font face="Arial"> <textarea wrap="HARD" cols="60" rows="5"
 							name="CAREER_PLANS"
 							onKeyDown="limitText(this.form.CAREER_PLANS,600);"
-							onKeyUp="limitText(this.form.CAREER_PLANS,600);">{{formDict['CareerPlans']}}</textarea>
+							onKeyUp="limitText(this.form.CAREER_PLANS,600);">{{formDict['CareerPlans'] if formDict['CareerPlans'] != None else ''}}</textarea>
 					</font>
 				</p>
 			</center>
@@ -109,7 +109,7 @@
 				<p>
 					<font face="Arial"> <textarea wrap="HARD" cols="60" rows="7"
 							name="whysurf" onKeyDown="limitText(this.form.whysurf,600);"
-							onKeyUp="limitText(this.form.whysurf,600);">{{formDict['AspirationNext20Yrs']}}</textarea>
+							onKeyUp="limitText(this.form.whysurf,600);">{{formDict['AspirationNext20Yrs'] if formDict['AspirationNext20Yrs'] != None else ''}}</textarea>
 					</font>
 				</p>
 			</center>
@@ -360,7 +360,7 @@
 												<div align="center">
 													<center>
 														<p> {% if error %}
-												      <strong>Error:</strong> {{ error }}
+												      <font size="4" color="red">Error:{{ error }}</font>
 												      {% endif %}</p>
 													</center>
 												</div>

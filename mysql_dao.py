@@ -42,9 +42,8 @@ def checkUser(conn,name,passwrd):
     s= user_info.select(and_(user_info.c.Username==name , user_info.c.Password==passwrd))
     rs = s.execute()
     formDict=rs.fetchone()
-    formDict=dict(formDict)
-    
     if formDict:
+        formDict=dict(formDict)
         courses = Table('Courses', metadata, autoload=True)
         s= courses.select(courses.c.UserId==name)
         rs=s.execute()
@@ -151,8 +150,7 @@ def getFirstFormData(conn,Username):
     return formDict
 
 def insertSecondForm(conn,formDict):
-    print()
-    print(formDict)
+   
     metadata = MetaData(conn)
     studentData = Table('studentData',metadata, autoload=True)
     i = studentData.update().where(studentData.c.Username == formDict['Username']).values(
@@ -172,7 +170,7 @@ def insertSecondForm(conn,formDict):
     Courses = Table('Courses',metadata, autoload=True)
     for i in range(0,26):
         if 'stitle'+''+str(i) in formDict:
-            print('formDict not none')
+            
             query = Courses.select(and_(Courses.c.UserId==formDict['Username'],Courses.c.Title==formDict['stitle'+''+str(i)]))
             rs = query.execute()
             if rs.fetchone():
@@ -188,6 +186,7 @@ def insertSecondForm(conn,formDict):
             break
 
 def insertThirdForm(conn, formDict):
+    deleteThirdForm(conn,formDict)
     metadata = MetaData(conn)
     References = Table('References',metadata, autoload=True)
     for i in range(1,3):
@@ -207,9 +206,9 @@ def insertReviewWaiver(conn, formDict):
 def deleteThirdForm(conn, formDict):
     metadata = MetaData(conn)
     References = Table('References',metadata, autoload=True)
-    ins = References.delete().where(
+    delete = References.delete().where(
     References.c.UserName == formDict['Username'])
-    conn.execute(ins)
+    conn.execute(delete)
     studentData = Table('studentData', metadata, autoload=True)
     s = studentData.update().where(studentData.c.Username==formDict['Username']).values(
     ReviewWaiver = None)
@@ -237,7 +236,6 @@ def getReferences(conn, formDict):
         
         
     ReferencesDict=dict(ReferencesDict)
-    print(ReferencesDict)
     return ReferencesDict
 
 def getStudentList(conn):

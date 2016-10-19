@@ -63,8 +63,8 @@
 			<center>
 				<p>
 					I waive my right to review these letters of recommendation : <input
-						type=radio name="REFERENCE_WAIVER" value="Yes"  {% if ReferencesDict['REFERENCE_WAIVER']=='Yes'%} checked {%endif%}> Yes <input
-						type=radio name="REFERENCE_WAIVER" value="No"  {% if ReferencesDict['REFERENCE_WAIVER']=='No'%} checked {%endif%}> No
+						type=radio name="REFERENCE_WAIVER" value="Yes"  {% if ReferencesDict['ReviewWaiver']=='Yes'%} checked {% endif %}> Yes <input
+						type=radio name="REFERENCE_WAIVER" value="No"  {% if ReferencesDict['ReviewWaiver']=='No'%} checked {% endif %}> No
 				</p>
 			</center>
 		</div>
@@ -77,6 +77,13 @@
 													</p>
 
 												</center>
+											</div>
+											<div align="center">
+													<center>
+														<p> {% if error %}
+												      <font size="4" color="red">Error:{{ error }}</font>
+												      {% endif %}</p>
+													</center>
 											</div>
 											<div align="center">
 												<center>
