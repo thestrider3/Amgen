@@ -8,6 +8,7 @@ from enum import Enum
 
 class ApplicationStatus(Enum):
     IncompleteApplication = 'IncompleteApplication'
+    ReferencesRequired = 'ReferencesRequired'
     UnderReview = 'UnderReview'
     Accepted = 'Accepted'
     Rejected = 'Rejected'
