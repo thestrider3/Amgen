@@ -164,7 +164,8 @@ def insertSecondForm(conn,formDict):
     Mentor2 = formDict['Mentor2'],  
     Mentor3 = formDict['Mentor3'],  
     Mentor4 = formDict['Mentor4'], 
-    Mentor5 = formDict['Mentor5'])  
+    Mentor5 = formDict['Mentor5'],
+    Transcript = formDict['Transcript'])  
     #Transcript = formDict['Transcript'],  
     #IsApplicationSubmitted = formDict['IsApplicationSubmitted'])
     conn.execute(i)
@@ -243,7 +244,7 @@ def getReferences(conn, formDict):
 def getStudentList(conn):
     metadata = MetaData(conn)
     studentData = Table('studentData', metadata, autoload=True)
-    s= select([studentData.c.Username,studentData.c.FirstName,studentData.c.LastName]).where(studentData.c.UserType == UserType.Student.name)
+    s= select([studentData.c.Username,studentData.c.FirstName,studentData.c.LastName]).where(studentData.c.UserType == UserType.Student)
     rs = s.execute().fetchall()
     #print(rs)
     '''

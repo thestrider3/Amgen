@@ -1,19 +1,23 @@
 #!/usr/bin/env python2.7
 
+from werkzeug.utils import secure_filename
 import os, uuid, json, flask, mysql_dao, smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
-from flask import Flask, request, flash, render_template, session, abort, g, redirect, Response
+from flask import Flask, request, flash, render_template, session, abort, g, redirect 
+from flask import Response, send_from_directory, url_for 
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from user import *
 from applicationStatus import ApplicationStatus
 from UserType import UserType
-import json
+
+UPLOAD_FOLDER = '/home/strider/FlaskApp/static/Uploads'
+ALLOWED_EXTENSIONS = set(['pdf'])
 
 #tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 app = Flask(__name__)
-
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.before_request
 def before_request():
@@ -32,7 +36,7 @@ def teardown_request(exception):
 
 @app.route('/')
 def main():
-    print(session.get('logged_in'))
+    
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
@@ -49,28 +53,26 @@ def checkUsername():
   
   formDict=mysql_dao.checkUser(dbcon,name,passwrd)
 
-  #print(formDict)
-  #print(UserType.Student)
+ 
   if formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.IncompleteApplication:
       session['logged_in'] = True
       session['user'] = formDict
       universityList = mysql_dao.getUniversityList(dbcon)
       return render_template('first.html',formDict=formDict,universityList=universityList)
 
-  elif formDict['UserType'] == UserType.Student.name and formDict['ApplicationStatus'] == ApplicationStatus.ReferencesRequired.name:
+  elif formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.ReferencesRequired:
       session['logged_in'] = True
       session['user'] = formDict
       ReferencesDict = dict()
-      ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
-      #print(ReferencesDict)
-      return render_template('third.html', ReferencesDict = ReferencesDict)  
-  elif formDict['UserType'] == UserType.Student.name and formDict['ApplicationStatus'] == ApplicationStatus.UnderReview.name:
+      ReferencesDict = mysql_dao.getReferences(dbcon, formDict)      
+      return render_template('third.html', ReferencesDict = ReferencesDict) 
+      
+  elif formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.UnderReview:
       session['logged_in'] = True
       session['user'] = formDict
       return render_template('underReview.html')
-  elif formDict['UserType'] == UserType.Admin.name:
-      #print("admin logging in")
-
+      
+  elif formDict['UserType'] == UserType.Admin:
       session['logged_in'] = True
       studentList = mysql_dao.getStudentList(dbcon)
       return render_template('studentList.html',studentList=studentList)
@@ -200,7 +202,6 @@ def addFirstForm():
 @app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
-        print(session)
         session['logged_in'] = True
         formDict = session['user']
         formDict['ScienceExperience'] = str(request.form.get('EXPERIENCE'))
@@ -211,31 +212,44 @@ def upload():
         formDict['Mentor3'] = str(request.form.get('mentor2'))
         formDict['Mentor4'] = str(request.form.get('mentor3'))
         formDict['Mentor5'] = str(request.form.get('mentor4'))
+        
         for i in range(0,26):
             if request.form['stitle'+''+str(i)] != '':
                 formDict['stitle'+''+str(i)] = request.form['stitle'+''+str(i)]
                 formDict['scredits'+''+str(i)] = request.form['scredits'+''+str(i)]
-                formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]
-                print('stitle'+''+str(i))
+                formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]                
             else:
                 break;
-        mysql_dao.insertSecondForm(dbcon,formDict)
-        session['user'] = formDict
+                
+              
+        transcript = request.files['fileupload']
+        
+        if transcript:
+            if allowed_file(transcript.filename):
+                fn = str(formDict['Username'])
+                #i = fn.index('@')
+                #fn = fn[:i]
+                filename = secure_filename(fn+".pdf")
+                transcript.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                formDict['Transcript'] = 'UPLOAD_FOLDER'+"/"+filename
+                print(formDict['Transcript'])
+            else:
+                error = "Please select a pdf file"
+        else:
+            error = "Please select a pdf file"
+        if request.form.get("agree") == "agree":
+            formDict['ApplicationStatus'] = ApplicationStatus.ReferencesRequired 
+        else:
+            error = "Please accept terms and condition"       
     
         if request.form['submitButton'] == 'Submit Application':
-            if request.form.get("agree") == "agree":
-
-                formDict['ApplicationStatus'] = ApplicationStatus.ReferencesRequired.name 
-
+            if not error:
                 mysql_dao.insertSecondForm(dbcon,formDict)
                 session['user'] = formDict
                 ReferencesDict = dict()
                 ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
-                print(ReferencesDict)
-                return render_template('third.html', ReferencesDict = ReferencesDict)
-                
-            else:
-                error="Please accept terms and condition"
+                return render_template('third.html', ReferencesDict = ReferencesDict)                
+            else:               
                 mentorsList = mysql_dao.getMentorsList(dbcon)
                 return flask.render_template('second.html', error=error,formDict=formDict,mentorsList=mentorsList)
         elif request.form['submitButton'] == 'Save':
@@ -248,40 +262,38 @@ def upload():
             session['logged_in']=False
             session.pop('user')
             return render_template('login.html')
+            
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 @app.route('/submitThirdForm', methods=['GET', 'POST'])
 def submitThirdForm():
   if request.method == 'POST':
     formDict = session['user']    #check with Shivani
     if request.form['submitButton'] == 'Submit':
-      print('submit button pressed')
+      
       for i in range(1,3):        ##check with shivani how may ref columns?
         formDict['RefName'+str(i)] = str(request.form.get('REFERENCE_'+str(i)))
         formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
-        print(request.form.get('ref'+str(i)+'email'))
         toaddr = str(request.form.get('ref'+str(i)+'email'))        
         #sendEMail(toaddr)
       mysql_dao.insertThirdForm(dbcon,formDict)
       formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
-      print('Review Waiver'+formDict['ReviewWaiver'])
       session['user'] = formDict
       mysql_dao.insertReviewWaiver(dbcon, formDict)
       ReferencesDict = dict()
       ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
-      #print(ReferencesDict)
-      return render_template('third.html', ReferencesDict = ReferencesDict)      
+      return render_template('third.html', ReferencesDict = ReferencesDict) 
+      
     elif request.form['submitButton'] == 'Reset':
-      print('reset button pressed')
       for i in range(0,2):        ##check with shivani how may ref columns?
         formDict['Name'] = str(request.form.get('REFERENCE_'+str(i)))
-        print(formDict['Name'])
         formDict['Email'] = str(request.form.get('ref'+str(i)+'email'))
-        print(formDict['Email'])
         mysql_dao.deleteThirdForm(dbcon,formDict)         #check with Chanda whether old referrer needs to be deleted
         ReferencesDict = dict()
-        return render_template('third.html', ReferencesDict = ReferencesDict)          
+        return render_template('third.html', ReferencesDict = ReferencesDict)
+          
     elif request.form['submitButton'] == 'Logout':
-        print('logout')
         session['logged_in']=False
         session.pop('user')
         return render_template('login.html')
@@ -312,7 +324,6 @@ def getStudentList():
             if request.form['submitButton'] == row[0]:
                 session['usernameProfile']='shivani'
                 formDict=mysql_dao.getUser(dbcon,session['usernameProfile'])
-                #print(formDict)
                 universityList = mysql_dao.getUniversityList(dbcon)
                 mentorsList = mysql_dao.getMentorsList(dbcon)
                 return render_template('profile.html',formDict=formDict,universityList=universityList,mentorsList=mentorsList)
@@ -331,7 +342,6 @@ def updateProfileByAdmin():
         return render_template('login.html')  
     
     if request.form['submitButton'] == 'Save':
-        print("Inside save button")
         l=list()
         formDict=mysql_dao.getUser(dbcon,session['usernameProfile'])
         
@@ -432,7 +442,7 @@ def updateProfileByAdmin():
                 formDict['stitle'+''+str(i)] = request.form['stitle'+''+str(i)]
                 formDict['scredits'+''+str(i)] = request.form['scredits'+''+str(i)]
                 formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]
-                print('stitle'+''+str(i))
+                
             else:
                 break;
         mysql_dao.insertSecondForm(dbcon,formDict)
@@ -442,7 +452,6 @@ def updateProfileByAdmin():
         return render_template('profile.html',formDict=formDict,universityList=universityList,mentorsList=mentorsList)
     
 def do_urlize(environment, value, trim_url_limit=None, nofollow=False):
-    print('inside urilize')
     """Converts URLs in plain text into clickable links.
 
     If you pass the filter an additional integer it will shorten the urls

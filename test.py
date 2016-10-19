@@ -12,7 +12,8 @@ app = Flask(__name__, template_folder=tmpl_dir)
 
 @app.route('/')
 def main():
-    return render_template('second.html')
+    formDict = dict()
+    return render_template('second.html', formDict = formDict)
 
 @app.route('/upload', methods=['POST'])
 def addFirstForm():
@@ -99,9 +100,11 @@ def addFirstForm():
     print("Back")
   return flask.render_template('first.html')
   '''
-  formDict = dict()
-  formDict['Transcript'] = request.files['fileupload'].read()
-  print(formDict['Transcript'])
+  if request.form['submitButton'] == 'Submit Application':
+  	formDict = dict()
+  	formDict['Transcript'] = request.files['fileupload'].read()
+  	print(formDict['Transcript'])
+
 
 
 if __name__ == "__main__":
