@@ -5,7 +5,10 @@ drop table columbiaamgen.studentData;
 select * from columbiaamgen.studentData;
 select * from columbiaamgen.Courses;
 select * from columbiaamgen.References;
-update columbiaamgen.studentData set UserType='IncompleteApplication' where Username in ('shivani','tulika')
+update columbiaamgen.studentData set UserType='Student' where Username in ('shivani','tulika')
+update columbiaamgen.studentData set ApplicationStatus='IncompleteApplication' where Username in ('shivani','tulika')
+update columbiaamgen.studentData set ApplicationStatus='UnderReview' where Username in ('shivani','tulika')
+update columbiaamgen.studentData set ApplicationStatus='ReferencesRequired'  where Username in ('shivani','tulika')
 Insert into columbiaamgen.studentData(Username,Password) values ('patan','temp')
 Insert into columbiaamgen.studentData(Username,Password,UserType) values ('admin','temp','Admin')
 
@@ -75,11 +78,10 @@ CREATE TABLE `columbiaamgen`.`studentData` (
 
 
 CREATE TABLE `columbiaamgen`.`References` (
-  `UserId` VARCHAR(24) NOT NULL,
-  `ReferenceId` VARCHAR(45) NOT NULL,
+  `UserName` VARCHAR(24) NOT NULL,
   `Name` VARCHAR(100) NULL,
   `Email` VARCHAR(100) NULL,
-  PRIMARY KEY (`UserId`,`ReferenceId`));
+  PRIMARY KEY (`UserName`,`Email`));
 
 CREATE TABLE `columbiaamgen`.`Courses` (
   `UserId` VARCHAR(24) NOT NULL,

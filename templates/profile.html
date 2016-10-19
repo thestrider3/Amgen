@@ -7,7 +7,7 @@
 
 <body text="#000000" bgcolor="#ffffff" link="#0088FF" vlink="#0088FF">
 
-    <form action="/submitFirstForm" method="post" name="surfapp">
+    <form action="/updateProfileByAdmin" method="post" name="surfapp">
         <div align="center">
             <center>
                 <table width="75%" cellspacing="0" cellpadding="2" border="0">
@@ -27,7 +27,27 @@
         </div>
         <div align="center">
             <center>
-                <table height="330" width="65%" cellspacing="0" cellpadding="2"
+                <table height="50" width="65%" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <tr><td><b><font face="Arial" >Application Status</font></b></td>
+                            <td>
+                                <select size="1" name="ApplicationStatus">
+                                        <option value="Accepted" {%if formDict['ApplicationStatus']=='Accepted'%} selected {%endif%}>Accepted</option>
+                                        <option value="Rejected" {%if formDict['ApplicationStatus']=='Rejected'%} selected {%endif%}>Rejected</option>
+                                        <option value="IncompleteApplication" {%if formDict['ApplicationStatus']=='IncompleteApplication'%} selected {%endif%}>IncompleteApplication</option>
+                                        <option value="ReferencesRequired" {%if formDict['ApplicationStatus']=='ReferencesRequired'%} selected {%endif%}>ReferencesRequired</option>
+                                        <option value="UnderReview" {%if formDict['ApplicationStatus']=='UnderReview'%} selected {%endif%}>UnderReview</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>
+        </div>
+        
+        <div align="center">
+            <center>
+                <table height="330" width="65%" cellspacing="0" cellpadding="0"
                     border="1">
                     <tbody>
                         <tr>
@@ -698,7 +718,7 @@
                         <td>Credits</td>
                         <td>Grade</td>
                     </tr>
-                    {% for i in range(26)  if formDict['stitle'+i|string()]%}
+                    {% for i in range(26) %}
                         <tr>
                             <td><input type="text" name={{'stitle'+i|string() }} value="{{formDict['stitle'+i|string()]}}"></td>
                             <td><input type="text" size=3 name={{'scredits'+i|string() }} value="{{formDict['scredits'+i|string()]}}"></td>
@@ -777,7 +797,7 @@
 
                     <input value="Logout" name="submitButton"
                         type="submit"> 
-                    <input value="Next" name="submitButton"
+                    <input value="Back" name="submitButton"
                         type="submit">
                     <input value="Save" name="submitButton"
                         type="submit">  
