@@ -32,8 +32,6 @@ def teardown_request(exception):
 
 @app.route('/')
 def main():
-    #return render_template('third.html')
-    
     print(session.get('logged_in'))
     if not session.get('logged_in'):
         return render_template('login.html')
@@ -50,20 +48,23 @@ def checkUsername():
   passwrd = str(request.form['passwrd'])
   
   formDict=mysql_dao.checkUser(dbcon,name,passwrd)
-  print(formDict['UserType'])
-  print(UserType.Admin.name)
+  #print(formDict['UserType'])
+  #print(UserType.Admin)
   #print(formDict)
-  #print(UserType.Student.name)
-  if formDict['UserType'] == UserType.Student.name and formDict['ApplicationStatus'] == ApplicationStatus.IncompleteApplication.name:
+  #print(UserType.Student)
+  if formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.IncompleteApplication:
       session['logged_in'] = True
       session['user'] = formDict
       universityList = mysql_dao.getUniversityList(dbcon)
       return render_template('first.html',formDict=formDict,universityList=universityList)
-  elif formDict['UserType'] == UserType.Student.name and formDict['ApplicationStatus'] == ApplicationStatus.UnderReview.name:
+  elif formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.UnderReview:
       session['logged_in'] = True
       session['user'] = formDict
-      return render_template('third.html')
-  elif formDict['UserType'] == UserType.Admin.name:
+      ReferencesDict = dict()
+      ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
+      print(ReferencesDict)
+      return render_template('third.html', ReferencesDict = ReferencesDict)      
+  elif formDict['UserType'] == UserType.Admin:
       print("admin logging in")
       session['logged_in'] = True
       formDict=mysql_dao.getUser(dbcon,'shivani')
@@ -218,10 +219,14 @@ def upload():
     
         if request.form['submitButton'] == 'Submit Application':
             if request.form.get("agree") == "agree":
-                formDict['ApplicationStatus'] = ApplicationStatus.UnderReview.name 
+                formDict['ApplicationStatus'] = ApplicationStatus.UnderReview 
                 mysql_dao.insertSecondForm(dbcon,formDict)
                 session['user'] = formDict
-                return flask.render_template('third.html')
+                ReferencesDict = dict()
+                ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
+                print(ReferencesDict)
+                return render_template('third.html', ReferencesDict = ReferencesDict)
+                
             else:
                 error="Please accept terms and condition"
                 mentorsList = mysql_dao.getMentorsList(dbcon)
@@ -243,38 +248,48 @@ def submitThirdForm():
     formDict = session['user']    #check with Shivani
     if request.form['submitButton'] == 'Submit':
       print('submit button pressed')
-      for i in range(0,2):        ##check with shivani how may ref columns?
+      for i in range(1,3):        ##check with shivani how may ref columns?
         formDict['RefName'+str(i)] = str(request.form.get('REFERENCE_'+str(i)))
         formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
-        fromaddr = str(request.form.get('ref'+str(i)+'email'))        
-        sendEMail(fromaddr)
+        print(request.form.get('ref'+str(i)+'email'))
+        toaddr = str(request.form.get('ref'+str(i)+'email'))        
+        #sendEMail(toaddr)
       mysql_dao.insertThirdForm(dbcon,formDict)
       formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
+      print('Review Waiver'+formDict['ReviewWaiver'])
       session['user'] = formDict
       mysql_dao.insertReviewWaiver(dbcon, formDict)
-      return sendEMailflask.render_template('third.html', formDict = formDict)
+      ReferencesDict = dict()
+      ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
+      #print(ReferencesDict)
+      return render_template('third.html', ReferencesDict = ReferencesDict)      
     elif request.form['submitButton'] == 'Reset':
       print('reset button pressed')
       for i in range(0,2):        ##check with shivani how may ref columns?
         formDict['Name'] = str(request.form.get('REFERENCE_'+str(i)))
+        print(formDict['Name'])
         formDict['Email'] = str(request.form.get('ref'+str(i)+'email'))
+        print(formDict['Email'])
         mysql_dao.deleteThirdForm(dbcon,formDict)         #check with Chanda whether old referrer needs to be deleted
-        return flask.render_template('third.html')
+        ReferencesDict = dict()
+        return render_template('third.html', ReferencesDict = ReferencesDict)          
     elif request.form['submitButton'] == 'Logout':
         print('logout')
         session['logged_in']=False
         session.pop('user')
         return render_template('login.html')
 
-def sendEMail(fromaddr):
+         
+
+def sendEMail(toaddr):
   msg = MIMEMultipart()
-  msg['From'] = fromaddr
+  msg['From'] = "Amgen@biology.columbia.edu"
   msg['To'] = toaddr
-  msg['Subject'] = ""
-  body = ""
+  msg['Subject'] = "This is a test email"
+  body = "Test email, please discard"
   msg.attach(MIMEText(body, 'plain'))
-  server = smtplib.SMTP_SSL('smtp.googlemail.com', 465)
-  server.login(toaddr, "########")
+  server = smtplib.SMTP_SSL('send.columbia.edu', 587)
+  server.login("Amgen@biology.columbia.edu", "744muDD")
   text = msg.as_string()
   server.sendmail(fromaddr, toaddr, text)
   server.quit()
@@ -282,8 +297,7 @@ def sendEMail(fromaddr):
 @app.route('/getStudentList', methods=['GET', 'POST'])
 def getStudentList():
     if request.method == 'GET':
-        studentList = mysql_dao.getStudentList(dbcon)
-        
+        studentList = mysql_dao.getStudentList(dbcon)        
         return render_template('studentList.html', studentList = studentList)
 
 if __name__ == "__main__":

@@ -45,17 +45,17 @@
 		</div>
 		<div align="center">
 			<center>
-				<p>
-					Name: <input size="28" name="REFERENCE_1" value=""> </font> Email:
-					<input size="20" name="ref1email" value="">
+				<p> 
+					Name: <input size="28" name="REFERENCE_1" value="{{ReferencesDict['REFERENCE_1']}}"> </font> 
+                           Email: <input size="20" name="ref1email" value="{{ReferencesDict['ref1email']}}">
 				</p>
 			</center>
 		</div>
 		<div align="center">
 			<center>
 				<p>
-					Name: <input size="28" name="REFERENCE_2" value=""> Email:
-					<input size="20" name="ref2email" value=""><br> </font>
+					Name: <input size="28" name="REFERENCE_2" value="{{ReferencesDict['REFERENCE_1']}}"> Email:
+					<input size="20" name="ref2email" value="{{ReferencesDict['ref2email']}}"><br> </font>
 				</p>
 			</center>
 		</div>
@@ -63,8 +63,8 @@
 			<center>
 				<p>
 					I waive my right to review these letters of recommendation : <input
-						type=radio name="REFERENCE_WAIVER" value="Yes"> Yes <input
-						type=radio name="REFERENCE_WAIVER" value="No"> No
+						type=radio name="REFERENCE_WAIVER" value="Yes"  {% if ReferencesDict['REFERENCE_WAIVER']=='Yes'%} checked {%endif%}> Yes <input
+						type=radio name="REFERENCE_WAIVER" value="No"  {% if ReferencesDict['REFERENCE_WAIVER']=='No'%} checked {%endif%}> No
 				</p>
 			</center>
 		</div>

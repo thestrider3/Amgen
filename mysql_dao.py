@@ -190,12 +190,12 @@ def insertSecondForm(conn,formDict):
 def insertThirdForm(conn, formDict):
     metadata = MetaData(conn)
     References = Table('References',metadata, autoload=True)
-    for i in range(0,2):
-        i = References.insert().values(
-        UserId = formDict['Username'],
+    for i in range(1,3):
+        ins = References.insert().values(
+        UserName = formDict['Username'],
         Name = formDict['RefName'+str(i)],  
         Email = formDict['RefEmail'+str(i)])
-        conn.execute(i)
+        conn.execute(ins)
 
 def insertReviewWaiver(conn, formDict):
     metadata = MetaData(conn)
@@ -205,12 +205,40 @@ def insertReviewWaiver(conn, formDict):
     conn.execute(i)
 
 def deleteThirdForm(conn, formDict):
-    MetaData = MetaData(conn)
+    metadata = MetaData(conn)
     References = Table('References',metadata, autoload=True)
-    for i in range(0,2):
-        i = References.delete().where(
-        UserId == formDict['Username'])
-        conn.execute(i)
+    ins = References.delete().where(
+    References.c.UserName == formDict['Username'])
+    conn.execute(ins)
+    studentData = Table('studentData', metadata, autoload=True)
+    s = studentData.update().where(studentData.c.Username==formDict['Username']).values(
+    ReviewWaiver = None)
+    rs = s.execute()
+    
+    
+def getReferences(conn, formDict):
+    metadata = MetaData(conn)
+    References = Table('References', metadata, autoload=True)
+    studentData = Table('studentData', metadata, autoload=True)
+    s= References.select(References.c.UserName==formDict['Username'])
+    rs = s.execute()
+    referencesDict=rs.fetchall()
+    #print(referencesDict)
+    ReferencesDict = dict()
+    i = 1
+    if referencesDict:
+        for row in referencesDict:
+            ReferencesDict['REFERENCE_'+str(i)] = row[1]
+            ReferencesDict['ref'+str(i)+'email'] = row[2]
+            i = i + 1            
+        ins = select([studentData.c.ReviewWaiver]).where(studentData.c.Username == formDict['Username'])
+        ReferencesDict['ReviewWaiver'] = ins.execute().fetchone()[0]
+    
+        
+        
+    ReferencesDict=dict(ReferencesDict)
+    print(ReferencesDict)
+    return ReferencesDict
 
 def getStudentList(conn):
     metadata = MetaData(conn)
