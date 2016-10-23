@@ -1,8 +1,12 @@
 #!/usr/bin/env python2.7
 
 import os, uuid, json,flask
+import smtplib
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
 
 from flask import Flask, request, render_template, g, redirect, Response
+
 
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
@@ -81,11 +85,26 @@ def addFirstForm():
   print(str(request.form['WHITE']))
   print(str(request.form['other']))
   print(str(request.form['decline']))
+=======
+def sendEMail(toaddr):
+  msg = MIMEMultipart()
+  msg['From'] = "Amgen@biology.columbia.edu"
+  msg['To'] = toaddr
+  msg['Subject'] = "This is a test email"
+  body = "Test email, please discard"
+  msg.attach(MIMEText(body, 'plain'))
+>>>>>>> efa7b0deb6d76d1bfe5b5a0ec8c6acb68517ad72
   
-  #print(str(request.form['ethinicity']))
-  if request.form.get('AMGENSITE'):
-    print(str(request.form.get('AMGENSITE')))
+  server = smtplib.SMTP('biomail.biology.columbia.edu', 587)
+  server.starttls()
+  server.ehlo()
+  server.login("Amgen@biology.columbia.edu", "744BmuDD")
+  text = msg.as_string()
+  server.set_debuglevel(True)
+  server.sendmail(fromaddr, toaddr, text)
+  server.quit()
   
+<<<<<<< HEAD
   if request.form.get('UNIVERSITYSITE'):
     print(str(request.form.get('UNIVERSITYSITE')))
   if request.form.get('UNIVERSITYSITENAME'):
@@ -106,7 +125,5 @@ def addFirstForm():
   	print(formDict['Transcript'])
 
 
-
 if __name__ == "__main__":
-  app.run()
-
+    sendEMail('shivani.b.gupta@gmail.com')

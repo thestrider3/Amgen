@@ -1,9 +1,13 @@
 drop table columbiaamgen.Courses;
 drop table columbiaamgen.References;
 drop table columbiaamgen.studentData;
-
+desc columbiaamgen.References;
+delete from columbiaamgen.studentData where Username = ('shivani.b.gupta@gmail.com');
+delete from columbiaamgen.References where Email like 'v.patanjali*';
+select * from columbiaamgen.References where Email = 'v.patanjali@gmail.com';
+update columbiaamgen.studentData set password='temp' where Username = ('v.patanjali@gmail.com');
 select * from columbiaamgen.studentData;
-select * from columbiaamgen.Courses;
+select count(*) from columbiaamgen.Courses;
 select * from columbiaamgen.References;
 update columbiaamgen.studentData set Transcript=null where Username in ('shivani','tulika')
 update columbiaamgen.studentData set UserType='Student' where Username in ('shivani','tulika')
@@ -63,6 +67,9 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `Mentor3` VARCHAR(50) NULL,
   `Mentor4` VARCHAR(50) NULL,
   `Mentor5` VARCHAR(50) NULL,
+  `Mentor6` VARCHAR(50) NULL,
+  `Mentor7` VARCHAR(50) NULL,
+  `Mentor8` VARCHAR(50) NULL,
   `Transcript` VARCHAR(200) NULL,
   `ApplicationStatus` VARCHAR(30) NULL,
   `ReviewWaiver` VARCHAR(5) NULL,
@@ -79,7 +86,7 @@ CREATE TABLE `columbiaamgen`.`studentData` (
 
 
 CREATE TABLE `columbiaamgen`.`References` (
-  `UserName` VARCHAR(24) NOT NULL,
+  `Username` VARCHAR(24) NOT NULL,
   `Name` VARCHAR(100) NULL,
   `Email` VARCHAR(100) NULL,
   PRIMARY KEY (`UserName`,`Email`));
