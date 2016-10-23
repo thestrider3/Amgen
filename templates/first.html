@@ -40,10 +40,10 @@
                             <td height="22" width="40%"><font size="3"
                                 face="Arial Unicode MS">First Name:</font></td>
                             <td height="22" align="left" width="60%"><font size="3"
-                                color="#000000"> <input name="FNAME" value="{{formDict['FirstName']}}"
+                                color="#000000"> <input name="FNAME" value="{{ formDict['FirstName'] if formDict['FirstName'] != None else ''}}"
                                     maxlength="50" size="14" type="text"> <font
                                     face="Arial, Helvetica, sans-serif">Last Name:</font> <input
-                                    name="LNAME" size="15" type="text" value="{{formDict['LastName']}}"></font></td>
+                                    name="LNAME" size="15" type="text" value="{{formDict['LastName'] if formDict['LastName'] != None else ''}}"></font></td>
                         </tr>
                         <tr>
                             <td height="22"><p>
@@ -52,7 +52,7 @@
                                 </p></td>
                             <td height="22" align="left"><font face="Arial" size="3"
                                 color="#000000"> <input name="DATEOFBIRTH" maxlength="40"
-                                    size="40" type="text" value="{{formDict['DOB']}}">
+                                    size="40" type="text" value="{{formDict['DOB'] if formDict['DOB'] != None else ''}}">
                             </font></td>
                         </tr>
                         <tr>
@@ -60,7 +60,7 @@
                                 face="Arial Unicode MS">Email:</font></td>
                             <td height="23" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"><input name="EMAIL" size="40"
-                                    type="text" value="{{formDict['Email']}}"> </font></td>
+                                    type="text" value="{{formDict['Email'] if formDict['Email'] != None else ''}}"> </font></td>
                         </tr>
                         <tr>
                             <td height="23" width="40%"><p>
@@ -70,7 +70,7 @@
                                 </p></td>
                             <td height="23" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"><input name="ALTERNATIVE_EMAIL"
-                                    size="40" type="text" value="{{formDict['AlternativeEmail']}}"> </font></td>
+                                    size="40" type="text" value="{{formDict['AlternativeEmail'] if formDict['AlternativeEmail'] != None else ''}}"> </font></td>
                         </tr>
 
                         <tr>
@@ -78,7 +78,7 @@
                                 face="Arial Unicode MS"> Phone # :</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"> <input name="PERMANENT_PHONE"
-                                    size="40" type="text" value="{{formDict['Phone']}}">
+                                    size="40" type="text" value="{{formDict['Phone'] if formDict['Phone'] != None else ''}}">
                             </font></td>
                         </tr>
                         <tr>
@@ -86,7 +86,7 @@
                                 face="Arial Unicode MS"> Permanent Street Address 1:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"> <input
-                                    name="PERMANENT_ADDRESS1" size="40" type="text" value="{{formDict['PermStreetAdr1']}}">
+                                    name="PERMANENT_ADDRESS1" size="40" type="text" value="{{formDict['PermStreetAdr1'] if formDict['PermStreetAdr1'] != None else ''}}">
                             </font></td>
                         </tr>
                         <tr>
@@ -95,7 +95,7 @@
                                     (optional):</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"> <input
-                                    name="PERMANENT_ADDRESS2" size="40" type="text" value="{{formDict['PermStreetAdr2']}}">
+                                    name="PERMANENT_ADDRESS2" size="40" type="text" value="{{formDict['PermStreetAdr2'] if formDict['PermStreetAdr2'] != None else ''}}">
                             </font></td>
                         </tr>
                         <tr>
@@ -103,21 +103,21 @@
                                     City:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"><input name="PERMANENT_CITY"
-                                    size="40" type="text" value="{{formDict['PermanentCity']}}"> </font></td>
+                                    size="40" type="text" value="{{formDict['PermanentCity'] if formDict['PermanentCity'] != None else ''}}"> </font></td>
                         </tr>
                         <tr>
                             <td height="22" width="40%"><font face="Arial Unicode MS">Permanent
                                     State:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"><input name="PERMANENT_STATE"
-                                    size="40" type="text" value="{{formDict['PermanentState']}}"> </font></td>
+                                    size="40" type="text" value="{{formDict['PermanentState'] if formDict['PermanentState'] != None else ''}}"> </font></td>
                         </tr>
                         <tr>
                             <td height="22" width="40%"><font face="Arial Unicode MS">Permanent
                                     Zip code:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"><input name="PERMANENT_ZIP"
-                                    size="40" type="text" value="{{formDict['PermanentZipCode']}}"> </font></td>
+                                    size="40" type="text" value="{{formDict['PermanentZipCode'] if formDict['PermanentZipCode'] != None else ''}}"> </font></td>
                         </tr>
 
 
@@ -131,7 +131,7 @@
                                 face="Arial Unicode MS"> Campus Address 1:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"> <input name="SCHOOL_ADDRESS1"
-                                    size="40" type="text" value="{{formDict['CampusAdr1']}}">
+                                    size="40" type="text" value="{{formDict['CampusAdr1'] if formDict['CampusAdr1'] != None else ''}}">
                             </font></td>
                         </tr>
                         <tr>
@@ -139,7 +139,7 @@
                                 face="Arial Unicode MS"> Campus Address 2:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"> <input name="SCHOOL_ADDRESS2"
-                                    size="40" type="text" value="{{formDict['CampusAdr2']}}">
+                                    size="40" type="text" value="{{formDict['CampusAdr2'] if formDict['CampusAdr2'] != None else ''}}">
                             </font></td>
                         </tr>
 
@@ -149,14 +149,14 @@
                                     City:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"><input name="CAMPUS_CITY"
-                                    size="40" type="text" value="{{formDict['CampusCity']}}"> </font></td>
+                                    size="40" type="text" value="{{formDict['CampusCity'] if formDict['CampusCity'] != None else ''}}"> </font></td>
                         </tr>
                         <tr>
                             <td height="22" width="40%"><font face="Arial Unicode MS">Campus
                                     State:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"><input name="CAMPUS_STATE"
-                                    size="40" type="text" value="{{formDict['CampusState']}}"> </font></td>
+                                    size="40" type="text" value="{{formDict['CampusState'] if formDict['CampusState'] != None else ''}}"> </font></td>
                         </tr>
 
 
@@ -166,7 +166,7 @@
                                     Zip code:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"><input name="CAMPUS_ZIP"
-                                    size="40" type="text" value="{{formDict['CampusZipCode']}}"> </font></td>
+                                    size="40" type="text" value="{{formDict['CampusZipCode'] if formDict['CampusZipCode'] != None else ''}}"> </font></td>
                         </tr>
 
 
@@ -179,7 +179,7 @@
                                     City:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"> <input name="HOMECITY" size="3"
-                                    type="text" value="{{formDict['HomeCity']}}"\>
+                                    type="text" value="{{formDict['HomeCity'] if formDict['HomeCity'] != None else ''}}"\>
                             </font>If you graduated high school in the US, which City did you
                                 graduate in</td>
                         </tr>
@@ -188,7 +188,7 @@
                                     State:</font></td>
                             <td height="22" align="left" width="60%"><font face="Arial"
                                 size="3" color="#000000"> <input name="HOMESTATE"
-                                    size="3" type="text" value="{{formDict['HomeState']}}"\>
+                                    size="3" type="text" value="{{formDict['HomeState'] if formDict['HomeState'] != None else ''}}"\>
                             </font>If you graduated high school in the US, which state did you
                                 graduate in</td>
                         </tr>
@@ -233,7 +233,7 @@
 
                                         <input type=radio name="ethinicity" id="WHITE" value="White/Caucasian" {% if formDict['Ethnicity']=='White / Caucasian' %} checked {% endif%}>White / Caucasian<BR>
                                         <input type=radio name="ethinicity" id="OTHER" value="Other" {% if formDict['Ethnicity']=='Other' %} checked {% endif%}>Other: <input name="ethnicityother" maxlength="50" size="40"
-                                        type="text" value="{{formDict['EthnicityOther']}}"> <BR> 
+                                        type="text" value="{{formDict['EthnicityOther'] if formDict['EthnicityOther'] != None else ''}}"> <BR> 
 
                                         <input type=radio
                                         name="ethinicity" id="decline" value="Decline" {% if formDict['Ethnicity']=='Decline to State' %} checked {% endif%}> Decline to State
@@ -251,7 +251,7 @@
                                         <input type="radio" name="CITIZENSHIP"
                                         value="resident" {% if formDict['CitizenshipStatus']=='resident' %} checked {% endif%}>Permanent Resident, Place of Birth
                                         <input name="PLACEOFBIRTH" maxlength="75" size="25" type="text"
-                                        value="{{formDict['PlaceOfBirth']}}"> <br> 
+                                        value="{{formDict['PlaceOfBirth'] if formDict['PlaceOfBirth'] != None else ''}}"> <br> 
                                         <input type="radio"
                                         name="CITIZENSHIP" value="other" {% if formDict['CitizenshipStatus']=='other' %} checked {% endif%}>Other<br> <br>
                                     </font>
@@ -285,7 +285,7 @@
                                             <option value="No High School Degree" {%if formDict['FatherDegree']=='No High School Degree' %} selected {%endif%}>No High School Degree</option>
                                             <option value="High School" {%if formDict['FatherDegree']=='High School' %} selected {%endif%}>High School</option>
                                             <option value="Associates/Certificate" {%if formDict['FatherDegree']=='Associates/Certificate' %} selected {%endif%}>Associates/Certificate</option>
-                                            <option value="Bachelors" {%if formDict['FatherDegree']=='Bachelors' %} selected {%endif%}>Bachelors<</option>
+                                            <option value="Bachelors" {%if formDict['FatherDegree']=='Bachelors' %} selected {%endif%}>Bachelors</option>
                                             <option value="Masters" {%if formDict['FatherDegree']=='Masters' %} selected {%endif%}>Masters</option>
                                             <option value="Doctorate" {%if formDict['FatherDegree']=='Doctorate' %} selected {%endif%}>Doctorate</option>
                                     </select> <br> <br> </font>
@@ -355,7 +355,7 @@
                             <td height="22" align="left" width="60%"><p>
                                     <font face="Arial, Helvetica, sans-serif" size="3"
                                         color="#000000"> <input name="CUMULATIVEGPA" size="40"
-                                        type="text" value="{{formDict['CumulativeGPA']}}">
+                                        type="text" value="{{formDict['CumulativeGPA'] if formDict['CumulativeGPA'] != None else ''}}">
                                     </font>
                                 </p></td>
                         </tr>
@@ -376,7 +376,7 @@
                                         value="Other" {% if formDict['AdvancedDegreeObjective']=='Other'%} checked {%endif%}> Other, Please Specify: <font
                                         color="#000000"> 
                                         <input name="ADVANCEDDEGREEOTHER"
-                                            size="40" type="text" value="{{formDict['AdvancedDegreeObjectiveOther']}}">
+                                            size="40" type="text" value="{{formDict['AdvancedDegreeObjectiveOther'] if formDict['AdvancedDegreeObjective'] != None else ''}}">
                                     </font></font>
                                 </p></td>
                         </tr>
@@ -401,23 +401,23 @@
                                         <input type=checkbox name="UNIVERSITYSITE" {% if 'University website, University name' in formDict['HowDidYouHear']%} checked {%endif%}> University website, University name:
                                     </font><font face="Arial, Helvetica, sans-serif" size="3"
                                         color="#000000"> 
-                                        <input name="UNIVERSITYSITENAME" size="25" type="text" value="{{formDict['HowDidYouHearUniversityName']}}">
+                                        <input name="UNIVERSITYSITENAME" size="25" type="text" value="{{formDict['HowDidYouHearUniversityName'] if formDict['HowDidYouHearUniversityName'] != None else ''}}">
                                     </font><font size="3" face="Arial, Helvetica, sans-serif"><BR>
                                         <input type=checkbox name="EMAILANNOUNCEMENT" {% if 'E-mail Announcement' in formDict['HowDidYouHear']%} checked {%endif%}>E-mail Announcement<BR> 
                                         <input type=checkbox name="POSTER" {% if 'Poster' in formDict['HowDidYouHear']%} checked {%endif%}>Poster<BR> 
                                         <input type=checkbox name="CONFERENCE" {% if 'Conference, Conference Name' in formDict['HowDidYouHear']%} checked {%endif%}> Conference, Conference name: 
                                     </font><font face="Arial, Helvetica, sans-serif" size="3" color="#000000">
-                                        <input name="CONFERENCENAME" size="30" type="text" value="{{formDict['HowDidYouHearConferenceName']}}">
+                                        <input name="CONFERENCENAME" size="30" type="text" value="{{formDict['HowDidYouHearConferenceName'] if formDict['HowDidYouHearConferenceName'] != None else ''}}">
                                     </font><font size="3" face="Arial, Helvetica, sans-serif"><BR>
                                         <input type=checkbox name="ACADEMICADVISOR" {% if 'Academic Advisor' in formDict['HowDidYouHear']%} checked {%endif%}> Academic Advisor <BR> 
                                         <input type=checkbox name="INTERNETSEARCH" {% if 'Internet Search' in formDict['HowDidYouHear']%} checked {%endif%}>Internet Search<BR>
                                         <input type=checkbox name="HOMEUNIVERSITY" {% if 'Faculty/Staff from home university' in formDict['HowDidYouHear']%} checked {%endif%}> Faculty/Staff from home university <BR>
                                         <input type=checkbox name="OTHERUNIVERSITY" {% if 'Faculty/Staff from home university' in formDict['HowDidYouHear']%} checked {%endif%}> Faculty/Staff from other university <br> University name: 
                                     </font><font face="Arial, Helvetica, sans-serif" size="3" color="#000000">
-                                        <input name="OTHERUNIVERSITYNAME" size="25" type="text" value="{{formDict['HowDidYouHearOtherUniversityName']}}">
+                                        <input name="OTHERUNIVERSITYNAME" size="25" type="text" value="{{formDict['HowDidYouHearOtherUniversityName'] if formDict['HowDidYouHearOtherUniversityName'] != None else ''}}">
                                     </font><font size="3" face="Arial, Helvetica, sans-serif"><br>
                                         <input type=checkbox name="AMGENOTHER" {% if 'Other' in formDict['HowDidYouHear']%} checked {%endif%}> Other, please specify: </font><font face="Arial, Helvetica, sans-serif" size="3" color="#000000">
-                                        <input name="AMGENOTHERNAME" size="25" type="text" value="{{formDict['HowDidYouHearOther']}}">
+                                        <input name="AMGENOTHERNAME" size="25" type="text" value="{{formDict['HowDidYouHearOther'] if formDict['HowDidYouHearOther'] != None else ''}}">
                                     </font>
                                 </p></td>
                         </tr>
@@ -475,7 +475,7 @@
                                         <input type="radio" name="ARRIVEONFIRSTDAY" value="No" {% if formDict['CanArriveAtColumbiaMemorialDay']=='No'%} checked {%endif%}>No <br /> 
                                         Comments: <br /> <textarea
                                             name="ARRIVEONFIRSTDAYX" rows="4" style="width: 99%"
-                                            maxlength="250">{{formDict['ArriveAtColumbiaComments']}}</textarea>
+                                            maxlength="250">{{formDict['ArriveAtColumbiaComments'] if formDict['ArriveAtColumbiaComments'] != None else ''}}</textarea>
                                     </font> </font>
                                 </p></td>
                         </tr>
@@ -518,14 +518,14 @@
                             <td width="79%"><font size="3" face="Arial Unicode MS">
                                     Your major (declared or expected)</font></td>
                             <td width="42%"><font face="Arial"><input size="26"
-                                    name="MAJOR" value="{{formDict['Major']}}"></font></td>
+                                    name="MAJOR" value="{{formDict['Major'] if formDict['Major'] != None else ''}}"></font></td>
                         </tr>
                         <tr>
                             <td width="79%"><font size="3" face="Arial Unicode MS">
                                     Date Spring semester ends: <br>
                             </font></td>
                             <td width="42%"><font face="Arial"><input size="26"
-                                    name="SEMESTER_END" value="{{formDict['DateSpringSemesterEnds']}}"> </font></td>
+                                    name="SEMESTER_END" value="{{formDict['DateSpringSemesterEnds'] if formDict['DateSpringSemesterEnds'] != None else ''}}"> </font></td>
                         </tr>
                 </table>
             </center>
@@ -539,6 +539,13 @@
 
             </center>
         </div>
+        <div align="center">
+                                                    <center>
+                                                        <p> {% if error %}
+                                                      <font size="4" color="red">Error: {{ error }}</font>
+                                                      {% endif %}</p>
+                                                    </center>
+                                                </div>
         <div align="center">
             <center>
                 <p>

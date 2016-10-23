@@ -765,10 +765,10 @@
                         <table>
                             <tr>
                                 <td>
-                                    <p>
+                                    
                                     <p>
                                         <input type="file" id="fileupload" name="file">
-                                    <p>
+                                    </p>
                                 </td>
                             </tr>
                         </table>
@@ -778,17 +778,29 @@
             </center>
             </div>
             <div align="center">
-                <center>
-                    <table width="75%" cellspacing="0" cellpadding="2" border="0">
-                        <p>
-                        <p></p>
-                        </div>
-                        <div align="center">
-                            <center>
-                                <table width="75%" cellspacing="0" cellpadding="2" border="0">
-                                    <tbody>
-                                        <p></p>
-                                        </div>
+            <center>
+                <p> 
+                    Name: <input size="28" name="REFERENCE_1" value="{{ReferencesDict['REFERENCE_1']}}"> </font> 
+                           Email: <input size="20" name="ref1email" value="{{ReferencesDict['ref1email']}}">
+                </p>
+            </center>
+            </div>
+            <div align="center">
+            <center>
+                <p>
+                    Name: <input size="28" name="REFERENCE_2" value="{{ReferencesDict['REFERENCE_1']}}"> Email:
+                    <input size="20" name="ref2email" value="{{ReferencesDict['ref2email']}}"><br> </font>
+                </p>
+            </center>
+            </div>
+            <div align="center">
+            <center>
+                <p>
+                    I waive my right to review these letters of recommendation : <input
+                        type=radio name="REFERENCE_WAIVER" value="Yes"  {% if ReferencesDict['ReviewWaiver']=='Yes'%} checked {%endif%}> Yes <input
+                        type=radio name="REFERENCE_WAIVER" value="No"  {% if ReferencesDict['ReviewWaiver']=='No'%} checked {%endif%}> No
+                </p>
+            </center>
         </div>
         <div align="center">
             <center>

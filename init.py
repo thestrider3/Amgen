@@ -19,6 +19,14 @@ ALLOWED_EXTENSIONS = set(['pdf'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
+def count_letters(word):
+  count = 0
+  for c in word:
+      count += 1
+  return count
+
+
 @app.before_request
 def before_request():
     global dbcon,engine,dbSession
@@ -46,12 +54,18 @@ def main():
 
 @app.route('/checkUsername', methods=['POST'])
 def checkUsername():
-  print("inside checkUsername")
+  
   global userSession
   name = str(request.form['username'])
   passwrd = str(request.form['passwrd'])
   
   formDict=mysql_dao.checkUser(dbcon,name,passwrd)
+  print(formDict)
+  if not formDict['HowDidYouHear']:
+      formDict['HowDidYouHear'] = ""
+  
+  if not formDict:
+      return render_template('login.html',error="Username or password is incorrect. Please try again.")
 
  
   if formDict['UserType'] == UserType.Student and formDict['ApplicationStatus'] == ApplicationStatus.IncompleteApplication:
@@ -86,16 +100,18 @@ def addUser():
   global userSession
   name = str(request.form['username'])
   passwrd = str(request.form['passwrd'])
+  if ".edu" not in name:
+      return render_template('signup.html',error="Username must be an email and ending in .edu")
+      
+  user = mysql_dao.createNewUser(dbcon,name,passwrd,ApplicationStatus.IncompleteApplication.name)
 
-  user = mysql_dao.createNewUser(dbcon,name,passwrd,ApplicationStatus.IncompleteApplication)
-  
   if user:
       session['logged_in'] = True
       session['user'] = user
       universityList = mysql_dao.getUniversityList(dbcon)
       return render_template('first.html',formDict=dict(),universityList=universityList)
   else:
-       flash("Username already exists. Please try again.")
+       return render_template('signup.html',error="Username already exists. Please try again.")
       
       
 @app.route('/submitFirstForm', methods=['POST'])
@@ -183,11 +199,51 @@ def addFirstForm():
     formDict['ArriveAtColumbiaComments'] = str(request.form.get('ARRIVEONFIRSTDAYX'))
     formDict['CurrentlyAttendingUniversity'] = str(request.form.get('university'))
     formDict['Major'] = str(request.form.get('MAJOR'))
-    formDict['DateSpringSemesterEnds'] = str(request.form.get('SEMESTER_END'))
+    formDict['DateSpringSemesterEnds'] = str(request.form.get('SEMESTER_END'))    
+    
+    
     mysql_dao.insertFirstForm(dbcon,formDict)
     session['user'] = formDict
       
     if request.form['submitButton'] == 'Next': 
+        if not ( formDict['FirstName'] and
+            formDict['LastName'] and
+            formDict['DOB'] and
+            formDict['Email'] and
+            formDict['AlternativeEmail'] and
+            formDict['Phone'] and
+            formDict['PermStreetAdr1'] and
+            formDict['PermanentCity'] and
+            formDict['PermanentState'] and
+            formDict['PermanentZipCode'] and
+            formDict['CampusAdr1'] and
+            formDict['CampusCity'] and
+            formDict['CampusState'] and
+            formDict['CampusZipCode'] and
+            formDict['HomeCity'] and
+            formDict['HomeState'] and
+            formDict['Gender'] and
+            formDict['Ethnicity'] and
+            formDict['CitizenshipStatus'] and
+            formDict['MotherDegree'] and
+            formDict['FatherDegree'] and
+            formDict['ClassCompletedSpring'] and
+            formDict['GraduationMonth'] and
+            formDict['GraduationYear'] and
+            formDict['CumulativeGPA'] and
+            formDict['AdvancedDegreeObjective'] and
+            formDict['IsUndergraduateResearchProgramOffered'] and
+            formDict['AnyOtherAmgenScholarsSite'] and
+            formDict['YesOtherAmgenScholarsSite'] and
+            formDict['PastAmgenScholarParticipation'] and
+            formDict['OriginalResearchPerformed'] and
+            formDict['CanArriveAtColumbiaMemorialDay'] and
+            formDict['ArriveAtColumbiaComments'] and
+            formDict['CurrentlyAttendingUniversity'] and
+            formDict['Major'] and
+            formDict['DateSpringSemesterEnds'] ):
+            universityList = mysql_dao.getUniversityList(dbcon)
+            return render_template('first.html',formDict=formDict,universityList=universityList,error="Please complete all fields before submitting")   
         mentorsList = mysql_dao.getMentorsList(dbcon)
         return flask.render_template('second.html',formDict=formDict,mentorsList=mentorsList)
     elif request.form['submitButton'] == 'Save':
@@ -221,7 +277,7 @@ def upload():
             else:
                 break;
                 
-              
+        error = ""     
         transcript = request.files['fileupload']
         
         if transcript:
@@ -240,7 +296,25 @@ def upload():
         if request.form.get("agree") == "agree":
             formDict['ApplicationStatus'] = ApplicationStatus.ReferencesRequired 
         else:
-            error = "Please accept terms and condition"       
+            error = "Please accept terms and condition" 
+        if count_letters(formDict['ScienceExperience']) > 700:
+                error="Character Limit exceeded for science experience."
+                
+        if count_letters(formDict['CareerPlans']) > 500:
+            error="Character Limit exceeded for career plans."
+            
+        if count_letters(formDict['AspirationNext20Yrs']) > 500:
+            error="Character Limit exceeded for aspiration for next 20 years."
+        if not (formDict['ScienceExperience'] and \
+                formDict['CareerPlans'] and \
+                formDict['AspirationNext20Yrs'] and \
+                formDict['Mentor1'] and \
+                formDict['Mentor2'] and \
+                formDict['Mentor3'] and \
+                formDict['Mentor4'] and \
+                formDict['Mentor5']):
+            error="Please complete all fields before submitting."   
+        
     
         if request.form['submitButton'] == 'Submit Application':
             if not error:
@@ -248,9 +322,10 @@ def upload():
                 session['user'] = formDict
                 ReferencesDict = dict()
                 ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
-                return render_template('third.html', ReferencesDict = ReferencesDict)                
-            else:               
-                mentorsList = mysql_dao.getMentorsList(dbcon)
+                return render_template('third.html', ReferencesDict = ReferencesDict)
+                
+            else:
+                mentorsList = mysql_dao.getMentorsList(dbcon)       
                 return flask.render_template('second.html', error=error,formDict=formDict,mentorsList=mentorsList)
         elif request.form['submitButton'] == 'Save':
             mentorsList = mysql_dao.getMentorsList(dbcon)
@@ -269,16 +344,23 @@ def allowed_file(filename):
 @app.route('/submitThirdForm', methods=['GET', 'POST'])
 def submitThirdForm():
   if request.method == 'POST':
-    formDict = session['user']    #check with Shivani
+    formDict = session['user']    
     if request.form['submitButton'] == 'Submit':
-      
-      for i in range(1,3):        ##check with shivani how may ref columns?
+      for i in range(1,3):        
         formDict['RefName'+str(i)] = str(request.form.get('REFERENCE_'+str(i)))
         formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
+        if not (formDict['RefName'+str(i)] and formDict['RefEmail'+str(i)]):
+            error="Please fill in all the  reference details."
+            return render_template('third.html', ReferencesDict = formDict,error=error)     
         toaddr = str(request.form.get('ref'+str(i)+'email'))        
-        #sendEMail(toaddr)
       mysql_dao.insertThirdForm(dbcon,formDict)
       formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
+      
+      if not (formDict['ReviewWaiver']):
+            ReferencesDict = dict()
+            error="Please select option for review waver"
+            return render_template('third.html', ReferencesDict = ReferencesDict,error=error)
+            
       session['user'] = formDict
       mysql_dao.insertReviewWaiver(dbcon, formDict)
       ReferencesDict = dict()
@@ -286,10 +368,10 @@ def submitThirdForm():
       return render_template('third.html', ReferencesDict = ReferencesDict) 
       
     elif request.form['submitButton'] == 'Reset':
-      for i in range(0,2):        ##check with shivani how may ref columns?
+      for i in range(0,2):
         formDict['Name'] = str(request.form.get('REFERENCE_'+str(i)))
         formDict['Email'] = str(request.form.get('ref'+str(i)+'email'))
-        mysql_dao.deleteThirdForm(dbcon,formDict)         #check with Chanda whether old referrer needs to be deleted
+        mysql_dao.deleteThirdForm(dbcon,formDict)
         ReferencesDict = dict()
         return render_template('third.html', ReferencesDict = ReferencesDict)
           
@@ -302,13 +384,14 @@ def submitThirdForm():
 
 def sendEMail(toaddr):
   msg = MIMEMultipart()
-  msg['From'] = "Amgen@biology.columbia.edu"
+  fromaddr = "Amgen@biology.columbia.edu"
+  msg['From'] = fromaddr
   msg['To'] = toaddr
   msg['Subject'] = "This is a test email"
   body = "Test email, please discard"
   msg.attach(MIMEText(body, 'plain'))
   server = smtplib.SMTP_SSL('send.columbia.edu', 587)
-  server.login("Amgen@biology.columbia.edu", "744muDD")
+  server.login(fromaddr, "744muDD")
   text = msg.as_string()
   server.sendmail(fromaddr, toaddr, text)
   server.quit()
@@ -324,9 +407,11 @@ def getStudentList():
             if request.form['submitButton'] == row[0]:
                 session['usernameProfile']='shivani'
                 formDict=mysql_dao.getUser(dbcon,session['usernameProfile'])
+                ReferencesDict = dict()
+                ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
                 universityList = mysql_dao.getUniversityList(dbcon)
                 mentorsList = mysql_dao.getMentorsList(dbcon)
-                return render_template('profile.html',formDict=formDict,universityList=universityList,mentorsList=mentorsList)
+                return render_template('profile.html',formDict=formDict,universityList=universityList,mentorsList=mentorsList,ReferencesDict=ReferencesDict)
 
 
 @app.route('/updateProfileByAdmin',methods=['POST'])
@@ -442,31 +527,30 @@ def updateProfileByAdmin():
                 formDict['stitle'+''+str(i)] = request.form['stitle'+''+str(i)]
                 formDict['scredits'+''+str(i)] = request.form['scredits'+''+str(i)]
                 formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]
-                
             else:
                 break;
         mysql_dao.insertSecondForm(dbcon,formDict)
         
+        
+        for i in range(1,3):       
+            formDict['RefName'+str(i)] = str(request.form.get('REFERENCE_'+str(i)))
+            formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
+          
+        mysql_dao.insertThirdForm(dbcon,formDict)
+        formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
+        session['user'] = formDict
+        mysql_dao.insertReviewWaiver(dbcon, formDict)
+
+        formDict['Transcript'] = request.files['fileupload'].read()
+        print(formDict['Transcript'])        
+        
         mentorsList = mysql_dao.getMentorsList(dbcon)
         universityList = mysql_dao.getUniversityList(dbcon)
-        return render_template('profile.html',formDict=formDict,universityList=universityList,mentorsList=mentorsList)
-    
-def do_urlize(environment, value, trim_url_limit=None, nofollow=False):
-    """Converts URLs in plain text into clickable links.
 
-    If you pass the filter an additional integer it will shorten the urls
-    to that number. Also a third argument exists that makes the urls
-    "nofollow":
+        ReferencesDict = dict()
+        ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
+        return render_template('profile.html',formDict=formDict,universityList=universityList,mentorsList=mentorsList,ReferencesDict=ReferencesDict)
 
-    .. sourcecode:: jinja
-
-        {{ mytext|urlize(40, true) }}
-            links are shortened to 40 chars and defined with rel="nofollow"
-    """
-    rv = urlize(value, trim_url_limit, nofollow)
-    if environment.autoescape:
-        rv = Markup(rv)
-    return rv
     
 if __name__ == "__main__":
   app.secret_key = os.urandom(24)
