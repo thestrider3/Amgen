@@ -11,12 +11,11 @@ Created on Wed Oct 12 09:26:17 2016
 
 @author: shivani
 """
-from enum import Enum
 
-class UserType(Enum):
-    Student = 'Student'
-    Mentor = 'Mentor'
-    Admin = 'Admin'
+UserType = {'Student':"Student",
+            'Mentor' : 'Mentor',
+            'Admin' : 'Admin',
+            'Referal' : 'Referal'}
     
 
     

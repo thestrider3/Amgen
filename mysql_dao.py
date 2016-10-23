@@ -8,10 +8,16 @@ Created on Wed Oct  5 17:28:00 2016
 from sqlalchemy import *
 from sqlalchemy.pool import NullPool
 from user import *
+import string
+import random
+from applicationStatus import ApplicationStatus
+from userType import UserType
 
-from UserType import UserType
 DATABASEURI = "mysql+mysqlconnector://aheicklen:mass67@mysql.columbiasurf.dreamhosters.com:3306/columbiaamgen" 
 engine = create_engine(DATABASEURI)
+
+def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 def getUniversityList(conn):
     metadata = MetaData(conn)
@@ -42,6 +48,7 @@ def checkUser(conn,name,passwrd):
     s= user_info.select(and_(user_info.c.Username==name , user_info.c.Password==passwrd))
     rs = s.execute()
     formDict=rs.fetchone()
+    
     if formDict:
         formDict=dict(formDict)
         courses = Table('Courses', metadata, autoload=True)
@@ -55,14 +62,14 @@ def checkUser(conn,name,passwrd):
             i=i+1
     return formDict
 
-def createNewUser(conn,name,passwrd,status):
+def createNewUser(conn,name,passwrd,status,userType):
     metadata = MetaData(conn)
     user_info = Table('studentData', metadata, autoload=True)
     s= user_info.select(user_info.c.Username==name)
     rs = s.execute()
     if rs.fetchone():
-        return None
-    conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`,`ApplicationStatus`) Values (%s,%s,%s)', [name,passwrd,status])
+        return NoneidGenerator
+    conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`,`ApplicationStatus`,`UserType`) Values (%s,%s,%s,%s)', [name,passwrd,status,userType])
     formDict = {"Username":name,"ApplicationStatus":status}
     return formDict
     
@@ -72,7 +79,10 @@ def getUser(conn,username):
     s= user_info.select(user_info.c.Username==username)
     rs = s.execute()
     formDict=rs.fetchone()
-    formDict=dict(formDict)
+    if formDict:
+        formDict=dict(formDict)
+    else:
+        formDict=dict()
     
     if formDict:
         courses = Table('Courses', metadata, autoload=True)
@@ -84,8 +94,8 @@ def getUser(conn,username):
             formDict['scredits'+''+str(i)] = row['Credits']
             formDict['sgrade'+''+str(i)] = row['Grade']
             i=i+1
-    return formDict
-
+    return formDict  
+    
 def insertFirstForm(conn,formDict):
     metadata = MetaData(conn)
     studentData = Table('studentData',metadata, autoload=True)
@@ -162,9 +172,10 @@ def insertSecondForm(conn,formDict):
     Mentor2 = formDict['Mentor2'],  
     Mentor3 = formDict['Mentor3'],  
     Mentor4 = formDict['Mentor4'], 
-    Mentor5 = formDict['Mentor5'])  
-    #Transcript = formDict['Transcript'],  
-    #IsApplicationSubmitted = formDict['IsApplicationSubmitted'])
+    Mentor5 = formDict['Mentor5'],
+    Mentor6 = formDict['Mentor6'],
+    Mentor7 = formDict['Mentor7'],
+    Mentor8 = formDict['Mentor8'])  
     conn.execute(i)
     
     Courses = Table('Courses',metadata, autoload=True)
@@ -185,16 +196,47 @@ def insertSecondForm(conn,formDict):
         else:
             break
 
-def insertThirdForm(conn, formDict):
-    deleteThirdForm(conn,formDict)
+def getStudentsByProf(conn, username):
+    """
+    """
+
     metadata = MetaData(conn)
+    References = Table('References', metadata, autoload=True)
+    studentData = Table('studentData', metadata, autoload=True)
+
+    students = [x[0] for x in select([References.c.Username]).where(References.c.Email == username).execute().fetchall()]
+
+    query = select([studentData.c.Username,studentData.c.FirstName,studentData.c.LastName], studentData.c.Username.in_(students))
+
+    result = query.execute().fetchall()    
+    return result
+
+def insertThirdForm(conn, formDict):
+    metadata = MetaData(conn)
+    newRefs=[]
     References = Table('References',metadata, autoload=True)
+    StudentData = Table('studentData',metadata, autoload=True)
+    curRef = References.select(References.c.Username==formDict['Username'])
+    curRef = curRef.execute().fetchall();
+    ins = [False,False]
+    for ref in curRef:
+        foundRef = False
+        for i in range(1,3):
+            if formDict['RefEmail'+str(i)] == ref['Email']:
+                ins[i-1] = True
+                foundRef=True
+                References.update().where(and_(References.c.Username==formDict['Username'], References.c.Email==formDict['RefEmail'+str(i)])).values(Name = formDict['RefName'+str(i)]).execute()
+        if not foundRef:
+            References.delete().where(and_(References.c.Username==formDict['Username'], References.c.Email==formDict['RefEmail'+str(i)])).execute()
+            StudentData.update().where(StudentData.c.Username==formDict['RefEmail'+str(i)]).values(ApplicationStatus = ApplicationStatus['ReferenceNoLongerRequired']).execute()
+    
     for i in range(1,3):
-        ins = References.insert().values(
-        UserName = formDict['Username'],
-        Name = formDict['RefName'+str(i)],  
-        Email = formDict['RefEmail'+str(i)])
-        conn.execute(ins)
+        if ins[i-1] == False:
+            password=idGenerator()
+            References.insert().values(Username = formDict['Username'],Name = formDict['RefName'+str(i)],Email = formDict['RefEmail'+str(i)]).execute()
+            createNewUser(conn,'RefEmail'+str(i),password,ApplicationStatus['ReferenceRequired'],UserType['Referal'])
+            newRefs.append((formDict['RefEmail'+str(i)],password))
+    return newRefs
 
 def insertReviewWaiver(conn, formDict):
     metadata = MetaData(conn)
@@ -206,8 +248,8 @@ def insertReviewWaiver(conn, formDict):
 def deleteThirdForm(conn, formDict):
     metadata = MetaData(conn)
     References = Table('References',metadata, autoload=True)
-    delete = References.delete().where(
-    References.c.UserName == formDict['Username'])
+    delete = References.select().where(
+    References.c.Username == formDict['Username'])
     conn.execute(delete)
     studentData = Table('studentData', metadata, autoload=True)
     s = studentData.update().where(studentData.c.Username==formDict['Username']).values(
@@ -219,10 +261,9 @@ def getReferences(conn, formDict):
     metadata = MetaData(conn)
     References = Table('References', metadata, autoload=True)
     studentData = Table('studentData', metadata, autoload=True)
-    s= References.select(References.c.UserName==formDict['Username'])
+    s= References.select(References.c.Username==formDict['Username'])
     rs = s.execute()
     referencesDict=rs.fetchall()
-    #print(referencesDict)
     ReferencesDict = dict()
     i = 1
     if referencesDict:
@@ -241,17 +282,8 @@ def getReferences(conn, formDict):
 def getStudentList(conn):
     metadata = MetaData(conn)
     studentData = Table('studentData', metadata, autoload=True)
-    s= select([studentData.c.Username,studentData.c.FirstName,studentData.c.LastName]).where(studentData.c.UserType == UserType.Student.name)
+    s= select([studentData.c.Username,studentData.c.FirstName,studentData.c.LastName]).where(studentData.c.UserType == UserType['Student'])
     rs = s.execute().fetchall()
-    #print(rs)
-    '''
-    studentDict = dict()
-    for row in rs:
-        studentDict['UserName'] = row[0]
-        studentDict['FirstName'] = row[1]
-        studentDict['LastName'] = row[2]
-    print(studentDict)
-    '''
     return rs
       
 
