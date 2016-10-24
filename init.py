@@ -456,7 +456,8 @@ def updateProfileByAdmin():
         session.pop('usernameProfile')
         session['logged_in']=False
         return render_template('login.html')
-    elif request.form['viewTranscript'] =='View Transcript':
+        
+    elif request.form['submitButton'] =='View':
         #filename = mysql_dao.getTranscript(dbcon,session['usernameProfile'])
         print('View Transcript')
         fn = str(session['usernameProfile'])
@@ -575,7 +576,7 @@ def updateProfileByAdmin():
                 break;
         
                 
-        error = ""     
+        #error = ""     
         transcript = request.files['fileupload']
         
         if transcript:
@@ -584,13 +585,16 @@ def updateProfileByAdmin():
                 i = fn.index('@')
                 fn = fn[:i]
                 filename = secure_filename(fn+".pdf")
+                print(filename)
                 transcript.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 formDict['Transcript'] = filename
                 print(formDict['Transcript'])
+                
             else:
                 error = "Please select a pdf file"
         else:
             error = "Please select a pdf file"
+            
         formDict['Transcript'] = filename   
         mysql_dao.insertSecondForm(dbcon,formDict)
         
