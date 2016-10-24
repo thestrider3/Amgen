@@ -173,9 +173,12 @@ def insertSecondForm(conn,formDict):
     Mentor3 = formDict['Mentor3'],  
     Mentor4 = formDict['Mentor4'], 
     Mentor5 = formDict['Mentor5'],
+    Transcript = formDict['Transcript'], 
     Mentor6 = formDict['Mentor6'],
     Mentor7 = formDict['Mentor7'],
-    Mentor8 = formDict['Mentor8'])  
+    Mentor8 = formDict['Mentor8'])
+    #Transcript = formDict['Transcript'],  
+    #IsApplicationSubmitted = formDict['IsApplicationSubmitted'])      
     conn.execute(i)
     
     Courses = Table('Courses',metadata, autoload=True)
@@ -285,5 +288,13 @@ def getStudentList(conn):
     s= select([studentData.c.Username,studentData.c.FirstName,studentData.c.LastName]).where(studentData.c.UserType == UserType['Student'])
     rs = s.execute().fetchall()
     return rs
+    
+def getTranscript(conn, username):
+    metadata = MetaData(conn)
+    studentData = Table('studentData', metadata, autoload=True)
+    s = select([studentData.c.Transcript]).where(studentData.c.Username == username)
+    filename = s.execute().fetchone()
+    print(filename)
+    return filename
       
 
