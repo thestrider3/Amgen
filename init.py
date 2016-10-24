@@ -470,6 +470,7 @@ def updateProfileByAdmin():
     
     if request.form['submitButton'] == 'Save':
         l=list()
+        formDict=dict()
         formDict=mysql_dao.getUser(dbcon,session['usernameProfile'])
         
         formDict['FirstName'] = str(request.form.get('FNAME'))
@@ -603,9 +604,10 @@ def updateProfileByAdmin():
             formDict['RefName'+str(i)] = str(request.form.get('REFERENCE_'+str(i)))
             formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
           
-        mysql_dao.insertThirdForm(dbcon,formDict)
+        
         formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
         session['user'] = formDict
+        mysql_dao.insertThirdForm(dbcon,formDict)
         mysql_dao.insertReviewWaiver(dbcon, formDict)
 
         #formDict['Transcript'] = request.files['fileupload'].read()

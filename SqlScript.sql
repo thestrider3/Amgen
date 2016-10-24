@@ -7,6 +7,8 @@ delete from columbiaamgen.References where Email like 'v.patanjali*';
 select * from columbiaamgen.References where Email = 'v.patanjali@gmail.com';
 update columbiaamgen.studentData set password='temp' where Username = ('v.patanjali@gmail.com');
 select * from columbiaamgen.studentData;
+select * from columbiaamgen.Mentors;
+Insert into Mentors values (246,'')
 select count(*) from columbiaamgen.Courses;
 select * from columbiaamgen.References;
 update columbiaamgen.studentData set Transcript=null where Username in ('shivani','tulika')
