@@ -70,7 +70,7 @@ def createNewUser(conn,name,passwrd,status,userType):
     if rs.fetchone():
         return NoneidGenerator
     conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`,`ApplicationStatus`,`UserType`) Values (%s,%s,%s,%s)', [name,passwrd,status,userType])
-    formDict = {"Username":name,"ApplicationStatus":status}
+    formDict = checkUser(conn,name,passwrd)
     return formDict
     
 def getUser(conn,username):
@@ -165,8 +165,7 @@ def insertSecondForm(conn,formDict):
     studentData = Table('studentData',metadata, autoload=True)
     i = studentData.update().where(studentData.c.Username == formDict['Username']).values(
     ScienceExperience = formDict['ScienceExperience'],  
-    CareerPlans = formDict['CareerPlans'],  
-    AspirationNext20Yrs = formDict['AspirationNext20Yrs'],
+    CareerPlans = formDict['CareerPlans'],
     ApplicationStatus = formDict['ApplicationStatus'],  
     Mentor1 = formDict['Mentor1'],  
     Mentor2 = formDict['Mentor2'],  
@@ -237,7 +236,7 @@ def insertThirdForm(conn, formDict):
         if ins[i-1] == False:
             password=idGenerator()
             References.insert().values(Username = formDict['Username'],Name = formDict['RefName'+str(i)],Email = formDict['RefEmail'+str(i)]).execute()
-            createNewUser(conn,'RefEmail'+str(i),password,ApplicationStatus['ReferenceRequired'],UserType['Referal'])
+            createNewUser(conn,formDict['RefEmail'+str(i)],password,ApplicationStatus['ReferenceRequired'],UserType['Referal'])
             newRefs.append((formDict['RefEmail'+str(i)],password))
     return newRefs
 

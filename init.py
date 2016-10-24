@@ -13,12 +13,14 @@ from applicationStatus import ApplicationStatus
 
 from userType import UserType
 
-UPLOAD_FOLDER = '/home/strider/FlaskApp/static/Uploads'
+UPLOAD_FOLDER = '/home/shivani/Documents/tulika/amgen/files'
+UPLOAD_REF_FOLDER = '/home/shivani/Documents/tulika/amgen/refFiles'
 ALLOWED_EXTENSIONS = set(['pdf'])
 #tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_REF_FOLDER'] = UPLOAD_REF_FOLDER
 
 
 def count_letters(word):
@@ -248,7 +250,6 @@ def addFirstForm():
             formDict['PastAmgenScholarParticipation'] and
             formDict['OriginalResearchPerformed'] and
             formDict['CanArriveAtColumbiaMemorialDay'] and
-            formDict['ArriveAtColumbiaComments'] and
             formDict['CurrentlyAttendingUniversity'] and
             formDict['Major'] and
             formDict['DateSpringSemesterEnds'] ):
@@ -272,7 +273,6 @@ def upload():
         formDict = session['user']
         formDict['ScienceExperience'] = str(request.form.get('EXPERIENCE'))
         formDict['CareerPlans'] = str(request.form.get('CAREER_PLANS'))
-        formDict['AspirationNext20Yrs'] = str(request.form.get('whysurf'))
         formDict['Mentor1'] = str(request.form.get('mentor0'))
         formDict['Mentor2'] = str(request.form.get('mentor1'))
         formDict['Mentor3'] = str(request.form.get('mentor2'))
@@ -290,13 +290,11 @@ def upload():
                 break;
                 
         error = ""     
-        transcript = request.files['fileupload']
+        transcript = request.files.get('fileupload')
         
         if transcript:
             if allowed_file(transcript.filename):
                 fn = str(formDict['Username'])
-                i = fn.index('@')
-                fn = fn[:i]
                 filename = secure_filename(fn+".pdf")
                 transcript.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 formDict['Transcript'] = filename
@@ -306,7 +304,7 @@ def upload():
         else:
             error = "Please select a pdf file"
         if request.form.get("agree") == "agree":
-            formDict['ApplicationStatus'] = ApplicationStatus.ReferencesRequired 
+            formDict['ApplicationStatus'] = ApplicationStatus['ReferencesRequired'] 
         else:
             error = "Please accept terms and condition" 
         if count_letters(formDict['ScienceExperience']) > 700:
@@ -315,11 +313,8 @@ def upload():
         if count_letters(formDict['CareerPlans']) > 500:
             error="Character Limit exceeded for career plans."
             
-        if count_letters(formDict['AspirationNext20Yrs']) > 500:
-            error="Character Limit exceeded for aspiration for next 20 years."
         if not (formDict['ScienceExperience'] and \
                 formDict['CareerPlans'] and \
-                formDict['AspirationNext20Yrs'] and \
                 formDict['Mentor1'] and \
                 formDict['Mentor2'] and \
                 formDict['Mentor3'] and \
@@ -332,7 +327,6 @@ def upload():
 
             if not (formDict['ScienceExperience'] and
                 formDict['CareerPlans'] and
-                formDict['AspirationNext20Yrs'] and
                 formDict['Mentor1'] and
                 formDict['Mentor2'] and
                 formDict['Mentor3'] and
@@ -421,7 +415,30 @@ def sendEMail(toaddr):
   text = msg.as_string()
   server.sendmail(fromaddr, toaddr, text)
   server.quit()
-  
+
+
+@app.route('/getReferalStudentList',methods=['POST'])
+def getReferalStudentList():
+    if request.method == 'POST' and request.form['submitButton'] == 'Submit':
+        formDict=session['user']
+        studentList = mysql_dao.getStudentsByProf(dbcon,formDict['Username'])
+        anyRefSubmitted=False
+        for row in studentList:
+            referal = request.files.get('fileupload'+row[0])
+            print('after referal get')
+            if referal:
+                if allowed_file(referal.filename):
+                    fn = str(row[0]+formDict['Username'])
+                    filename = secure_filename(fn+".pdf")
+                    referal.save(os.path.join(app.config['UPLOAD_REF_FOLDER'], filename))
+                    formDict['Referal'+row[0]+formDict['Username']] = filename
+                    anyRef
+                #print(formDict['Transcript'])
+            
+    return render_template('referalStudentList.html',studentList=studentList,message1='Reference Submission was successful.')
+
+    
+    
 @app.route('/getStudentList', methods=['GET', 'POST'])
 def getStudentList():
     if request.method == 'GET':
@@ -577,14 +594,13 @@ def updateProfileByAdmin():
                 break;
         
                 
-        #error = ""     
-        transcript = request.files['fileupload']
+        error = ""     
+        
+        transcript = request.files.get('fileupload')
         
         if transcript:
             if allowed_file(transcript.filename):
                 fn = str(session['usernameProfile'])
-                i = fn.index('@')
-                fn = fn[:i]
                 filename = secure_filename(fn+".pdf")
                 print(filename)
                 transcript.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
@@ -595,8 +611,6 @@ def updateProfileByAdmin():
                 error = "Please select a pdf file"
         else:
             error = "Please select a pdf file"
-            
-        formDict['Transcript'] = filename   
         mysql_dao.insertSecondForm(dbcon,formDict)
         
         

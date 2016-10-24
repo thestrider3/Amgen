@@ -63,7 +63,6 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `DateSpringSemesterEnds` VARCHAR(20) NULL,
   `ScienceExperience` VARCHAR(750) NULL,
   `CareerPlans` VARCHAR(550) NULL,
-  `AspirationNext20Yrs` VARCHAR(550) NULL,
   `Mentor1` VARCHAR(50) NULL,
   `Mentor2` VARCHAR(50) NULL,
   `Mentor3` VARCHAR(50) NULL,
@@ -91,6 +90,7 @@ CREATE TABLE `columbiaamgen`.`References` (
   `Username` VARCHAR(24) NOT NULL,
   `Name` VARCHAR(100) NULL,
   `Email` VARCHAR(100) NULL,
+  `Status` VARCHAR(30) NULL,
   PRIMARY KEY (`UserName`,`Email`));
 
 CREATE TABLE `columbiaamgen`.`Courses` (

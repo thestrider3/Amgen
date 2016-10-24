@@ -10,10 +10,7 @@ ApplicationStatus={'IncompleteApplication' : 'IncompleteApplication',
     'UnderReview' : 'UnderReview',
     'Accepted' : 'Accepted',
     'Rejected' : 'Rejected',
-    'Deleted' : 'Deleted',
-    
-    'ReferenceRequired' : 'ReferenceRequired',
-    'ReferenceNoLongerRequired' : 'ReferenceNoLongerRequired'}
+    'Deleted' : 'Deleted'}
     
 
     

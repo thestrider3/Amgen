@@ -11,7 +11,7 @@ table, th, td {
 }
 </style>
 <body text="#000000" bgcolor="#ffffff" link="#0088FF" vlink="#0088FF">
-	<form action="/getStudentList" method="POST">
+	<form action="/getReferalStudentList" method="POST" enctype="multipart/form-data">
 		<div align="center">
 			<center>
 				<table width="75%" cellspacing="0" cellpadding="2" border="0">
@@ -54,7 +54,7 @@ table, th, td {
                         <td >{{row[1]}}</td>
                         <td >{{row[2]}}</td>
                         <td >{{row[0]}}</td>
-                        <td> <input type="file" id="fileupload"+{{row[0]}} name="file"></td>
+                        <td> <input type="file" name="fileupload{{row[0]}}"></td>
 						</tr>{% endfor %}
 					</tbody>
 				</table>
@@ -67,6 +67,19 @@ table, th, td {
 		      {% endif %}</p>
 			</center>
 		</div>
+		</div>
+		<center>
+				<p> {% if message1 %}
+		      <font size="4" color="blue">Message:{{ message1 }}</font>
+		      {% endif %}</p>
+		</center>
+		<div align="center">
+			<center>
+				<p>
+					<font face="Arial"> <br> <input value="Submit"	name='submitButton' type="submit"> 
+					</font>
+				</p>
+			</center>
 		</div>
 	
 	</form>
