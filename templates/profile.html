@@ -7,7 +7,7 @@
 
 <body text="#000000" bgcolor="#ffffff" link="#0088FF" vlink="#0088FF">
 
-    <form action="/updateProfileByAdmin" method="post" name="surfapp">
+    <form action="/updateProfileByAdmin" method="POST" enctype="multipart/form-data">
         <div align="center">
             <center>
                 <table width="75%" cellspacing="0" cellpadding="2" border="0">
@@ -775,10 +775,14 @@
                     </tbody>
                 </table>
             </center>
-            </div>
+            <div>
             <p>
                 <font face="Arial Unicode MS">
                     <center>
+                    <input value="View Transcript" name="viewTranscript"
+                        type="submit"> <br>
+                            <br>
+                    
                         Please upload your transcript in pdf format:
                         <table>
                             <tr>

@@ -11,7 +11,7 @@ from sqlalchemy import create_engine
 from user import *
 from applicationStatus import ApplicationStatus
 
-from UserType import UserType
+from userType import UserType
 
 UPLOAD_FOLDER = '/home/strider/FlaskApp/static/Uploads'
 ALLOWED_EXTENSIONS = set(['pdf'])
@@ -295,12 +295,12 @@ def upload():
         if transcript:
             if allowed_file(transcript.filename):
                 fn = str(formDict['Username'])
-                #i = fn.index('@')
-                #fn = fn[:i]
+                i = fn.index('@')
+                fn = fn[:i]
                 filename = secure_filename(fn+".pdf")
                 transcript.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                formDict['Transcript'] = 'UPLOAD_FOLDER'+"/"+filename
-                print(formDict['Transcript'])
+                formDict['Transcript'] = filename
+                #print(formDict['Transcript'])
             else:
                 error = "Please select a pdf file"
         else:
@@ -434,16 +434,20 @@ def getStudentList():
                 session['usernameProfile']=row[0]
                 formDict=mysql_dao.getUser(dbcon,session['usernameProfile'])
                 ReferencesDict = dict()
-                print(formDict)
+                #print(formDict)
                 ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
                 universityList = mysql_dao.getUniversityList(dbcon)
                 mentorsList = mysql_dao.getMentorsList(dbcon)
                 return render_template('profile.html',formDict=formDict,universityList=universityList,mentorsList=mentorsList,ReferencesDict=ReferencesDict)
 
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 
 @app.route('/updateProfileByAdmin',methods=['POST'])
 def updateProfileByAdmin():
-    
+    print('yay')
     if request.form['submitButton'] == 'Back': 
         session.pop('usernameProfile')
         studentList = mysql_dao.getStudentList(dbcon)
@@ -451,7 +455,17 @@ def updateProfileByAdmin():
     elif request.form['submitButton'] == 'Logout':
         session.pop('usernameProfile')
         session['logged_in']=False
-        return render_template('login.html')  
+        return render_template('login.html')
+    elif request.form['viewTranscript'] =='View Transcript':
+        #filename = mysql_dao.getTranscript(dbcon,session['usernameProfile'])
+        print('View Transcript')
+        fn = str(session['usernameProfile'])
+        i = fn.index('@')
+        fn = fn[:i]
+        filename = secure_filename(fn+".pdf")
+        print(filename)      
+        return redirect(url_for('uploaded_file',filename=filename))
+        
     
     if request.form['submitButton'] == 'Save':
         l=list()
@@ -559,6 +573,25 @@ def updateProfileByAdmin():
                 formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]
             else:
                 break;
+        
+                
+        error = ""     
+        transcript = request.files['fileupload']
+        
+        if transcript:
+            if allowed_file(transcript.filename):
+                fn = str(session['usernameProfile'])
+                i = fn.index('@')
+                fn = fn[:i]
+                filename = secure_filename(fn+".pdf")
+                transcript.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                formDict['Transcript'] = filename
+                print(formDict['Transcript'])
+            else:
+                error = "Please select a pdf file"
+        else:
+            error = "Please select a pdf file"
+        formDict['Transcript'] = filename   
         mysql_dao.insertSecondForm(dbcon,formDict)
         
         
@@ -571,7 +604,7 @@ def updateProfileByAdmin():
         session['user'] = formDict
         mysql_dao.insertReviewWaiver(dbcon, formDict)
 
-        formDict['Transcript'] = request.files['fileupload'].read()
+        #formDict['Transcript'] = request.files['fileupload'].read()
               
         
         mentorsList = mysql_dao.getMentorsList(dbcon)
