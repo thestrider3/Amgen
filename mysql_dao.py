@@ -198,6 +198,28 @@ def insertSecondForm(conn,formDict):
         else:
             break
 
+def reflectReferalSubmitted(dcon,formDict):
+    i=0
+    metadata = MetaData(conn)
+    References = Table('References', metadata, autoload=True)
+    studentData = Table('studentData', metadata, autoload=True)
+    students=[]
+    while 1:
+        if 'Referal'+str(i) not in formDict:
+            break
+        else:
+            students.append(formDict['Referal'+str(i)])
+            i=i+1
+    query = References.update().where(and_(References.c.Username.in_(students),References.c.Email==formDict['Username'])).values(Status=ReferenceStatus['ReferenceSubmitted'])
+    query.execute()
+
+
+    query = studentData.update().where(and_(studentData.c.Username.in_(students),studentData.c.ApplicationStatus==ApplicationStatus['ReferencesRequired2'])).values(ApplicationStatus=ApplicationStatus['ReferencesRequired1'])
+    query.execute()    
+
+    query = studentData.update().where(and_(studentData.c.Username.in_(students),studentData.c.ApplicationStatus==ApplicationStatus['ReferencesRequired1'])).values(ApplicationStatus=ApplicationStatus['UnderReview'])
+    query.execute()    
+
 def getStudentsByProf(conn, username):
     """
     """
@@ -230,13 +252,12 @@ def insertThirdForm(conn, formDict):
                 References.update().where(and_(References.c.Username==formDict['Username'], References.c.Email==formDict['RefEmail'+str(i)])).values(Name = formDict['RefName'+str(i)]).execute()
         if not foundRef:
             References.delete().where(and_(References.c.Username==formDict['Username'], References.c.Email==formDict['RefEmail'+str(i)])).execute()
-            StudentData.update().where(StudentData.c.Username==formDict['RefEmail'+str(i)]).values(ApplicationStatus = ApplicationStatus['ReferenceNoLongerRequired']).execute()
-    
+            
     for i in range(1,3):
         if ins[i-1] == False:
             password=idGenerator()
-            References.insert().values(Username = formDict['Username'],Name = formDict['RefName'+str(i)],Email = formDict['RefEmail'+str(i)]).execute()
-            createNewUser(conn,formDict['RefEmail'+str(i)],password,ApplicationStatus['ReferenceRequired'],UserType['Referal'])
+            References.insert().values(Username = formDict['Username'],Name = formDict['RefName'+str(i)],Email = formDict['RefEmail'+str(i)],Status=ReferenceStatus['ReferenceRequired']).execute()
+            createNewUser(conn,formDict['RefEmail'+str(i)],password,ApplicationStatus['PlaceholderAppStatus'],UserType['Referal'])
             newRefs.append((formDict['RefEmail'+str(i)],password))
     return newRefs
 
@@ -272,6 +293,7 @@ def getReferences(conn, formDict):
         for row in referencesDict:
             ReferencesDict['REFERENCE_'+str(i)] = row[1]
             ReferencesDict['ref'+str(i)+'email'] = row[2]
+            ReferencesDict['ref'+str(i)+'status']=row[3]
             i = i + 1            
         ins = select([studentData.c.ReviewWaiver]).where(studentData.c.Username == formDict['Username'])
         ReferencesDict['ReviewWaiver'] = ins.execute().fetchone()[0]

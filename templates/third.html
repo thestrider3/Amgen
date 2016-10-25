@@ -44,20 +44,38 @@
 			</center>
 		</div>
 		<div align="center">
+            {% if ReferencesDict['ref1status'] == 'ReferenceRequired'}
 			<center>
 				<p> 
 					Name: <input size="28" name="REFERENCE_1" value="{{ReferencesDict['REFERENCE_1']}}"> </font> 
                            Email: <input size="20" name="ref1email" value="{{ReferencesDict['ref1email']}}">
 				</p>
 			</center>
-		</div>
-		<div align="center">
-			<center>
-				<p>
-					Name: <input size="28" name="REFERENCE_2" value="{{ReferencesDict['REFERENCE_2']}}"> Email:
-					<input size="20" name="ref2email" value="{{ReferencesDict['ref2email']}}"><br> </font>
+            {% else %}
+            <center>
+				<p> 
+					Name: {{ReferencesDict['REFERENCE_1']}} </br>
+                           Email: {{ReferencesDict['ref1email']}}
 				</p>
 			</center>
+            {% endif %}
+		</div>
+		<div align="center">
+			{% if ReferencesDict['ref2status'] == 'ReferenceRequired'}
+			<center>
+				<p> 
+					Name: <input size="28" name="REFERENCE_2" value="{{ReferencesDict['REFERENCE_2']}}"> </font> 
+                           Email: <input size="20" name="ref2email" value="{{ReferencesDict['ref2email']}}">
+				</p>
+			</center>
+            {% else %}
+            <center>
+				<p> 
+					Name: {{ReferencesDict['REFERENCE_2']}} </br>
+                           Email: {{ReferencesDict['ref2email']}}
+				</p>
+			</center>
+            {% endif %}
 		</div>
 		<div align="center">
 			<center>
