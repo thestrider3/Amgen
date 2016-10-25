@@ -12,6 +12,7 @@ import string
 import random
 from applicationStatus import ApplicationStatus
 from userType import UserType
+from referenceStatus import ReferenceStatus
 
 DATABASEURI = "mysql+mysqlconnector://aheicklen:mass67@mysql.columbiasurf.dreamhosters.com:3306/columbiaamgen" 
 engine = create_engine(DATABASEURI)
@@ -68,7 +69,7 @@ def createNewUser(conn,name,passwrd,status,userType):
     s= user_info.select(user_info.c.Username==name)
     rs = s.execute()
     if rs.fetchone():
-        return NoneidGenerator
+        return None
     conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`,`ApplicationStatus`,`UserType`) Values (%s,%s,%s,%s)', [name,passwrd,status,userType])
     formDict = checkUser(conn,name,passwrd)
     return formDict
@@ -198,7 +199,7 @@ def insertSecondForm(conn,formDict):
         else:
             break
 
-def reflectReferalSubmitted(dcon,formDict):
+def reflectReferalSubmitted(conn,formDict):
     i=0
     metadata = MetaData(conn)
     References = Table('References', metadata, autoload=True)
@@ -208,18 +209,26 @@ def reflectReferalSubmitted(dcon,formDict):
         if 'Referal'+str(i) not in formDict:
             break
         else:
-            students.append(formDict['Referal'+str(i)])
+            query = select([References.c.Status]).where(and_(References.c.Username == formDict['Referal'+str(i)],References.c.Email==formDict['Username']))
+            rs = query.execute()
+            a=rs.fetchone
+            print('This is it')
+            status = rs.fetchone()
+            print type(status[0])
+            print status[0] == 'ReferenceRequired'
+            if status[0] == 'ReferenceRequired':
+                students.append(formDict['Referal'+str(i)])
+                query = References.update().where(and_(References.c.Username == formDict['Referal'+str(i)],References.c.Email==formDict['Username'])).values(Status=ReferenceStatus['ReferenceSubmitted'],ReferalFilePath=formDict['ReferalPath'+str(i)])
+                query.execute()
             i=i+1
-    query = References.update().where(and_(References.c.Username.in_(students),References.c.Email==formDict['Username'])).values(Status=ReferenceStatus['ReferenceSubmitted'])
-    query.execute()
-
+    
+    query = studentData.update().where(and_(studentData.c.Username.in_(students),studentData.c.ApplicationStatus==ApplicationStatus['ReferencesRequired1'])).values(ApplicationStatus=ApplicationStatus['UnderReview'])
+    query.execute()    
 
     query = studentData.update().where(and_(studentData.c.Username.in_(students),studentData.c.ApplicationStatus==ApplicationStatus['ReferencesRequired2'])).values(ApplicationStatus=ApplicationStatus['ReferencesRequired1'])
     query.execute()    
 
-    query = studentData.update().where(and_(studentData.c.Username.in_(students),studentData.c.ApplicationStatus==ApplicationStatus['ReferencesRequired1'])).values(ApplicationStatus=ApplicationStatus['UnderReview'])
-    query.execute()    
-
+    
 def getStudentsByProf(conn, username):
     """
     """
@@ -258,7 +267,7 @@ def insertThirdForm(conn, formDict):
             password=idGenerator()
             References.insert().values(Username = formDict['Username'],Name = formDict['RefName'+str(i)],Email = formDict['RefEmail'+str(i)],Status=ReferenceStatus['ReferenceRequired']).execute()
             createNewUser(conn,formDict['RefEmail'+str(i)],password,ApplicationStatus['PlaceholderAppStatus'],UserType['Referal'])
-            newRefs.append((formDict['RefEmail'+str(i)],password))
+            newRefs.append((formDict['RefEmail'+str(i)],formDict['RefName'+str(i)],password))
     return newRefs
 
 def insertReviewWaiver(conn, formDict):

@@ -24,13 +24,50 @@
 				</br>
 			</center>
 		</div>
+		{% if ReferencesDict.ref1status and (ReferencesDict['ref1status'] == 'ReferenceSubmitted' or ReferencesDict['ref1status'] == 'ReferenceSubmitted' )%}
 		<div align="center">
 			<center>
 				<table width="75%" cellspacing="0" cellpadding="2" border="0">
 					<tbody>
 						<tr>
 							<td bgcolor="#004488" width="100%" align="center"><font
-								size="4" face="Arial" color="#ffffff">References</font><font
+								size="4" face="Arial" color="#ffffff">References Received</font></td>
+						</tr>
+					</tbody>
+				</table>
+			</center>
+		</div>
+		{%endif%}
+		<div align="center">
+            {% if ReferencesDict.ref1status and ReferencesDict['ref1status'] == 'ReferenceSubmitted'%}
+            <center>
+				<p> 
+					Name: {{ReferencesDict['REFERENCE_1']}} &nbsp; &nbsp; &nbsp; &nbsp; Email: {{ReferencesDict['ref1email']}} 
+				</p>
+			</center>
+            {% endif %}
+		</div>
+		<div align="center">
+			{% if ReferencesDict.ref2status and ReferencesDict['ref2status'] == 'ReferenceSubmitted' %}
+            <center>
+				<p> 
+					Name: {{ReferencesDict['REFERENCE_2']}} &nbsp; &nbsp; &nbsp; &nbsp; Email: {{ReferencesDict['ref2email']}}
+				</p>
+			</center>
+            {% endif %}
+		</div>
+
+
+
+
+		{% if not ReferencesDict.ref1status or ReferencesDict['ref1status'] == 'ReferenceRequired' or ReferencesDict['ref2status'] == 'ReferenceRequired'%}
+		<div align="center">
+			<center>
+				<table width="75%" cellspacing="0" cellpadding="2" border="0">
+					<tbody>
+						<tr>
+							<td bgcolor="#004488" width="100%" align="center"><font
+								size="4" face="Arial" color="#ffffff">References Required</font><font
 								face="Arial" size="5" color="#ffffff"><br> </font><font
 								face="Arial Unicode MS" size="3" color="#ffffff"><b>List
 										names and email address of the people whom you have asked to
@@ -44,39 +81,26 @@
 			</center>
 		</div>
 		<div align="center">
-            {% if ReferencesDict['ref1status'] == 'ReferenceRequired'}
+            {% if not ReferencesDict.ref1status or ReferencesDict['ref1status'] == 'ReferenceRequired'%}
 			<center>
 				<p> 
 					Name: <input size="28" name="REFERENCE_1" value="{{ReferencesDict['REFERENCE_1']}}"> </font> 
                            Email: <input size="20" name="ref1email" value="{{ReferencesDict['ref1email']}}">
 				</p>
 			</center>
-            {% else %}
-            <center>
-				<p> 
-					Name: {{ReferencesDict['REFERENCE_1']}} </br>
-                           Email: {{ReferencesDict['ref1email']}}
-				</p>
-			</center>
             {% endif %}
 		</div>
 		<div align="center">
-			{% if ReferencesDict['ref2status'] == 'ReferenceRequired'}
+			{% if not ReferencesDict.ref2status or ReferencesDict['ref2status'] == 'ReferenceRequired' %}
 			<center>
 				<p> 
 					Name: <input size="28" name="REFERENCE_2" value="{{ReferencesDict['REFERENCE_2']}}"> </font> 
                            Email: <input size="20" name="ref2email" value="{{ReferencesDict['ref2email']}}">
 				</p>
 			</center>
-            {% else %}
-            <center>
-				<p> 
-					Name: {{ReferencesDict['REFERENCE_2']}} </br>
-                           Email: {{ReferencesDict['ref2email']}}
-				</p>
-			</center>
             {% endif %}
 		</div>
+		{%endif%}
 		<div align="center">
 			<center>
 				<p>

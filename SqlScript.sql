@@ -1,24 +1,21 @@
+update columbiaamgen.studentData set password='temp' where Username = ('v.patanjali@gmail.com');
+
+select * from columbiaamgen.References;
+select * from columbiaamgen.studentData;
+select * from columbiaamgen.Mentors;
+select * from columbiaamgen.Courses;
+
+update columbiaamgen.studentData set Transcript=null where Username in ('shivani','tulika')
+update columbiaamgen.studentData set UserType='Student' where Username in ('shivani','tulika')
+update columbiaamgen.studentData set ApplicationStatus='IncompleteApplication' where Username ='pv2270@columbia.edu'
+update columbiaamgen.studentData set ApplicationStatus='UnderReview' where Username in ('shivani','tulika')
+update columbiaamgen.studentData set ApplicationStatus='ReferencesRequired1' where Username in ('sg3296@columbia.edu')
+
+
 drop table columbiaamgen.Courses;
 drop table columbiaamgen.References;
 drop table columbiaamgen.studentData;
-desc columbiaamgen.References;
-delete from columbiaamgen.studentData where Username = ('shivani.b.gupta@gmail.com');
-delete from columbiaamgen.References where Email like 'v.patanjali*';
-select * from columbiaamgen.References where Email = 'v.patanjali@gmail.com';
-update columbiaamgen.studentData set password='temp' where Username = ('v.patanjali@gmail.com');
-select * from columbiaamgen.studentData;
-select * from columbiaamgen.Mentors;
-Insert into Mentors values (246,'')
-select count(*) from columbiaamgen.Courses;
-select * from columbiaamgen.References;
-update columbiaamgen.studentData set Transcript=null where Username in ('shivani','tulika')
-update columbiaamgen.studentData set UserType='Student' where Username in ('shivani','tulika')
-update columbiaamgen.studentData set ApplicationStatus='IncompleteApplication' where Username in ('shivani','tulika')
-update columbiaamgen.studentData set ApplicationStatus='UnderReview' where Username in ('shivani','tulika')
-update columbiaamgen.studentData set ApplicationStatus='ReferencesRequired' 
-Insert into columbiaamgen.studentData(Username,Password) values ('patan','temp')
-Insert into columbiaamgen.studentData(Username,Password,UserType) values ('admin','temp','Admin')
-select Transcript from columbiaamgen.studentData where username='shivani'
+
 CREATE TABLE `columbiaamgen`.`studentData` (
   `Username` VARCHAR(45) NULL,
   `Password` VARCHAR(45) NULL,
@@ -63,6 +60,7 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `DateSpringSemesterEnds` VARCHAR(20) NULL,
   `ScienceExperience` VARCHAR(750) NULL,
   `CareerPlans` VARCHAR(550) NULL,
+  `AspirationNext20Yrs` VARCHAR(550) NULL,
   `Mentor1` VARCHAR(50) NULL,
   `Mentor2` VARCHAR(50) NULL,
   `Mentor3` VARCHAR(50) NULL,
@@ -71,7 +69,7 @@ CREATE TABLE `columbiaamgen`.`studentData` (
   `Mentor6` VARCHAR(50) NULL,
   `Mentor7` VARCHAR(50) NULL,
   `Mentor8` VARCHAR(50) NULL,
-  `Transcript` VARCHAR(200) NULL,
+  `Transcript` VARCHAR(500) NULL,
   `ApplicationStatus` VARCHAR(30) NULL,
   `ReviewWaiver` VARCHAR(5) NULL,
   `HowDidYouHearUniversityName` VARCHAR(50) NULL,
@@ -91,6 +89,7 @@ CREATE TABLE `columbiaamgen`.`References` (
   `Name` VARCHAR(100) NULL,
   `Email` VARCHAR(100) NULL,
   `Status` VARCHAR(30) NULL,
+  `ReferalFilePath` VARCHAR(500) NULL,
   PRIMARY KEY (`UserName`,`Email`));
 
 CREATE TABLE `columbiaamgen`.`Courses` (
@@ -99,3 +98,5 @@ CREATE TABLE `columbiaamgen`.`Courses` (
   `Credits` INT NULL,
   `Grade` VARCHAR(5) NULL,
   PRIMARY KEY (`UserId`, `Title`));
+
+Insert into columbiaamgen.studentData(Username,Password,UserType) values ('admin','temp','Admin')

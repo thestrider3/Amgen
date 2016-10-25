@@ -10,11 +10,12 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 from user import *
 from applicationStatus import ApplicationStatus
-
+from referenceStatus import ReferenceStatus
 from userType import UserType
+import utils
 
-UPLOAD_FOLDER = '/home/patanjali/shivani/amgen/files'
-UPLOAD_REF_FOLDER = '/home/patanjali/shivani/amgen/refFiles'
+UPLOAD_FOLDER = '/home/shivani/Documents/tulika/amgen/files'
+UPLOAD_REF_FOLDER = '/home/shivani/Documents/tulika/amgen/refFiles'
 ALLOWED_EXTENSIONS = set(['pdf'])
 #tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
@@ -22,7 +23,19 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['UPLOAD_REF_FOLDER'] = UPLOAD_REF_FOLDER
 
-
+def saveFile(transcript,username,typeFile,referalName=""):     
+    if typeFile == 'Transcript':
+        folder= app.config['UPLOAD_FOLDER']
+        filename = secure_filename(username+".pdf")
+    elif typeFile == 'Referal':
+        folder= app.config['UPLOAD_REF_FOLDER']
+        filename = secure_filename(username+" "+referalName+".pdf")
+    if transcript:
+        if allowed_file(transcript.filename):
+            transcript.save(os.path.join(folder, filename))
+            return filename
+        
+    
 def count_letters(word):
   count = 0
   for c in word:
@@ -75,8 +88,7 @@ def checkUsername():
   name = str(request.form['username'])
   passwrd = str(request.form['passwrd'])
 
-  formDict=mysql_dao.checkUser(dbcon,name,passwrd)
-  
+  formDict=mysql_dao.checkUser(dbcon, name, passwrd)
   
   if not formDict:
       return render_template('login.html',error="Username or password is incorrect. Please try again.")
@@ -288,55 +300,36 @@ def upload():
                 formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]                
             else:
                 break;
-                
-        error = ""     
+        
         transcript = request.files.get('fileupload')
-        if transcript:
-            if allowed_file(transcript.filename):
-                fn = str(formDict['Username'])
-                filename = secure_filename(fn+".pdf")
-                transcript.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                formDict['Transcript'] = filename
-                #print(formDict['Transcript'])
-            else:
-                error = "Please select a pdf file"
-        else:
-            error = "Please select a pdf file"
-        if request.form.get("agree") == "agree":
-            formDict['ApplicationStatus'] = ApplicationStatus['ReferencesRequired2'] 
-        else:
-            error = "Please accept terms and condition" 
-        if count_letters(formDict['ScienceExperience']) > 700:
-                error="Character Limit exceeded for science experience."
-                
-        if count_letters(formDict['CareerPlans']) > 500:
-            error="Character Limit exceeded for career plans."
-            
-        if not (formDict['ScienceExperience'] and \
-                formDict['CareerPlans'] and \
-                formDict['Mentor1'].strip() and \
-                formDict['Mentor2'].strip() and \
-                formDict['Mentor3'].strip() and \
-                formDict['Mentor4'].strip() and \
-                formDict['Mentor5'].strip()):
-            error="Please complete all fields before submitting."   
+        formDict['Transcript'] = saveFile(transcript,formDict['Username'],'Transcript')
         
     
         if request.form['submitButton'] == 'Submit Application':
-
-            if not (formDict['ScienceExperience'] and
-                formDict['CareerPlans'] and
-                formDict['Mentor1'] and
-                formDict['Mentor2'] and
-                formDict['Mentor3'] and
-                formDict['Mentor4'] and
-                formDict['Mentor5']):
-                    error="Please complete all fields before submitting."
-                    mentorsList = mysql_dao.getMentorsList(dbcon)
-                    return flask.render_template('second.html', error=error,formDict=formDict,mentorsList=mentorsList)
+            error = ""  
+            if not formDict['Transcript']:        
+                error = "Please select a pdf file"
+                
+            if not request.form.get("agree") == "agree":
+                error = "Please accept terms and condition" 
+            
+            if count_letters(formDict['ScienceExperience']) > 700:
+                    error="Character Limit exceeded for science experience."
+                    
+            if count_letters(formDict['CareerPlans']) > 500:
+                error="Character Limit exceeded for career plans."
+                
+            if not (formDict['ScienceExperience'] and \
+                    formDict['CareerPlans'] and \
+                    formDict['Mentor1'].strip() and \
+                    formDict['Mentor2'].strip() and \
+                    formDict['Mentor3'].strip() and \
+                    formDict['Mentor4'].strip() and \
+                    formDict['Mentor5'].strip()):
+                error="Please complete all fields before submitting."   
 
             
-            if request.form.get("agree") == "agree" and not error:
+            if not error:
                 formDict['ApplicationStatus'] = ApplicationStatus['ReferencesRequired2']
                 mysql_dao.insertSecondForm(dbcon,formDict)
                 session['user'] = formDict
@@ -347,12 +340,11 @@ def upload():
             else:
                 mentorsList = mysql_dao.getMentorsList(dbcon)       
                 return flask.render_template('second.html', error=error,formDict=formDict,mentorsList=mentorsList)
-        elif request.form['submitButton'] == 'Save':
-            mentorsList = mysql_dao.getMentorsList(dbcon)
-            return flask.render_template('second.html',formDict=formDict,mentorsList=mentorsList)
+
         elif request.form['submitButton'] == 'Back':
             universityList = mysql_dao.getUniversityList(dbcon)
             return flask.render_template('first.html',formDict=formDict,universityList=universityList)
+            
         elif request.form['submitButton'] == 'Logout':
             session['logged_in']=False
             session.pop('user')
@@ -379,10 +371,14 @@ def submitThirdForm():
             ReferencesDict = dict()
             error="Please select option for review waver."
             return render_template('third.html', ReferencesDict = ReferencesDict,error=error)
-            
+      
       session['user'] = formDict
-      mysql_dao.insertThirdForm(dbcon,formDict)
+      newRefs = mysql_dao.insertThirdForm(dbcon,formDict)
       mysql_dao.insertReviewWaiver(dbcon, formDict)
+
+      for ref in newRefs:
+          utils.sendEmail(ref[0],ref[1],formDict['FirstName']+" "+formDict["LastName"],ref[2])
+      
       ReferencesDict = dict()
       ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
       return render_template('third.html', ReferencesDict = ReferencesDict,message="References have been submitted. You can modify them by logging again later also.")      
@@ -399,22 +395,6 @@ def submitThirdForm():
         session.pop('user')
         return render_template('login.html')
 
-         
-
-def sendEMail(toaddr):
-  msg = MIMEMultipart()
-  fromaddr = "Amgen@biology.columbia.edu"
-  msg['From'] = fromaddr
-  msg['To'] = toaddr
-  msg['Subject'] = "This is a test email"
-  body = "Test email, please discard"
-  msg.attach(MIMEText(body, 'plain'))
-  server = smtplib.SMTP_SSL('send.columbia.edu', 587)
-  server.login(fromaddr, "744muDD")
-  text = msg.as_string()
-  server.sendmail(fromaddr, toaddr, text)
-  server.quit()
-
 
 @app.route('/getReferalStudentList',methods=['POST'])
 def getReferalStudentList():
@@ -422,23 +402,22 @@ def getReferalStudentList():
     if request.method == 'POST' and request.form['submitButton'] == 'Submit':
         formDict=session['user']
         studentList = mysql_dao.getStudentsByProf(dbcon,formDict['Username'])
-        anyRefSubmitted=False
+        
         for row in studentList:
             referal = request.files.get('fileupload'+row[0])
-            print('after referal get')
-            if referal:
-                if allowed_file(referal.filename):
-                    fn = str(row[0]+formDict['Username'])
-                    filename = secure_filename(fn+".pdf")
-                    referal.save(os.path.join(app.config['UPLOAD_REF_FOLDER'], filename))
-                    formDict['Referal'+str(i)] = row[0]
-                    i=i+1
-    if anyRefSubmitted:
-        mysql_dao.reflectReferalSubmitted(dcon,formDict)
-                #print(formDict['Transcript'])
-            
-    return render_template('referalStudentList.html',studentList=studentList,message1='Reference Submission was successful.')
-
+            temp= saveFile(referal,row[0],'Referal',formDict['Username'])
+            if temp:
+                formDict['Referal'+str(i)] = row[0]
+                formDict['ReferalPath'+str(i)] = temp
+                i=i+1
+        if i>0:
+            mysql_dao.reflectReferalSubmitted(dbcon,formDict)
+                
+        return render_template('referalStudentList.html',studentList=studentList,message1='Reference Submission was successful.')
+    elif request.method == 'POST' and request.form['submitButton'] == 'Logout':
+        session.pop('user')
+        session['logged_in']=False
+        return render_template('login.html')
     
     
 @app.route('/getStudentList', methods=['GET', 'POST'])
@@ -447,6 +426,9 @@ def getStudentList():
         studentList = mysql_dao.getStudentList(dbcon)        
         return render_template('studentList.html', studentList = studentList)
     elif request.method == 'POST':
+        if request.form['submitButton'] == 'Logout':
+            session['logged_in']=False
+            return render_template('login.html')
         studentList = mysql_dao.getStudentList(dbcon)
         for row in studentList:
             if request.form['submitButton'] == row[0]:
@@ -466,7 +448,6 @@ def uploaded_file(filename):
 
 @app.route('/updateProfileByAdmin',methods=['POST'])
 def updateProfileByAdmin():
-    print('yay')
     if request.form['submitButton'] == 'Back': 
         session.pop('usernameProfile')
         studentList = mysql_dao.getStudentList(dbcon)
@@ -598,26 +579,15 @@ def updateProfileByAdmin():
         error = ""     
         
         transcript = request.files.get('fileupload')
-        
-        if transcript:
-            if allowed_file(transcript.filename):
-                fn = str(session['usernameProfile'])
-                filename = secure_filename(fn+".pdf")
-                print(filename)
-                transcript.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                formDict['Transcript'] = filename
-                print(formDict['Transcript'])
-                
-            else:
-                error = "Please select a pdf file"
-        else:
-            error = "Please select a pdf file"
+        formDict['Transcript']=saveFile(transcript,session['usernameProfile'],'Transcript')
+    
         mysql_dao.insertSecondForm(dbcon,formDict)
         
         
         for i in range(1,3):       
             formDict['RefName'+str(i)] = str(request.form.get('REFERENCE_'+str(i)))
             formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
+            formDict['RefFilePath'+str(i)] = session['usernameProfile']+' '+formDict['RefName'+str(i)] +'.pdf'
           
         
         formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
@@ -633,6 +603,18 @@ def updateProfileByAdmin():
 
         ReferencesDict = dict()
         ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
+        
+        ref1 = request.files.get('fileupload1')
+        temp = saveFile(ref1,session['usernameProfile'],'Referal',formDict['RefEmail1'])
+        if temp:
+            formDict['RefFilePath1']=temp
+        
+        
+        ref2 = request.files.get('fileupload2')
+        temp = saveFile(ref2,session['usernameProfile'],'Referal',formDict['RefEmail2'])
+        if temp:
+            formDict['RefFilePath2']=temp
+        
         return render_template('profile.html',formDict=formDict,universityList=universityList,mentorsList=mentorsList,ReferencesDict=ReferencesDict)
 
     
