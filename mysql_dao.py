@@ -263,7 +263,7 @@ def insertThirdForm(conn, formDict):
             References.delete().where(and_(References.c.Username==formDict['Username'], References.c.Email==formDict['RefEmail'+str(i)])).execute()
             
     for i in range(1,3):
-        if ins[i-1] == False:
+        if ins[i-1] == False and formDict['RefName'+str(i)].strip() and formDict['RefEmail'+str(i)].strip():
             password=idGenerator()
             References.insert().values(Username = formDict['Username'],Name = formDict['RefName'+str(i)],Email = formDict['RefEmail'+str(i)],Status=ReferenceStatus['ReferenceRequired']).execute()
             createNewUser(conn,formDict['RefEmail'+str(i)],password,ApplicationStatus['PlaceholderAppStatus'],UserType['Referal'])
