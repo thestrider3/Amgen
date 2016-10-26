@@ -601,33 +601,6 @@
             </center>
         </div>
         <p></p>
-        <div align="center">
-            <center>
-                <table width="75%" cellspacing="0" cellpadding="2" border="0">
-                    <tbody>
-                        <tr>
-                            <td bgcolor="#004488" width="100%" align="center"><font
-                                size="4" face="Arial" color="#ffffff"></font><font face="Arial"
-                                size="5" color="#ffffff"> </font><font face="Arial Unicode MS"
-                                size="3" color="#ffffff"><b>What the student would
-                                        like to be doing at work in 20 years,(ideal job)<br> (Limit: 500 characters,
-                                        about 75 words.)
-                                </b></font></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </center>
-        </div>
-        <div align="center">
-            <center>
-                <p>
-                    <font face="Arial"> <textarea wrap="HARD" cols="60" rows="7"
-                            name="whysurf" onKeyDown="limitText(this.form.whysurf,600);"
-                            onKeyUp="limitText(this.form.whysurf,600);">{{formDict['AspirationNext20Yrs']}}</textarea>
-                    </font>
-                </p>
-            </center>
-        </div>
         <blockquote>
             <p></p>
             <div align="center">
@@ -765,8 +738,8 @@
                 <table width="61%" cellspacing="0" cellpadding="2" border="0">
                     <tbody>
                         <tr>
-                            <td align="center" bgcolor="#004488" width="50%"><div
-                                    align="center">
+                            <td align="center" bgcolor="#004488" width="50%">
+                                <div align="center">
                                     <p>
                                         <font size="4" face="Arial" color="#ffffff">Transcript</font>
                                     </p>
@@ -779,16 +752,22 @@
             <p>
                 <font face="Arial Unicode MS">
                     <center>
-                    <input value="View" name="submitButton" type="submit"> <br>
+            {% if msg != 'No transcript found' %}
+                    <input value="ViewTranscript" name="submitButton" type="submit">
+            {%endif%}
+<p>{{msg}}</p>
                             <br>
-                    
+                    <b>Update Transcript</b>
+                    <br>
+                    <br>
                         Please upload your transcript in pdf format:
                         <table>
                             <tr>
                                 <td>
                                     
                                     <p>
-                                        <input type="file" name="fileupload" id="fileupload">
+                                        <input type="file" name="fileupload" id="fileupload" title=" ">
+                                        
                                     </p>
                                 </td>
                             </tr>
@@ -798,11 +777,26 @@
             </p>
             </center>
             </div>
+
+            <center>
+                <table width="61%" cellspacing="0" cellpadding="2" border="0">
+                    <tbody>
+                        <tr>
+                            <td align="center" bgcolor="#004488" width="50%">
+                                <div align="center">
+                                    <p>
+                                        <font size="4" face="Arial" color="#ffffff">References</font>
+                                    </p>
+                                </div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>
             <div align="center">
             <center>
                 <p> 
-                    Name: <input size="28" name="REFERENCE_1" value="{{ReferencesDict['REFERENCE_1']}}"> </font> 
-                           Email: <input size="20" name="ref1email" value="{{ReferencesDict['ref1email']}}">
+                    Name: <input size="28" name="REFERENCE_1" value="{{ReferencesDict['REFERENCE_1']}}"> 
+                           Email: <input size="20" name="ref1email" value="{{ReferencesDict['ref1email']}}"> <input type="file" name="fileupload1">
                 </p>
             </center>
             </div>
@@ -810,7 +804,7 @@
             <center>
                 <p>
                     Name: <input size="28" name="REFERENCE_2" value="{{ReferencesDict['REFERENCE_2']}}"> Email:
-                    <input size="20" name="ref2email" value="{{ReferencesDict['ref2email']}}"><br> </font>
+                    <input size="20" name="ref2email" value="{{ReferencesDict['ref2email']}}"> <input type="file" name="fileupload2">
                 </p>
             </center>
             </div>

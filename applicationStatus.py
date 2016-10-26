@@ -6,14 +6,13 @@ Created on Wed Oct 12 09:26:17 2016
 """
 
 ApplicationStatus={'IncompleteApplication' : 'IncompleteApplication',
-    'ReferencesRequired' : 'ReferencesRequired',
+    'ReferencesRequired2' : 'ReferencesRequired2',
+    'ReferencesRequired1' : 'ReferencesRequired1',
     'UnderReview' : 'UnderReview',
     'Accepted' : 'Accepted',
     'Rejected' : 'Rejected',
     'Deleted' : 'Deleted',
-    
-    'ReferenceRequired' : 'ReferenceRequired',
-    'ReferenceNoLongerRequired' : 'ReferenceNoLongerRequired'}
+    'PlaceholderAppStatus':'PlaceholderAppStatus'}
     
 
     

@@ -85,7 +85,11 @@ def addFirstForm():
   print(str(request.form['WHITE']))
   print(str(request.form['other']))
   print(str(request.form['decline']))
+<<<<<<< HEAD
   '''
+
+'''
+>>>>>>> e66a9f345ee75ab0077625ee954851dbc979753a
 def sendEMail(toaddr):
   msg = MIMEMultipart()
   fromaddr = "Amgen@biology.columbia.edu"
@@ -94,6 +98,10 @@ def sendEMail(toaddr):
   msg['Subject'] = "This is a test email"
   body = "Test email, please discard"
   msg.attach(MIMEText(body, 'plain'))
+<<<<<<< HEAD
+=======
+  fromaddr = 'Amgen@biology.columbia.edu'
+>>>>>>> e66a9f345ee75ab0077625ee954851dbc979753a
   server = smtplib.SMTP('biomail.biology.columbia.edu', 587)
   server.starttls()
   server.ehlo()
@@ -103,7 +111,11 @@ def sendEMail(toaddr):
   server.sendmail(fromaddr, toaddr, text)
   server.quit()
   
+<<<<<<< HEAD
   '''
+
+'''
+>>>>>>> e66a9f345ee75ab0077625ee954851dbc979753a
   if request.form.get('UNIVERSITYSITE'):
     print(str(request.form.get('UNIVERSITYSITE')))
   if request.form.get('UNIVERSITYSITENAME'):
@@ -122,7 +134,13 @@ def sendEMail(toaddr):
   	formDict = dict()
   	formDict['Transcript'] = request.files['fileupload'].read()
   	print(formDict['Transcript'])
+<<<<<<< HEAD
    '''
 
+
+
+'''
+>>>>>>> e66a9f345ee75ab0077625ee954851dbc979753a
 if __name__ == "__main__":
     sendEMail('tulikabhatt92@gmail.com')
+'''
