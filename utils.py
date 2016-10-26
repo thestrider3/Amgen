@@ -18,7 +18,7 @@ def sendEmail(toProf,profName,fromStud,profPassword):
   
   msg['Subject'] = "Letter of Recommendation Requested By "+fromStud
   body = "Dear " +profName+",\n"+fromStud + " has requested a Letter of Recommedation from you for participating in the Amgen Scholars Summer Research Program. \
-  Please submit a recommendation in pdf format by using the following credentials \n Username:"+toProf+" \n Password:" +profPassword
+  Please submit a recommendation in pdf format by using the following credentials \n \n Username:"+toProf+" \n Password:" +profPassword
   
   msg['From'] = "Amgen@biology.columbia.edu"
   msg.attach(MIMEText(body, 'plain'))
