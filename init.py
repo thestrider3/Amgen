@@ -444,10 +444,24 @@ def getStudentList():
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+                               
+@app.route('/referralUpload')"
+       error = ""     
+        ref1 = request.files['fileupload']        
+        if ref1:
+            if allowed_file(ref1.filename):
+                fn = str(session['usernameProfile'])
+                i = fn.index('@')
+                fn = fn[:i]
+                filename = secure_filename(fn+".pdf")
+                print(filename)
+                transcript.save(os.path.join(app.config['UPLOAD_FOLDER'], "Reference/"+filename))
+                formDict['Transcript'] = filename
+                print(formDict['Transcript'])
+                                         
 
 @app.route('/updateProfileByAdmin',methods=['POST'])
 def updateProfileByAdmin():
-    print('yay')
     if request.form['submitButton'] == 'Back': 
         session.pop('usernameProfile')
         studentList = mysql_dao.getStudentList(dbcon)
@@ -577,7 +591,7 @@ def updateProfileByAdmin():
                 break;
         
                 
-        #error = ""     
+        error = ""     
         transcript = request.files['fileupload']
         
         if transcript:

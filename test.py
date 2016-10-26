@@ -85,26 +85,25 @@ def addFirstForm():
   print(str(request.form['WHITE']))
   print(str(request.form['other']))
   print(str(request.form['decline']))
-=======
+  '''
 def sendEMail(toaddr):
   msg = MIMEMultipart()
+  fromaddr = "Amgen@biology.columbia.edu"
   msg['From'] = "Amgen@biology.columbia.edu"
   msg['To'] = toaddr
   msg['Subject'] = "This is a test email"
   body = "Test email, please discard"
   msg.attach(MIMEText(body, 'plain'))
->>>>>>> efa7b0deb6d76d1bfe5b5a0ec8c6acb68517ad72
-  
   server = smtplib.SMTP('biomail.biology.columbia.edu', 587)
   server.starttls()
   server.ehlo()
-  server.login("Amgen@biology.columbia.edu", "744BmuDD")
+  server.login("Amgen@biology.columbia.edu", "744muDD")
   text = msg.as_string()
   server.set_debuglevel(True)
   server.sendmail(fromaddr, toaddr, text)
   server.quit()
   
-<<<<<<< HEAD
+  '''
   if request.form.get('UNIVERSITYSITE'):
     print(str(request.form.get('UNIVERSITYSITE')))
   if request.form.get('UNIVERSITYSITENAME'):
@@ -118,12 +117,12 @@ def sendEMail(toaddr):
   elif request.form['submitBut'] == 'Back':
     print("Back")
   return flask.render_template('first.html')
-  '''
+  
   if request.form['submitButton'] == 'Submit Application':
   	formDict = dict()
   	formDict['Transcript'] = request.files['fileupload'].read()
   	print(formDict['Transcript'])
-
+   '''
 
 if __name__ == "__main__":
-    sendEMail('shivani.b.gupta@gmail.com')
+    sendEMail('tulikabhatt92@gmail.com')
