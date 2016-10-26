@@ -38,26 +38,29 @@
 				</table>
 			</center>
 		</div>
-		
+			<center>
+			<table width="40%" cellspacing="0" cellpadding="2" border="0">
+					<tbody>
+						<tr>
+				
+				<td>
+					Username: </td><td><input size="28" name="username" value="" onblur="validateEmail(); return false;"></td>  
+				</tr>
 			
-				<p style="margin-left: 30%">
-					Username: <input size="28" name="username" value="" onblur="validateEmail(); return false;">  
+		
+		
+				<tr>
+				<td>	Password: </td><td><input size="28" id="passwrd" name="passwrd" type="password" value=""> </td>
+				</tr>
 				</p>
 			
 		
 		
-			
-				<p style="margin-left: 30%">
-					Password: <input size="28" id="passwrd" name="passwrd" type="password" value=""> 
-				</p>
-			
-		
-		
-				<p style="margin-left: 25%">
-					Confirm Password: <input size="28" id="repasswrd" name="repasswrd" type="password" value="" onkeyup="checkSamePassword(); return false;"> 
-					 
-				</p>
-			
+				<tr> <td>	Confirm Password: </td><td> <input size="28" id="repasswrd" name="repasswrd" type="password" value="" onkeyup="checkSamePassword(); return false;"> </td>
+				</tr>
+					 </tbody>
+				</table>
+			</center>
 			<p><center><span id="confirmMessage" class="confirmMessage"></span></center></p>
 		
 			<div align="center">
