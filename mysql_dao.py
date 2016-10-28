@@ -326,5 +326,14 @@ def getTranscript(conn, username):
     filename = s.execute().fetchone()
     print(filename)
     return filename
+    
+def getReferralPath(conn, username):
+    metadata = MetaData(conn)
+    References = Table('References', metadata, autoload=True)
+    s = select([References.c.ReferalFilePath]).where(References.c.Username == username)
+    fs = s.execute().fetchall()
+    filename=[item[0] for item in fs]
+    #print(filename)
+    return filename
       
 

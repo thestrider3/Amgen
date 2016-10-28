@@ -26,7 +26,7 @@ def saveFile(transcript,username,typeFile,referalName=""):
         filename = secure_filename(username+".pdf")
     elif typeFile == 'Referal':
         folder= app.config['UPLOAD_REF_FOLDER']
-        filename = secure_filename(username+" "+referalName+".pdf")
+        filename = secure_filename(username+"_"+referalName+".pdf")
     if transcript:
         if allowed_file(transcript.filename):
             transcript.save(os.path.join(folder, filename))
@@ -346,6 +346,12 @@ def upload():
             session['logged_in']=False
             session.pop('user')
             return render_template('login.html')
+        elif request.form['submitButton'] == 'ViewTranscript':
+            formDict = mysql_dao.getTranscript(dbcon,formDict['Username'])
+            filename = secure_filename(formDict['Transcript'])
+            print(formDict['Transcript'])
+            return redirect(url_for('upload_Transcript',filename=filename))
+            
             
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
@@ -436,16 +442,33 @@ def getStudentList():
                     msg = formDict['Transcript']
                 else:
                     msg = "No transcript found"
+                ref1 = ""
+                ref2 = ""
+                refDict=getRefPath(session['usernameProfile'])
+                if refDict:
+                    if refDict['ReferalFilePath1']:
+                        ref1 = refDict['ReferalFilePath1']
+                    else:
+                        ref1 = "No document for Referral1 found"
+                    if refDict['ReferalFilePath2']:
+                        ref2 = refDict['ReferalFilePath2']
+                    else:
+                        ref2 = "No document for Referral2 found"   
                 ReferencesDict = dict()
                 ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
                 universityList = mysql_dao.getUniversityList(dbcon)
                 mentorsList = mysql_dao.getMentorsList(dbcon)
-                return render_template('profile.html',formDict=formDict,msg=msg,universityList=universityList,mentorsList=mentorsList,ReferencesDict=ReferencesDict)
+                return render_template('profile.html',formDict=formDict,ref1=ref1,ref2=ref2,msg=msg,universityList=universityList,mentorsList=mentorsList,ReferencesDict=ReferencesDict)
 
 @app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
-                               filename)
+def upload_Transcript(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
+
+
+@app.route('/uploads/<filename>')
+def upload_Referral(filename):
+    return send_from_directory(app.config['UPLOAD_REF_FOLDER'],filename)
+    
                                
 #@app.route('/referralUpload')
 #def referralUpload():
@@ -461,6 +484,20 @@ def uploaded_file(filename):
 #            #formDict['Transcript'] = filename
 #            #print(formDict['Transcript'])
                                          
+def getRefPath(username):
+   formDict = dict()
+   refList = mysql_dao.getReferralPath(dbcon,username)
+   print(refList)
+   i=1
+   for el in refList:
+       if el:
+           formDict['ReferalFilePath'+str(i)] = el
+       else:
+           formDict['ReferalFilePath'+str(i)] = None
+       i = i+1
+   print(formDict)
+   return formDict
+            
 
 @app.route('/updateProfileByAdmin',methods=['POST'])
 def updateProfileByAdmin():
@@ -477,8 +514,17 @@ def updateProfileByAdmin():
         formDict = mysql_dao.getUser(dbcon,session['usernameProfile'])
         if formDict['Transcript']:
             filename = secure_filename(formDict['Transcript'])
-            return redirect(url_for('uploaded_file',filename=filename))
-        
+            return redirect(url_for('upload_Transcript',filename=filename))
+    elif request.form['submitButton'] =='ViewReferral1':
+        formDict = getRefPath(session['usernameProfile'])
+        if formDict['ReferalFilePath1']:
+            filename = secure_filename(formDict['ReferalFilePath1'])
+            return redirect(url_for('upload_Referral',filename=filename))
+    elif request.form['submitButton'] =='ViewReferral2':
+        formDict = getRefPath(session['usernameProfile'])
+        if formDict['ReferalFilePath2']:
+            filename = secure_filename(formDict['ReferalFilePath2'])
+            return redirect(url_for('upload_Referral',filename=filename))
         
     
     if request.form['submitButton'] == 'Save':

@@ -35,7 +35,8 @@
                                         <option value="Accepted" {%if formDict['ApplicationStatus']=='Accepted'%} selected {%endif%}>Accepted</option>
                                         <option value="Rejected" {%if formDict['ApplicationStatus']=='Rejected'%} selected {%endif%}>Rejected</option>
                                         <option value="IncompleteApplication" {%if formDict['ApplicationStatus']=='IncompleteApplication'%} selected {%endif%}>IncompleteApplication</option>
-                                        <option value="ReferencesRequired" {%if formDict['ApplicationStatus']=='ReferencesRequired'%} selected {%endif%}>ReferencesRequired</option>
+                                        <option value="ReferencesRequired1" {%if formDict['ApplicationStatus']=='ReferencesRequired1'%} selected {%endif%}>ReferencesRequired1</option>
+                                        <option value="ReferencesRequired2" {%if formDict['ApplicationStatus']=='ReferencesRequired2'%} selected {%endif%}>ReferencesRequired2</option>
                                         <option value="UnderReview" {%if formDict['ApplicationStatus']=='UnderReview'%} selected {%endif%}>UnderReview</option>
                                 </select>
                             </td>
@@ -794,6 +795,17 @@
             </center>
             <div align="center">
             <center>
+            {% if ref1 != 'No document for Referral1 found' %}
+                </br>
+                    <input value="ViewReferral1" name="submitButton" type="submit">
+            {%endif%}
+                        <p>{{ref1}}</p>
+             {% if ref2 != 'No document for Referral2 found' %}
+                    <input value="ViewReferral2" name="submitButton" type="submit">
+            {%endif%}
+                        <p>{{ref2}}</p>
+
+                     <b>Update Referral</b></br>
                 <p> 
                     Name: <input size="28" name="REFERENCE_1" value="{{ReferencesDict['REFERENCE_1']}}"> 
                            Email: <input size="20" name="ref1email" value="{{ReferencesDict['ref1email']}}"> <input type="file" name="fileupload1">

@@ -233,11 +233,17 @@
 								</td>
 							</tr>
 						</table>
+                                 {% if formDict['Transcript']%}
+                                    <input value="ViewTranscript" name="submitButton" type="submit">
+                                    </br>
+                                        {{formDict['Transcript']}}
+                                {%endif%}
 					</center>
 				</font>
 			</p>
-			</center>
-			</div>
+                               
+                
+			
 			<div align="center">
 				<center>
 					<p>
