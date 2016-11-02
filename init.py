@@ -5,14 +5,13 @@ import os, flask, mysql_dao
 from flask import Flask, request, render_template, session, redirect 
 from flask import send_from_directory, url_for 
 from sqlalchemy.orm import sessionmaker
-from applicationStatus import ApplicationStatus
-from userType import UserType
+from enums import ApplicationStatus, UserType, messages, emailMessages
 import utils
 
-#UPLOAD_FOLDER = '/home/shivani/Documents/tulika/amgen/files'
-#UPLOAD_REF_FOLDER = '/home/shivani/Documents/tulika/amgen/refFiles'
-UPLOAD_REF_FOLDER = '/home/strider/FlaskApp/static/Uploads/refFiles'
-UPLOAD_FOLDER = '/home/strider/FlaskApp/static/Uploads/Transcripts'
+UPLOAD_FOLDER = '/home/shivani/Documents/tulika/amgen/files'
+UPLOAD_REF_FOLDER = '/home/shivani/Documents/tulika/amgen/refFiles'
+#UPLOAD_REF_FOLDER = '/home/strider/FlaskApp/static/Uploads/refFiles'
+#UPLOAD_FOLDER = '/home/strider/FlaskApp/static/Uploads/Transcripts'
 ALLOWED_EXTENSIONS = set(['pdf'])
 #tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
@@ -263,7 +262,7 @@ def addFirstForm():
             formDict['Major'] and
             formDict['DateSpringSemesterEnds'] ):
             universityList = mysql_dao.getUniversityList(dbcon)
-            return render_template('first.html',formDict=formDict,universityList=universityList,error="Please complete all fields before submitting")   
+            return render_template('first.html',formDict=formDict,universityList=universityList,error=messages['incompleteApplication'])   
         mentorsList = mysql_dao.getMentorsList(dbcon)
         return flask.render_template('second.html',formDict=formDict,mentorsList=mentorsList)
     elif request.form['submitButton'] == 'Save':
@@ -308,13 +307,13 @@ def upload():
                 error = "Please select a pdf file"
                 
             if not request.form.get("agree") == "agree":
-                error = "Please accept terms and condition" 
+                error = "Please accept terms and conditions." 
             
             if count_letters(formDict['ScienceExperience']) > 700:
-                    error="Character Limit exceeded for science experience."
+                    error=messages['essayTooLong']
                     
             if count_letters(formDict['CareerPlans']) > 500:
-                error="Character Limit exceeded for career plans."
+                error=messages['essayTooLong']
                 
             if not (formDict['ScienceExperience'] and \
                     formDict['CareerPlans'] and \
@@ -323,7 +322,7 @@ def upload():
                     formDict['Mentor3'].strip() and \
                     formDict['Mentor4'].strip() and \
                     formDict['Mentor5'].strip()):
-                error="Please complete all fields before submitting."   
+                error=messages['incompleteApplication']   
 
             
             if not error:
@@ -364,14 +363,15 @@ def submitThirdForm():
       for i in range(1,3):        
         formDict['RefName'+str(i)] = str(request.form.get('REFERENCE_'+str(i)))
         formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
+      for i in range(1,3):  
         if not (formDict['RefName'+str(i)] and formDict['RefEmail'+str(i)]):
-            error="Please fill in all the  reference details."
+            error=messages['incompleteApplication']
             return render_template('third.html', ReferencesDict = formDict,error=error)     
         #toaddr = str(request.form.get('ref'+str(i)+'email'))        
       formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
       
       if not (formDict['ReviewWaiver']):
-            ReferencesDict = dict()
+            ReferencesDict = formDict
             error="Please select option for review waiver."
             return render_template('third.html', ReferencesDict = ReferencesDict,error=error)
       

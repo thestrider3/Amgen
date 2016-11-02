@@ -10,9 +10,7 @@ from sqlalchemy.pool import NullPool
 from user import *
 import string
 import random
-from applicationStatus import ApplicationStatus
-from userType import UserType
-from referenceStatus import ReferenceStatus
+from enums import ApplicationStatus, UserType, ReferenceStatus
 
 DATABASEURI = "mysql+mysqlconnector://aheicklen:mass67@mysql.columbiasurf.dreamhosters.com:3306/columbiaamgen" 
 engine = create_engine(DATABASEURI)
