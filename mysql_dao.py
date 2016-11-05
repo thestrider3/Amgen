@@ -12,7 +12,7 @@ import string
 import random
 from enums import ApplicationStatus, UserType, ReferenceStatus
 
-DATABASEURI = "mysql+mysqlconnector://aheicklen:mass67@mysql.columbiasurf.dreamhosters.com:3306/columbiaamgen" 
+DATABASEURI = "mysql+mysqlconnector://amgen:744BmuDD@amgen.cyo9vivgubeb.us-west-2.rds.amazonaws.com:3306/amgen" 
 engine = create_engine(DATABASEURI)
 
 def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
@@ -20,8 +20,8 @@ def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
 
 def getUniversityList(conn):
     metadata = MetaData(conn)
-    colleges = Table('colleges',metadata,autoload=True)
-    rs = select([colleges.c.name]).execute()
+    colleges = Table('Colleges',metadata,autoload=True)
+    rs = select([colleges.c.Name]).execute()
     rs = [item[0] for item in rs.fetchall()]
     return rs 
 
@@ -68,7 +68,7 @@ def createNewUser(conn,name,passwrd,status,userType):
     rs = s.execute()
     if rs.fetchone():
         return None
-    conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`,`ApplicationStatus`,`UserType`) Values (%s,%s,%s,%s)', [name,passwrd,status,userType])
+    conn.execute('Insert into amgen.studentData(`Username`,`Password`,`ApplicationStatus`,`UserType`) Values (%s,%s,%s,%s)', [name,passwrd,status,userType])
     formDict = checkUser(conn,name,passwrd)
     return formDict
     
