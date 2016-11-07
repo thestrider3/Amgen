@@ -262,7 +262,7 @@ def addFirstForm():
             formDict['Major'] and
             formDict['DateSpringSemesterEnds'] ):
             universityList = mysql_dao.getUniversityList(dbcon)
-            return render_template('first.html',formDict=formDict,universityList=universityList,error=messages['IncompleteApplication'])   
+            return render_template('first.html',formDict=formDict,universityList=universityList,error=messages['incompleteApplication'])   
         mentorsList = mysql_dao.getMentorsList(dbcon)
         return flask.render_template('second.html',formDict=formDict,mentorsList=mentorsList)
     elif request.form['submitButton'] == 'Save':
@@ -312,10 +312,10 @@ def upload():
                 error = "Please accept terms and conditions." 
             
             if count_letters(formDict['ScienceExperience']) > 700:
-                    error=messages['essayTooLong']
+                    error=messages['essayTooLong'].format(essay='Science Experience essay')
                     
             if count_letters(formDict['CareerPlans']) > 500:
-                error=messages['essayTooLong']
+                    error=messages['essayTooLong'].format(essay='Career Plans essay')
                 
             if not (formDict['ScienceExperience'] and \
                     formDict['CareerPlans'] and \
@@ -324,7 +324,7 @@ def upload():
                     formDict['Mentor3'].strip() and \
                     formDict['Mentor4'].strip() and \
                     formDict['Mentor5'].strip()):
-                error=messages['IncompleteApplication']   
+                error=messages['incompleteApplication']   
 
             print("Reached 4")
             if not error:
@@ -369,7 +369,7 @@ def submitThirdForm():
         formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
       for i in range(1,3):  
         if not (formDict['RefName'+str(i)] and formDict['RefEmail'+str(i)]):
-            error=messages['IncompleteApplication']
+            error=messages['incompleteApplication']
             return render_template('third.html', ReferencesDict = formDict,error=error)     
         #toaddr = str(request.form.get('ref'+str(i)+'email'))        
       formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
@@ -384,7 +384,7 @@ def submitThirdForm():
       mysql_dao.insertReviewWaiver(dbcon, formDict)
 
       for ref in newRefs:
-          utils.sendEmail(ref[0],ref[1],formDict['FirstName']+" "+formDict["LastName"],ref[2])
+          utils.sendRecommendationRequestEmail(ref[0],ref[1],formDict['FirstName']+" "+formDict["LastName"],ref[2])
       
       ReferencesDict = dict()
       ReferencesDict = mysql_dao.getReferences(dbcon, formDict)

@@ -76,7 +76,7 @@ def createNewUser(conn,name,passwrd,status,userType):
     if rs.fetchone():
         return None
     else:
-        conn.execute('Insert into amgen.LoginData(`Username`,`Password`,`UserType`) Values (%s,%s,%s,%s)', [name,passwrd,userType])
+        conn.execute('Insert into amgen.LoginData(`Username`,`Password`,`UserType`) Values (%s,%s,%s)', [name,passwrd,userType])
         if userType==UserType['Student']:
             conn.execute('Insert into amgen.studentData(`Username`,`Password`,`ApplicationStatus`) Values (%s,%s,%s)', [name,passwrd,status])
     formDict = checkUser(conn,name,passwrd)
