@@ -3,8 +3,7 @@ CREATE TABLE `amgen`.`LoginData` (
   `Password` VARCHAR(45) NULL,
   `FirstName` VARCHAR(45) NULL,
   `LastName` VARCHAR(45) NULL,
-  `UserType` VARCHAR(45) NOT NULL DEFAULT 'Student',
-  `Status` VARCHAR(30) NULL,
+  `UserType` VARCHAR(45) NOT NULL DEFAULT 'Student'
   PRIMARY KEY (`Username`));
   
 CREATE TABLE `amgen`.`studentData` (
