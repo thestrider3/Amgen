@@ -10,21 +10,21 @@ import utils
 
 UPLOAD_FOLDER = '/home/shivani/Documents/tulika/amgen/files'
 UPLOAD_REF_FOLDER = '/home/shivani/Documents/tulika/amgen/refFiles'
-#UPLOAD_REF_FOLDER = '/home/strider/FlaskApp/static/Uploads/refFiles'
-#UPLOAD_FOLDER = '/home/strider/FlaskApp/static/Uploads/Transcripts'
+#UPLOAD_REF_FOLDER = '/home/strider/Flaskapplication/static/Uploads/refFiles'
+#UPLOAD_FOLDER = '/home/strider/Flaskapplication/static/Uploads/Transcripts'
 ALLOWED_EXTENSIONS = set(['pdf'])
 #tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['UPLOAD_REF_FOLDER'] = UPLOAD_REF_FOLDER
+application = Flask(__name__)
+application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+application.config['UPLOAD_REF_FOLDER'] = UPLOAD_REF_FOLDER
 
 def saveFile(transcript,username,typeFile,referalName=""):     
     if typeFile == 'Transcript':
-        folder= app.config['UPLOAD_FOLDER']
+        folder= application.config['UPLOAD_FOLDER']
         filename = secure_filename(username+".pdf")
     elif typeFile == 'Referal':
-        folder= app.config['UPLOAD_REF_FOLDER']
+        folder= application.config['UPLOAD_REF_FOLDER']
         filename = secure_filename(username+"_"+referalName+".pdf")
     if transcript:
         if allowed_file(transcript.filename):
@@ -39,14 +39,14 @@ def count_letters(word):
   return count
 
 
-@app.before_request
+@application.before_request
 def before_request():
     global dbcon,engine,dbSession
     dbcon,engine = mysql_dao.createDatabaseConnection()
     Session = sessionmaker(bind=engine)
     dbSession = Session()
 
-@app.teardown_request
+@application.teardown_request
 def teardown_request(exception):
   global dbcon
   try:
@@ -54,7 +54,7 @@ def teardown_request(exception):
   except Exception:
     pass
 
-@app.route('/')
+@application.route('/')
 def main():
     
     if not session.get('logged_in'):
@@ -77,7 +77,7 @@ def main():
           return render_template('studentList.html',studentList=studentList)
     
 
-@app.route('/checkUsername', methods=['POST'])
+@application.route('/checkUsername', methods=['POST'])
 def checkUsername():
   
   global userSession
@@ -115,7 +115,7 @@ def checkUsername():
       return render_template('referalStudentList.html',studentList=studentList)
 
   
-@app.route('/addUsername', methods=['POST'])
+@application.route('/addUsername', methods=['POST'])
 def addUser():
   global userSession
   name = str(request.form['username'])
@@ -134,7 +134,7 @@ def addUser():
        return render_template('signup.html',error="Username already exists. Please try again.")
       
       
-@app.route('/submitFirstForm', methods=['POST'])
+@application.route('/submitFirstForm', methods=['POST'])
 def addFirstForm():
     l=list()
     formDict=session['user']
@@ -211,8 +211,8 @@ def addFirstForm():
         formDict['HowDidYouHearOther'] = ""
     formDict['HowDidYouHear'] = l
     
-    formDict['AnyOtherAmgenScholarsSite'] = str(request.form.get('APPLYINGOTHER'))
-    formDict['YesOtherAmgenScholarsSite'] = str(request.form.get('APPLYINGOTHERSPECIFY'))
+    formDict['AnyOtherAmgenScholarsSite'] = str(request.form.get('applicationLYINGOTHER'))
+    formDict['YesOtherAmgenScholarsSite'] = str(request.form.get('applicationLYINGOTHERSPECIFY'))
     formDict['PastAmgenScholarParticipation'] = str(request.form.get('PARTICIPATED'))
     formDict['OriginalResearchPerformed'] = str(request.form.get('UG_RESEARCH'))
     formDict['CanArriveAtColumbiaMemorialDay'] = str(request.form.get('ARRIVEONFIRSTDAY'))
@@ -262,7 +262,7 @@ def addFirstForm():
             formDict['Major'] and
             formDict['DateSpringSemesterEnds'] ):
             universityList = mysql_dao.getUniversityList(dbcon)
-            return render_template('first.html',formDict=formDict,universityList=universityList,error=messages['incompleteApplication'])   
+            return render_template('first.html',formDict=formDict,universityList=universityList,error=messages['IncompleteApplication'])   
         mentorsList = mysql_dao.getMentorsList(dbcon)
         return flask.render_template('second.html',formDict=formDict,mentorsList=mentorsList)
     elif request.form['submitButton'] == 'Save':
@@ -274,7 +274,7 @@ def addFirstForm():
         return render_template('login.html')
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@application.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         session['logged_in'] = True
@@ -289,6 +289,7 @@ def upload():
         formDict['Mentor6'] = ''
         formDict['Mentor7'] = ''
         formDict['Mentor8'] = ''
+        print("Reached 1")
         for i in range(0,26):
             if request.form['stitle'+''+str(i)] != '':
                 formDict['stitle'+''+str(i)] = request.form['stitle'+''+str(i)]
@@ -296,12 +297,13 @@ def upload():
                 formDict['sgrade'+''+str(i)] = request.form['sgrade'+''+str(i)]                
             else:
                 break;
-        
+        print("Reached 2")
         transcript = request.files.get('fileupload')
         formDict['Transcript'] = saveFile(transcript,formDict['Username'],'Transcript')
-        
+        print("Reached 3")
     
         if request.form['submitButton'] == 'Submit Application':
+            print("Reached 7")
             error = ""  
             if not formDict['Transcript']:        
                 error = "Please select a pdf file"
@@ -322,15 +324,17 @@ def upload():
                     formDict['Mentor3'].strip() and \
                     formDict['Mentor4'].strip() and \
                     formDict['Mentor5'].strip()):
-                error=messages['incompleteApplication']   
+                error=messages['IncompleteApplication']   
 
-            
+            print("Reached 4")
             if not error:
                 formDict['ApplicationStatus'] = ApplicationStatus['ReferencesRequired2']
                 mysql_dao.insertSecondForm(dbcon,formDict)
+                print("Reached 5")
                 session['user'] = formDict
                 ReferencesDict = dict()
                 ReferencesDict = mysql_dao.getReferences(dbcon, formDict)
+                print("Reached 6")
                 return render_template('third.html', ReferencesDict = ReferencesDict)
                 
             else:
@@ -355,7 +359,7 @@ def upload():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route('/submitThirdForm', methods=['GET', 'POST'])
+@application.route('/submitThirdForm', methods=['GET', 'POST'])
 def submitThirdForm():
   if request.method == 'POST':
     formDict = session['user']    
@@ -365,7 +369,7 @@ def submitThirdForm():
         formDict['RefEmail'+str(i)] = str(request.form.get('ref'+str(i)+'email'))
       for i in range(1,3):  
         if not (formDict['RefName'+str(i)] and formDict['RefEmail'+str(i)]):
-            error=messages['incompleteApplication']
+            error=messages['IncompleteApplication']
             return render_template('third.html', ReferencesDict = formDict,error=error)     
         #toaddr = str(request.form.get('ref'+str(i)+'email'))        
       formDict['ReviewWaiver'] = str(request.form.get('REFERENCE_WAIVER'))
@@ -399,7 +403,7 @@ def submitThirdForm():
         return render_template('login.html')
 
 
-@app.route('/getReferalStudentList',methods=['POST'])
+@application.route('/getReferalStudentList',methods=['POST'])
 def getReferalStudentList():
     i=0
     if request.method == 'POST' and request.form['submitButton'] == 'Submit':
@@ -423,7 +427,7 @@ def getReferalStudentList():
         return render_template('login.html')
     
     
-@app.route('/getStudentList', methods=['GET', 'POST'])
+@application.route('/getStudentList', methods=['GET', 'POST'])
 def getStudentList():
     if request.method == 'GET':
         studentList = mysql_dao.getStudentList(dbcon)        
@@ -460,17 +464,17 @@ def getStudentList():
                 mentorsList = mysql_dao.getMentorsList(dbcon)
                 return render_template('profile.html',formDict=formDict,ref1=ref1,ref2=ref2,msg=msg,universityList=universityList,mentorsList=mentorsList,ReferencesDict=ReferencesDict)
 
-@app.route('/uploads/<filename>')
+@application.route('/uploads/<filename>')
 def upload_Transcript(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
+    return send_from_directory(application.config['UPLOAD_FOLDER'],filename)
 
 
-@app.route('/uploads/<filename>')
+@application.route('/uploads/<filename>')
 def upload_Referral(filename):
-    return send_from_directory(app.config['UPLOAD_REF_FOLDER'],filename)
+    return send_from_directory(application.config['UPLOAD_REF_FOLDER'],filename)
     
                                
-#@app.route('/referralUpload')
+#@application.route('/referralUpload')
 #def referralUpload():
 #    ref1 = request.files['fileupload']        
 #    if ref1:
@@ -480,7 +484,7 @@ def upload_Referral(filename):
 #            fn = fn[:i]
 #            filename = secure_filename(fn+".pdf")
 #            print(filename)
-#            ref1.save(os.path.join(app.config['UPLOAD_FOLDER'], "Reference/"+filename))
+#            ref1.save(os.path.join(application.config['UPLOAD_FOLDER'], "Reference/"+filename))
 #            #formDict['Transcript'] = filename
 #            #print(formDict['Transcript'])
                                          
@@ -499,7 +503,7 @@ def getRefPath(username):
    return formDict
             
 
-@app.route('/updateProfileByAdmin',methods=['POST'])
+@application.route('/updateProfileByAdmin',methods=['POST'])
 def updateProfileByAdmin():
     if request.form['submitButton'] == 'Back': 
         session.pop('usernameProfile')
@@ -604,8 +608,8 @@ def updateProfileByAdmin():
             formDict['HowDidYouHearOther'] = ""
         formDict['HowDidYouHear'] = l
         
-        formDict['AnyOtherAmgenScholarsSite'] = str(request.form.get('APPLYINGOTHER'))
-        formDict['YesOtherAmgenScholarsSite'] = str(request.form.get('APPLYINGOTHERSPECIFY'))
+        formDict['AnyOtherAmgenScholarsSite'] = str(request.form.get('applicationLYINGOTHER'))
+        formDict['YesOtherAmgenScholarsSite'] = str(request.form.get('applicationLYINGOTHERSPECIFY'))
         formDict['PastAmgenScholarParticipation'] = str(request.form.get('PARTICIPATED'))
         formDict['OriginalResearchPerformed'] = str(request.form.get('UG_RESEARCH'))
         formDict['CanArriveAtColumbiaMemorialDay'] = str(request.form.get('ARRIVEONFIRSTDAY'))
@@ -677,8 +681,8 @@ def updateProfileByAdmin():
 
     
 if __name__ == "__main__":
-  app.secret_key = os.urandom(24)
-  app.run(threaded=True)
+  application.secret_key = os.urandom(24)
+  application.run(threaded=True)
   
 def xstr(s):
     if s is None:

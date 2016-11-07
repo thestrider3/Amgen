@@ -1,3 +1,12 @@
+CREATE TABLE `amgen`.`LoginData` (
+  `Username` VARCHAR(45) NULL,
+  `Password` VARCHAR(45) NULL,
+  `FirstName` VARCHAR(45) NULL,
+  `LastName` VARCHAR(45) NULL,
+  `UserType` VARCHAR(45) NOT NULL DEFAULT 'Student',
+  `Status` VARCHAR(30) NULL,
+  PRIMARY KEY (`Username`));
+  
 CREATE TABLE `amgen`.`studentData` (
   `Username` VARCHAR(45) NULL,
   `Password` VARCHAR(45) NULL,
@@ -58,7 +67,6 @@ CREATE TABLE `amgen`.`studentData` (
   `HowDidYouHearConferenceName` VARCHAR(100) NULL,
   `HowDidYouHearOtherUniversityName` VARCHAR(100) NULL,
   `HowDidYouHearOther` VARCHAR(100) NULL,
-  `UserType` VARCHAR(45) NOT NULL DEFAULT 'Student',
   `EthnicityOther` VARCHAR(30) NULL,
   `PlaceOfBirth` VARCHAR(30) NULL,
   `AdvancedDegreeObjectiveOther` VARCHAR(30) NULL,
@@ -81,7 +89,7 @@ CREATE TABLE `amgen`.`Courses` (
   `Grade` VARCHAR(5) NULL,
   PRIMARY KEY (`UserId`, `Title`));
 
-Insert into amgen.studentData(Username,Password,UserType) values ('admin','temp','Admin')
+Insert into amgen.LoginData(Username,Password,UserType) values ('admin','temp','Admin')
 
 CREATE TABLE `amgen`.`Mentors` (
   `Id` INT NOT NULL,
