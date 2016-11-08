@@ -7,7 +7,7 @@ from flask import send_from_directory, url_for
 from sqlalchemy.orm import sessionmaker
 from applicationStatus import ApplicationStatus
 from userType import UserType
-import utils
+import AmgenUtils
 
 #UPLOAD_FOLDER = '/home/shivani/Documents/tulika/amgen/files'
 #UPLOAD_REF_FOLDER = '/home/shivani/Documents/tulika/amgen/refFiles'
@@ -677,6 +677,7 @@ def updateProfileByAdmin():
 
     
 if __name__ == "__main__":
+  app.run(host='0.0.0.0')
   app.secret_key = os.urandom(24)
   app.run(threaded=True)
   

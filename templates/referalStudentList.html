@@ -54,7 +54,10 @@ table, th, td {
                         <td >{{row[1]}}</td>
                         <td >{{row[2]}}</td>
                         <td >{{row[0]}}</td>
-                        <td> <input type="file" name="fileupload{{row[0]}}"></td>
+                        <td> <input type="file" name="fileupload{{row[0]}}">
+                        <input value="View "+{{ref[0]}}+" Referral"	name='submitButton' type="submit"> 
+</td>
+
 						</tr>{% endfor %}
 					</tbody>
 				</table>
