@@ -4,7 +4,7 @@ Created on Tue Oct 25 16:31:00 2016
 
 @author: shivani
 """
-
+from enums import emailMessages
 import smtplib
 from email.MIMEMultipart import MIMEMultipart
 from email.MIMEText import MIMEText
@@ -12,13 +12,12 @@ from email.MIMEText import MIMEText
 messageType={'ReferenceRequest':'ReferenceRequest'}
 
 
-def sendEmail(toProf,profName,fromStud,profPassword):
+def sendRecommendationRequestEmail(toProf,profName,fromStud,profPassword):
   msg = MIMEMultipart()
   msg['To'] = toProf
   
   msg['Subject'] = "Letter of Recommendation Requested By "+fromStud
-  body = "Dear " +profName+",\n"+fromStud + " has requested a Letter of Recommedation from you for participating in the Amgen Scholars Summer Research Program. \
-  Please submit a recommendation in pdf format by using the following credentials \n \n Username:"+toProf+" \n Password:" +profPassword
+  body = emailMessages['recommenderRequestMail'].format(profName=profName,studentName=fromStud,username=toProf,password=profPassword)
   
   msg['From'] = "Amgen@biology.columbia.edu"
   msg.attach(MIMEText(body, 'plain'))

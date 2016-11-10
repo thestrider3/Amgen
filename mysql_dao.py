@@ -10,11 +10,9 @@ from sqlalchemy.pool import NullPool
 from user import *
 import string
 import random
-from applicationStatus import ApplicationStatus
-from userType import UserType
-from referenceStatus import ReferenceStatus
+from enums import ApplicationStatus, UserType, ReferenceStatus
 
-DATABASEURI = "mysql+mysqlconnector://aheicklen:mass67@mysql.columbiasurf.dreamhosters.com:3306/columbiaamgen" 
+DATABASEURI = "mysql+mysqlconnector://amgen:744BmuDD@amgen.cyo9vivgubeb.us-west-2.rds.amazonaws.com:3306/amgen" 
 engine = create_engine(DATABASEURI)
 
 def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
@@ -22,8 +20,8 @@ def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
 
 def getUniversityList(conn):
     metadata = MetaData(conn)
-    colleges = Table('colleges',metadata,autoload=True)
-    rs = select([colleges.c.name]).execute()
+    colleges = Table('Colleges',metadata,autoload=True)
+    rs = select([colleges.c.Name]).execute()
     rs = [item[0] for item in rs.fetchall()]
     return rs 
 
@@ -45,32 +43,42 @@ def createDatabaseConnection():
     
 def checkUser(conn,name,passwrd):
     metadata = MetaData(conn)
-    user_info = Table('studentData', metadata, autoload=True)
-    s= user_info.select(and_(user_info.c.Username==name , user_info.c.Password==passwrd))
-    rs = s.execute()
+    LoginData = Table('LoginData',metadata, autoload=True)
+    l= LoginData.select(and_(LoginData.c.Username==name , LoginData.c.Password==passwrd))
+    rs = l.execute()
     formDict=rs.fetchone()
     
     if formDict:
         formDict=dict(formDict)
-        courses = Table('Courses', metadata, autoload=True)
-        s= courses.select(courses.c.UserId==name)
-        rs=s.execute()
-        i=0
-        for row in rs:
-            formDict['stitle'+''+str(i)] = row['Title']
-            formDict['scredits'+''+str(i)] = row['Credits']
-            formDict['sgrade'+''+str(i)] = row['Grade']
-            i=i+1
-    return formDict
+        if formDict['UserType'] == UserType['Student']:
+            user_info = Table('studentData', metadata, autoload=True)
+            s= user_info.select(and_(user_info.c.Username==name , user_info.c.Password==passwrd))
+            rs=s.execute()
+            formDict=rs.fetchone()
+            formDict=dict(formDict)
+            courses = Table('Courses', metadata, autoload=True)
+            s= courses.select(courses.c.UserId==name)
+            rs=s.execute()
+            i=0
+            for row in rs:
+                formDict['stitle'+''+str(i)] = row['Title']
+                formDict['scredits'+''+str(i)] = row['Credits']
+                formDict['sgrade'+''+str(i)] = row['Grade']
+                i=i+1
+        return formDict
 
 def createNewUser(conn,name,passwrd,status,userType):
     metadata = MetaData(conn)
-    user_info = Table('studentData', metadata, autoload=True)
-    s= user_info.select(user_info.c.Username==name)
-    rs = s.execute()
+    LoginData = Table('LoginData',metadata, autoload=True)
+    l= LoginData.select( LoginData.c.Username==name )
+    
+    rs =l.execute()
     if rs.fetchone():
         return None
-    conn.execute('Insert into columbiaamgen.studentData(`Username`,`Password`,`ApplicationStatus`,`UserType`) Values (%s,%s,%s,%s)', [name,passwrd,status,userType])
+    else:
+        conn.execute('Insert into amgen.LoginData(`Username`,`Password`,`UserType`) Values (%s,%s,%s)', [name,passwrd,userType])
+        if userType==UserType['Student']:
+            conn.execute('Insert into amgen.studentData(`Username`,`Password`,`ApplicationStatus`) Values (%s,%s,%s)', [name,passwrd,status])
     formDict = checkUser(conn,name,passwrd)
     return formDict
     
@@ -304,8 +312,8 @@ def getReferences(conn, formDict):
             ReferencesDict['ref'+str(i)+'email'] = row[2]
             ReferencesDict['ref'+str(i)+'status']=row[3]
             i = i + 1            
-        ins = select([studentData.c.ReviewWaiver]).where(studentData.c.Username == formDict['Username'])
-        ReferencesDict['ReviewWaiver'] = ins.execute().fetchone()[0]
+        sel = select([studentData.c.ReviewWaiver]).where(studentData.c.Username == formDict['Username'])
+        ReferencesDict['ReviewWaiver'] = sel.execute().fetchone()[0]
     
         
         

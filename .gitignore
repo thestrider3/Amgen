@@ -4,3 +4,10 @@ venv/bin/python2.7/*
 *.html~
 ./test.py
 static/Uploads/*
+files/*
+refFiles/*
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
