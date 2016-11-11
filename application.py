@@ -1,34 +1,53 @@
 #!/usr/bin/env python2.7
 
 from werkzeug.utils import secure_filename
-import os, flask, mysql_dao
+import os, flask, mysql_dao, fileUpload
 from flask import Flask, request, render_template, session, redirect 
 from flask import send_from_directory, url_for 
 from sqlalchemy.orm import sessionmaker
 from enums import ApplicationStatus, UserType, messages, emailMessages
 import utils
+from flask import make_response
 
-UPLOAD_FOLDER = '/home/shivani/Documents/tulika/amgen/files'
-UPLOAD_REF_FOLDER = '/home/shivani/Documents/tulika/amgen/refFiles'
-#UPLOAD_REF_FOLDER = '/home/strider/Flaskapplication/static/Uploads/refFiles'
-#UPLOAD_FOLDER = '/home/strider/Flaskapplication/static/Uploads/Transcripts'
+
+#UPLOAD_FOLDER = '/home/shivani/Documents/tulika/amgen/files'
+#UPLOAD_REF_FOLDER = '/home/shivani/Documents/tulika/amgen/refFiles'
+UPLOAD_REF_FOLDER = '/home/strider/FlaskApp/static/Uploads/refFiles'
+UPLOAD_FOLDER = '/home/strider/FlaskApp/static/Uploads/Transcripts'
 ALLOWED_EXTENSIONS = set(['pdf'])
 #tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
 
 application = Flask(__name__)
-application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-application.config['UPLOAD_REF_FOLDER'] = UPLOAD_REF_FOLDER
+#application.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+#application.config['UPLOAD_REF_FOLDER'] = UPLOAD_REF_FOLDER
+#application.config.from_object('config')
+
+@application.route('/uploads/<filename>')
+def upload_Transcript(filename):
+    files = fileUpload.viewTranscript(filename)
+    response = make_response(files)
+    response.headers['Content-Type'] = 'application/pdf'
+    return response
+    
+@application.route('/uploads/<filename>')
+def upload_Referral(filename):
+    files = fileUpload.viewReferral(filename)
+    response = make_response(files)
+    response.headers['Content-Type'] = 'application/pdf'
+    return response
 
 def saveFile(transcript,username,typeFile,referalName=""):     
     if typeFile == 'Transcript':
-        folder= application.config['UPLOAD_FOLDER']
+        #folder= application.config['UPLOAD_FOLDER']
         filename = secure_filename(username+".pdf")
+        fileUpload.storeFileInS3(transcript,filename, typeFile)
     elif typeFile == 'Referal':
-        folder= application.config['UPLOAD_REF_FOLDER']
+        #folder= application.config['UPLOAD_REF_FOLDER']
         filename = secure_filename(username+"_"+referalName+".pdf")
+        fileUpload.storeFileInS3(transcript,filename, typeFile)
     if transcript:
         if allowed_file(transcript.filename):
-            transcript.save(os.path.join(folder, filename))
+            #transcript.save(os.path.join(folder, filename))
             return filename
         
     
@@ -353,7 +372,7 @@ def upload():
             formDict = mysql_dao.getTranscript(dbcon,formDict['Username'])
             filename = secure_filename(formDict['Transcript'])
             print(formDict['Transcript'])
-            return redirect(url_for('upload_Transcript',filename=filename))
+            return upload_Transcript(filename)
             
             
 def allowed_file(filename):
@@ -464,30 +483,9 @@ def getStudentList():
                 mentorsList = mysql_dao.getMentorsList(dbcon)
                 return render_template('profile.html',formDict=formDict,ref1=ref1,ref2=ref2,msg=msg,universityList=universityList,mentorsList=mentorsList,ReferencesDict=ReferencesDict)
 
-@application.route('/uploads/<filename>')
-def upload_Transcript(filename):
-    return send_from_directory(application.config['UPLOAD_FOLDER'],filename)
 
-
-@application.route('/uploads/<filename>')
-def upload_Referral(filename):
-    return send_from_directory(application.config['UPLOAD_REF_FOLDER'],filename)
     
-                               
-#@application.route('/referralUpload')
-#def referralUpload():
-#    ref1 = request.files['fileupload']        
-#    if ref1:
-#        if allowed_file(ref1.filename):
-#            fn = str(session['usernameProfile'])
-#            i = fn.index('@')
-#            fn = fn[:i]
-#            filename = secure_filename(fn+".pdf")
-#            print(filename)
-#            ref1.save(os.path.join(application.config['UPLOAD_FOLDER'], "Reference/"+filename))
-#            #formDict['Transcript'] = filename
-#            #print(formDict['Transcript'])
-                                         
+
 def getRefPath(username):
    formDict = dict()
    refList = mysql_dao.getReferralPath(dbcon,username)
@@ -518,17 +516,18 @@ def updateProfileByAdmin():
         formDict = mysql_dao.getUser(dbcon,session['usernameProfile'])
         if formDict['Transcript']:
             filename = secure_filename(formDict['Transcript'])
-            return redirect(url_for('upload_Transcript',filename=filename))
+            return upload_Transcript(filename)
+            
     elif request.form['submitButton'] =='ViewReferral1':
         formDict = getRefPath(session['usernameProfile'])
         if formDict['ReferalFilePath1']:
             filename = secure_filename(formDict['ReferalFilePath1'])
-            return redirect(url_for('upload_Referral',filename=filename))
+            return upload_Referral(filename)
     elif request.form['submitButton'] =='ViewReferral2':
         formDict = getRefPath(session['usernameProfile'])
         if formDict['ReferalFilePath2']:
             filename = secure_filename(formDict['ReferalFilePath2'])
-            return redirect(url_for('upload_Referral',filename=filename))
+            return upload_Referral(filename)
         
     
     if request.form['submitButton'] == 'Save':
